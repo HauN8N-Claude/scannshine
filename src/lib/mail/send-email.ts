@@ -48,8 +48,21 @@ export type MailAdapter = {
  * @returns a promise of the email sent
  */
 
+// Dev fallback when RESEND_API_KEY is not set: log the email instead of sending it.
+const consoleMailAdapter: MailAdapter = {
+  send: async (params) => {
+    logger.info("[sendEmail] RESEND_API_KEY not set — email logged, not sent", {
+      to: params.to,
+      subject: params.subject,
+    });
+    return { error: null, data: { id: nanoid() } };
+  },
+};
+
 // If you use another mail adapter, you can replace the mailAdapter with your own
-const mailAdapter: MailAdapter = resendMailAdapter;
+const mailAdapter: MailAdapter = env.RESEND_API_KEY
+  ? resendMailAdapter
+  : consoleMailAdapter;
 
 type SendEmailParams = Omit<EmailParams, "from" | "html"> & {
   from?: string;

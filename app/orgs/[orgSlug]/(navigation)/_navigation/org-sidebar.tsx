@@ -27,7 +27,6 @@ import { useMemo } from "react";
 import { getOrganizationNavigation } from "./org-navigation.links";
 
 import { OrgsSelect } from "./orgs-select";
-import { UpgradeCard } from "./upgrade-org-card";
 
 const OrgCommand = dynamic(
   async () => import("./org-command").then((mod) => mod.OrgCommand),
@@ -91,7 +90,6 @@ export function OrgSidebar({
               <ChangelogSidebarStack changelogs={changelogs} />
             )}
             <ChangelogDebugActions />
-            <UpgradeCard />
             <div className="flex items-center gap-3">
               <Link
                 href="/docs"

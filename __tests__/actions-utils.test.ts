@@ -22,7 +22,7 @@ describe("actions-utils", () => {
         data: { id: "123" },
         serverError: "Server error occurred",
         validationError: undefined,
-      };
+      } as unknown as Parameters<typeof isActionSuccessful>[0];
 
       expect(isActionSuccessful(action)).toBe(false);
     });
@@ -32,7 +32,7 @@ describe("actions-utils", () => {
         data: { id: "123" },
         serverError: undefined,
         validationErrors: { field: ["Error"] },
-      };
+      } as unknown as Parameters<typeof isActionSuccessful>[0];
 
       expect(isActionSuccessful(action)).toBe(false);
     });

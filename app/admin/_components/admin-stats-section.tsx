@@ -1,124 +1,52 @@
 "use cache";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AUTH_PLANS } from "@/lib/auth/stripe/auth-plans";
 import { prisma } from "@/lib/prisma";
-import { stripe } from "@/lib/stripe";
-import { Building2, Crown, DollarSign, Users } from "lucide-react";
+import { DollarSign, QrCode, Store, Users } from "lucide-react";
 import { cacheLife } from "next/dist/server/use-cache/cache-life";
 
-async function calculateTotalMRR() {
-  const subscriptions = await prisma.subscription.findMany({
-    where: {
-      status: { in: ["active", "trialing", "past_due"] },
-      stripeSubscriptionId: { not: null },
-    },
-    select: {
-      stripeSubscriptionId: true,
-    },
-  });
-
-  if (subscriptions.length === 0) {
-    return 0;
-  }
-
-  const stripeSubscriptions = (
-    await Promise.all(
-      subscriptions.map(async (sub) => {
-        if (!sub.stripeSubscriptionId) return null;
-
-        try {
-          const stripeSub = await stripe.subscriptions.retrieve(
-            sub.stripeSubscriptionId,
-          );
-          return stripeSub;
-        } catch {
-          return null;
-        }
-      }),
-    )
-  ).filter((sub) => sub !== null);
-
-  let totalMRR = 0;
-
-  for (const stripeSub of stripeSubscriptions) {
-    for (const item of stripeSub.items.data) {
-      const price = item.price;
-      if (!price.unit_amount || !price.recurring) continue;
-
-      const { unit_amount } = price;
-      const { interval, interval_count } = price.recurring;
-
-      let monthlyAmount = 0;
-      switch (interval) {
-        case "month":
-          monthlyAmount = unit_amount / interval_count;
-          break;
-        case "year":
-          monthlyAmount = unit_amount / (12 * interval_count);
-          break;
-        case "week":
-          monthlyAmount = (unit_amount * 4.33) / interval_count;
-          break;
-        case "day":
-          monthlyAmount = (unit_amount * 30) / interval_count;
-          break;
-      }
-
-      totalMRR += monthlyAmount * (item.quantity ?? 1);
-    }
-  }
-
-  return totalMRR;
-}
+// Prix mensuel ScanNShine en EUR (3 990 XPF). Source de vérité fine : Dodo Payments.
+const MONTHLY_PRICE_EUR = 33.5;
 
 export async function AdminStatsSection() {
   cacheLife("hours");
 
-  const premiumPlanNames = AUTH_PLANS.filter((p) => p.price > 0).map(
-    (p) => p.name,
-  );
-
-  const [totalOrgs, totalUsers, premiumOrgs, mrrInCents] = await Promise.all([
-    prisma.organization.count(),
-    prisma.user.count(),
-    prisma.subscription.count({
-      where: {
-        plan: { in: premiumPlanNames },
-        status: { in: ["active", "trialing", "past_due"] },
-      },
+  const [totalBusinesses, totalScans, payingBusinesses] = await Promise.all([
+    prisma.business.count(),
+    prisma.scanEvent.count({ where: { type: "SCAN" } }),
+    prisma.business.count({
+      where: { subscriptionStatus: { in: ["ACTIVE", "TRIALING"] } },
     }),
-    calculateTotalMRR(),
   ]);
 
-  const mrrFormatted = new Intl.NumberFormat("en-US", {
+  const mrrFormatted = new Intl.NumberFormat("fr-FR", {
     style: "currency",
-    currency: "USD",
-  }).format(mrrInCents / 100);
+    currency: "EUR",
+  }).format(payingBusinesses * MONTHLY_PRICE_EUR);
 
   const stats = [
     {
-      title: "Total Organizations",
-      value: totalOrgs.toLocaleString(),
-      description: "Active organizations",
-      icon: Building2,
+      title: "Commerces",
+      value: totalBusinesses.toLocaleString("fr-FR"),
+      description: "Commerces inscrits",
+      icon: Store,
     },
     {
-      title: "Total Users",
-      value: totalUsers.toLocaleString(),
-      description: "Registered users",
+      title: "Scans",
+      value: totalScans.toLocaleString("fr-FR"),
+      description: "QR scannés (total)",
       icon: Users,
     },
     {
-      title: "Premium Organizations",
-      value: premiumOrgs.toLocaleString(),
-      description: "Paid plan subscriptions",
-      icon: Crown,
+      title: "Abonnés actifs",
+      value: payingBusinesses.toLocaleString("fr-FR"),
+      description: "Essais + abonnements actifs",
+      icon: QrCode,
     },
     {
-      title: "Monthly Recurring Revenue",
+      title: "MRR estimé",
       value: mrrFormatted,
-      description: "Active subscriptions",
+      description: "Abonnés actifs × 33,50 €",
       icon: DollarSign,
     },
   ];

@@ -18,6 +18,7 @@ model User {
   feedbacks   Feedback[]
   members     Member[]
   invitations Invitation[]
+  business    Business?    @relation("UserBusiness")
 
   role       String?
   banned     Boolean?

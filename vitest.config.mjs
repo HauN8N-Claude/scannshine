@@ -13,7 +13,6 @@ export default defineConfig({
     environment: "happy-dom",
     setupFiles: [path.resolve(__dirname, "test/vitest.setup.ts")],
     env: {
-      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: "pk_test_123",
       NEXT_PUBLIC_LOG_LEVEL: "6",
       NEXT_PUBLIC_IMGUR_CLIENT_ID: "123",
       NEXT_PUBLIC_EMAIL_CONTACT: "test@test.com",

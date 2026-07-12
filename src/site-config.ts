@@ -1,22 +1,23 @@
 export const SiteConfig = {
-  title: "NOW.TS",
-  description: "Collect and showcase powerful video and text testimonials",
-  prodUrl: "https://demo.nowts.app",
-  appId: "nowts",
-  domain: "demo.nowts.app",
+  title: "ScanNShine",
+  description:
+    "Transformez vos clients satisfaits en avis Google — le QR code pensé pour les commerces de Polynésie française.",
+  prodUrl: "https://scannshine.com",
+  appId: "scannshine",
+  domain: "scannshine.com",
   appIcon: "/images/icon.png",
   company: {
-    name: "NOW.TS LLC",
-    address: "421 Rue de Paris, France", // Remove if not needed
+    name: "ScanNShine",
+    address: "Papeete, Polynésie française",
   },
   brand: {
-    primary: "#007291", // You can adjust this to your brand color
+    primary: "#0ea5e9",
   },
   team: {
-    image: "https://melvynx.com/images/me/twitter-en.jpg",
-    website: "https://melvynx.com",
-    twitter: "https://twitter.com/melvyn_me",
-    name: "Melvynx",
+    image: "/images/icon.png",
+    website: "https://scannshine.com",
+    twitter: "https://twitter.com/scannshine",
+    name: "ScanNShine",
   },
   features: {
     /**
@@ -25,10 +26,10 @@ export const SiteConfig = {
      * Or you can use Cloudflare R2 : https://mlv.sh/cloudflare-r2-tutorial
      * Or you can use AWS S3 : https://mlv.sh/aws-s3-tutorial
      */
-    enableImageUpload: false as boolean,
+    enableImageUpload: true as boolean,
     /**
-     * If enable, the user will be redirected to `/orgs` when he visits the landing page at `/`
-     * The logic is located in middleware.ts
+     * If enable, the user will be redirected to `/dashboard` when he visits the landing page at `/`
+     * The logic is located in proxy.ts
      */
     enableLandingRedirection: true as boolean,
   },

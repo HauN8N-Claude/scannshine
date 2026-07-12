@@ -1,6 +1,5 @@
 import { CircleSvg } from "@/components/svg/circle-svg";
 import { buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { Typography } from "../../components/nowts/typography";
 
@@ -16,9 +15,9 @@ export const Hero = () => {
               variant="h1"
               className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl lg:text-7xl"
             >
-              Write the best content and Grow your{" "}
+              Transformez vos clients satisfaits en{" "}
               <span className="relative inline-block">
-                <span>business</span>
+                <span>avis Google</span>
                 <CircleSvg className="fill-primary absolute inset-0" />
               </span>
             </Typography>
@@ -26,31 +25,28 @@ export const Hero = () => {
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              Build for Thread, create, schedule and publish your content to
-              your account with AI.
+              Un QR code en caisse, une page à vos couleurs, et chaque client
+              content devient un avis ⭐⭐⭐⭐⭐ sur votre fiche Google. Pensé
+              pour les commerces du fenua.
             </Typography>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
-                href="/signin"
+                href="/auth/signup"
                 className={buttonVariants({ size: "lg", variant: "default" })}
               >
-                Get started
+                Essai gratuit 7 jours
               </Link>
               <Link
-                href="#pricing"
+                href="#tarif"
                 className={buttonVariants({ size: "lg", variant: "link" })}
               >
-                Learn more <span aria-hidden="true">→</span>
+                Voir le tarif <span aria-hidden="true">→</span>
               </Link>
             </div>
+            <Typography variant="muted" className="mt-6 text-xs">
+              Sans engagement · Prêt en 10 minutes · Support en français
+            </Typography>
           </div>
-          <Image
-            alt="App screenshot"
-            src="/images/screenshot.png"
-            width={1280}
-            height={720}
-            className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-24"
-          />
         </div>
       </main>
     </div>

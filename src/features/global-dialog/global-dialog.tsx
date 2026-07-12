@@ -1,20 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import type { DialogType } from "./global-dialog.store";
 import { useGlobalDialogStore } from "./global-dialog.store";
 
-const OrgDialogPlan = dynamic(
-  async () =>
-    import("./org-plan-dialog").then((mod) => ({
-      default: mod.OrgPlanDialog,
-    })),
-  { ssr: false },
-);
-
-const DialogTypeMap: Record<DialogType, React.ComponentType> = {
-  "org-plan": OrgDialogPlan,
-};
+// ScanNShine : le dialog "org-plan" (pricing Stripe) a été retiré.
+// La map reste en place pour de futurs dialogs globaux.
+const DialogTypeMap: Partial<Record<DialogType, React.ComponentType>> = {};
 
 /**
  * This component is used to display the global dialog.
@@ -37,6 +28,10 @@ export const GlobalDialog = () => {
   }
 
   const DialogComponent = DialogTypeMap[dialogType];
+
+  if (!DialogComponent) {
+    return null;
+  }
 
   return <DialogComponent />;
 };

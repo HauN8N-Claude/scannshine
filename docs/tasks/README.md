@@ -10,20 +10,23 @@
 
 | # | Task | Priority | Hours | Depends On | Jour | Status |
 |---|------|----------|-------|------------|------|--------|
-| 01 | Setup NOW.TS + environnement | P0 | 2 | — | J1 | ⬜ |
-| 02 | Schéma Prisma ScanNShine | P0 | 2 | 01 | J1 | ⬜ |
-| 03 | Résolution lien Maps → Place ID | P0 | 3 | 01 | J1-J2 | ⬜ |
-| 04 | Funnel public /r/[slug] | P0 ⭐ | 4 | 02 | J2 | ⬜ |
-| 05 | Feedback privé + email gérant | P0 | 3 | 04 | J2 | ⬜ |
-| 06 | Capture contact CRM (funnel) | P1 | 2 | 04 | J6 | ⬜ |
-| 07 | Onboarding 3 écrans | P0 | 4 | 02, 03 | J3 | ⬜ |
-| 08 | Dodo Payments (checkout, webhooks, gating) | P0 | 4 | 07 | J4 | ⬜ |
-| 09 | Dashboard stats | P0 | 3 | 02, 04 | J5 | ⬜ |
-| 10 | Page feedbacks privés | P0 | 2 | 05 | J5 | ⬜ |
-| 11 | QR plein écran + PDF | P0 | 3 | 07 | J5 | ⬜ |
-| 12 | CRM — table + export CSV | P1 | 2 | 06 | J6 | ⬜ |
-| 13 | Landing page + pricing | P0 | 3 | 01 | J6 | ⬜ |
-| 14 | Settings + tests E2E + deploy | P0 | 4 | 08, 09, 10, 11, 13 | J7 | ⬜ |
+| 01 | Setup NOW.TS + environnement | P0 | 2 | — | J1 | ✅ |
+| 02 | Schéma Prisma ScanNShine | P0 | 2 | 01 | J1 | ✅ |
+| 03 | Résolution lien Maps → Place ID | P0 | 3 | 01 | J1-J2 | ✅ |
+| 04 | Funnel public /r/[slug] | P0 ⭐ | 4 | 02 | J2 | ✅ |
+| 05 | Feedback privé + email gérant | P0 | 3 | 04 | J2 | ✅ |
+| 06 | Capture contact CRM (funnel) | P1 | 2 | 04 | J6 | ✅ |
+| 07 | Onboarding 3 écrans | P0 | 4 | 02, 03 | J3 | ✅ |
+| 08 | Dodo Payments (checkout, webhooks, gating) | P0 | 4 | 07 | J4 | ✅ |
+| 09 | Dashboard stats | P0 | 3 | 02, 04 | J5 | ✅ |
+| 10 | Page feedbacks privés | P0 | 2 | 05 | J5 | ✅ |
+| 11 | QR plein écran + PDF | P0 | 3 | 07 | J5 | ✅ |
+| 12 | CRM — table + export CSV | P1 | 2 | 06 | J6 | ✅ |
+| 13 | Landing page + pricing | P0 | 3 | 01 | J6 | ✅ |
+| 14 | Settings + tests E2E + deploy | P0 | 4 | 08, 09, 10, 11, 13 | J7 | 🔄 |
+
+> **État détaillé et point de reprise : voir [docs/REPRISE.md](../REPRISE.md).**
+> Code complet et validé (typecheck ✅, lint ✅, 116 tests ✅). Reste : smoke-test runtime, revue adversariale, déploiement.
 
 ## Dependency Graph
 

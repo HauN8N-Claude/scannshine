@@ -1,7 +1,6 @@
 "use cache";
 
 import { prisma } from "@/lib/prisma";
-import { stripe } from "@/lib/stripe";
 import { cacheLife } from "next/dist/server/use-cache/cache-life";
 
 export type MrrDataPoint = {
@@ -15,48 +14,38 @@ export type UserGrowthDataPoint = {
   total: number;
 };
 
+// Prix mensuel de l'abonnement ScanNShine en EUR (3 990 XPF)
+const MONTHLY_PRICE_EUR = 33.5;
+
+/**
+ * MRR approximé depuis la base : nombre de Business actifs (ACTIVE/TRIALING)
+ * créés avant la fin de chaque mois × prix mensuel. Source de vérité fine :
+ * le dashboard Dodo Payments.
+ */
 export async function getMrrHistory(): Promise<MrrDataPoint[]> {
   cacheLife("hours");
 
   const now = new Date();
-  const sixMonthsAgo = new Date(now);
-  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
-  const invoices = await stripe.invoices.list({
-    created: {
-      gte: Math.floor(sixMonthsAgo.getTime() / 1000),
+  const businesses = await prisma.business.findMany({
+    where: {
+      subscriptionStatus: { in: ["ACTIVE", "TRIALING"] },
     },
-    status: "paid",
-    limit: 100,
-    expand: ["data.subscription"],
+    select: { createdAt: true },
   });
 
-  const monthlyMrr: Record<string, number> = {};
+  const points: MrrDataPoint[] = [];
 
-  for (let i = 0; i < 6; i++) {
-    const date = new Date(now);
-    date.setMonth(date.getMonth() - i);
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
-    monthlyMrr[key] = 0;
+  for (let i = 5; i >= 0; i--) {
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
+    const key = `${endOfMonth.getFullYear()}-${String(endOfMonth.getMonth() + 1).padStart(2, "0")}`;
+    const activeCount = businesses.filter(
+      (business) => business.createdAt <= endOfMonth,
+    ).length;
+    points.push({ date: key, mrr: activeCount * MONTHLY_PRICE_EUR });
   }
 
-  for (const invoice of invoices.data) {
-    if (!invoice.amount_paid || !invoice.created) continue;
-
-    const date = new Date(invoice.created * 1000);
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
-
-    if (key in monthlyMrr) {
-      monthlyMrr[key] += invoice.amount_paid;
-    }
-  }
-
-  return Object.entries(monthlyMrr)
-    .map(([date, mrr]) => ({
-      date,
-      mrr: mrr / 100,
-    }))
-    .sort((a, b) => a.date.localeCompare(b.date));
+  return points;
 }
 
 export async function getUserGrowth(): Promise<UserGrowthDataPoint[]> {

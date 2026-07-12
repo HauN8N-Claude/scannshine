@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-07-12
+
+FEATURE: Transform boilerplate into ScanNShine — Google review QR funnel SaaS for French Polynesian businesses
+FEATURE: Add public collect funnel /r/[slug] (branded page, satisfied→Google redirect, unsatisfied→private feedback, UGC-compliant)
+FEATURE: Add Business/ScanEvent/FeedbackPrivate/Contact Prisma models with demo seed
+FEATURE: Add Google Maps link → Place ID resolver with unit tests and manual fallback
+FEATURE: Add 3-step onboarding (business info + logo upload, Google link, QR ready)
+FEATURE: Add Dodo Payments integration (checkout session with 7-day trial, webhooks, customer portal) replacing Stripe
+FEATURE: Add user-scoped dashboard (KPIs + scans chart, private feedbacks with WhatsApp quick actions, CRM with CSV export, QR page with printable A5/sticker PDFs, settings)
+FEATURE: Rewrite landing page in French with ScanNShine copy, single 3990 XPF plan and FAQ
+CHORE: Remove Stripe integration (env, auth hook, billing UI, admin MRR, tests, CI secrets)
+CHORE: Make REDIS_URL and RESEND_API_KEY optional in dev (in-memory cache / logged emails)
+FIX: Bump flaky 500ms form test timeouts to 5s and fix pre-existing actions-utils type errors
+
 ## 2026-05-12
 
 CHORE: Upgrade next 16.1.6→16.2.6, resend 6.9.3→6.12.3 and bump all ^-pinned deps (motion, next-safe-action, prisma, zod, recharts, sass, vitest, etc.)

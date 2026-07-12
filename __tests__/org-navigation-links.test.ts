@@ -46,12 +46,11 @@ describe("getOrganizationNavigation", () => {
     // Admin can access Menu links
     expect(result[0].links).toHaveLength(ORGANIZATION_LINKS[0].links.length);
 
-    // Admin can access Settings, Members, Billing (not Danger Zone)
+    // Admin can access Settings, Members (not Danger Zone)
     const settingsGroup = result[1];
     const allowedLinks = settingsGroup.links;
     expect(allowedLinks.map((link) => link.label)).toContain("Settings");
     expect(allowedLinks.map((link) => link.label)).toContain("Members");
-    expect(allowedLinks.map((link) => link.label)).toContain("Billing");
     expect(allowedLinks.map((link) => link.label)).not.toContain("Danger Zone");
   });
 
@@ -68,7 +67,6 @@ describe("getOrganizationNavigation", () => {
     expect(allowedLinks.length).toEqual(ORGANIZATION_LINKS[1].links.length);
     expect(allowedLinks.map((link) => link.label)).toContain("Settings");
     expect(allowedLinks.map((link) => link.label)).toContain("Members");
-    expect(allowedLinks.map((link) => link.label)).toContain("Billing");
     expect(allowedLinks.map((link) => link.label)).toContain("Danger Zone");
   });
 

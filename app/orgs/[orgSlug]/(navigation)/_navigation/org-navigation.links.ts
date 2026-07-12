@@ -2,7 +2,6 @@ import type { NavigationGroup } from "@/features/navigation/navigation.type";
 import type { AuthRole } from "@/lib/auth/auth-permissions";
 import { isInRoles } from "@/lib/organizations/is-in-roles";
 import {
-  CreditCard,
   Home,
   Settings,
   TriangleAlert,
@@ -71,12 +70,6 @@ export const ORGANIZATION_LINKS: NavigationGroup[] = [
         href: `${ORGANIZATION_PATH}/settings/members`,
         Icon: User2,
         label: "Members",
-        roles: ["admin"],
-      },
-      {
-        href: `${ORGANIZATION_PATH}/settings/billing`,
-        Icon: CreditCard,
-        label: "Billing",
         roles: ["admin"],
       },
       {
