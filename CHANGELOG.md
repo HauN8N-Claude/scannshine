@@ -2,6 +2,9 @@
 
 ## 2026-07-12
 
+REFACTOR: Simplify landing footer — remove Product/Company/Legal link columns (dead links to boilerplate pages), keep brand + address + copyright in French
+CHORE: Add AI image-generation prompt library (docs/prompts-visuels-ia.md) — 13 optimized ChatGPT prompts for Meta Ads statics, mapped to the 4 ad angles
+CHORE: Add 8 Meta Ads static creatives (docs/ads-creatives/) — 4 angles x 2 formats (1:1, 9:16) with real QR code, generated from HTML/CSS
 FIX: Adversarial review batch — Dodo webhook: derive TRIALING from payload status (not trial dates) so paid renewals aren't reverted to trial; guard against out-of-order events reactivating a cancelled sub; stop grace-window sliding on CANCELLED retries; require webhook secret in production
 FIX: Harden place-id SSRF — re-validate host allowlist on every redirect hop, reject private/loopback/link-local IPs, https-only, drop generic goo.gl/google.com shorteners (+4 tests)
 FIX: Escape user-supplied feedback/contact content before markdown email interpolation (prevents phishing/tracking-pixel injection into owner inbox)
