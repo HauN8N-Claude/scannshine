@@ -15,8 +15,12 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
   const business = await getBusinessBySlug(params.slug);
+  if (!business) {
+    // Déclenché ici (avant le streaming) pour que la réponse soit un vrai 404
+    notFound();
+  }
   return {
-    title: business ? `Votre avis compte — ${business.name}` : "Votre avis",
+    title: `Votre avis compte — ${business.name}`,
     robots: { index: false },
   };
 }

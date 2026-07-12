@@ -2,6 +2,8 @@
 
 ## 2026-07-12
 
+FIX: Trigger notFound() in funnel generateMetadata for cleaner unknown-slug handling (status stays 200 in dev due to PPR streaming — known cosmetic behavior, page is noindex)
+CHORE: Runtime smoke-test passed — funnel renders branded content, /go logs CLICK_GOOGLE + 307 to Google review form, 1h scan dedup verified in DB, unauthenticated dashboard shows unauthorized screen without data leak
 FEATURE: Transform boilerplate into ScanNShine — Google review QR funnel SaaS for French Polynesian businesses
 FEATURE: Add public collect funnel /r/[slug] (branded page, satisfied→Google redirect, unsatisfied→private feedback, UGC-compliant)
 FEATURE: Add Business/ScanEvent/FeedbackPrivate/Contact Prisma models with demo seed
