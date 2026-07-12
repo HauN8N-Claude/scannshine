@@ -3,6 +3,7 @@
 import { authAction } from "@/lib/actions/safe-actions";
 import { ApplicationError } from "@/lib/errors/application-error";
 import { formatId } from "@/lib/format/id";
+import { Prisma } from "@/generated/prisma";
 import { resolvePlaceId, validateManualPlaceId } from "@/lib/place-id";
 import { prisma } from "@/lib/prisma";
 import { customAlphabet } from "nanoid";
@@ -15,13 +16,45 @@ import {
 
 const slugSuffix = customAlphabet("1234567890abcdef", 4);
 
-const buildUniqueSlug = async (name: string): Promise<string> => {
-  const base = formatId(name).slice(0, 40) || "commerce";
-  const existing = await prisma.business.findUnique({
-    where: { slug: base },
-    select: { id: true },
-  });
-  return existing ? `${base}-${slugSuffix()}` : base;
+const isUniqueViolation = (error: unknown): boolean =>
+  error instanceof Prisma.PrismaClientKnownRequestError &&
+  error.code === "P2002";
+
+/**
+ * Crée le commerce en gérant la collision de slug de façon atomique : on tente
+ * le slug de base, puis on retente avec un suffixe frais tant que Prisma
+ * remonte une violation d'unicité (P2002). Robuste face aux créations
+ * concurrentes de deux commerces homonymes.
+ */
+const createBusinessWithUniqueSlug = async (
+  data: {
+    userId: string;
+    name: string;
+    brandColor: string;
+    logoUrl: string | null;
+  },
+): Promise<{ id: string; slug: string }> => {
+  const base = formatId(data.name).slice(0, 40) || "commerce";
+
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const slug = attempt === 0 ? base : `${base}-${slugSuffix()}`;
+    try {
+      // eslint-disable-next-line no-await-in-loop -- retry séquentiel sur collision de slug, chaque tentative dépend de l'échec de la précédente
+      const business = await prisma.business.create({
+        data: { ...data, slug, onboardingStep: 2 },
+        select: { id: true, slug: true },
+      });
+      return business;
+    } catch (error) {
+      // Slug déjà pris → on retente avec un nouveau suffixe.
+      if (isUniqueViolation(error)) continue;
+      throw error;
+    }
+  }
+
+  throw new ApplicationError(
+    "Impossible de générer un identifiant unique pour votre commerce. Réessayez.",
+  );
 };
 
 /** Écran 1 : crée ou met à jour le commerce (nom, logo, couleur). */
@@ -46,16 +79,11 @@ export const saveBusinessInfoAction = authAction
       return { businessId: business.id, slug: business.slug };
     }
 
-    const slug = await buildUniqueSlug(parsedInput.name);
-    const business = await prisma.business.create({
-      data: {
-        userId: user.id,
-        name: parsedInput.name,
-        slug,
-        brandColor: parsedInput.brandColor,
-        logoUrl: parsedInput.logoUrl ?? null,
-        onboardingStep: 2,
-      },
+    const business = await createBusinessWithUniqueSlug({
+      userId: user.id,
+      name: parsedInput.name,
+      brandColor: parsedInput.brandColor,
+      logoUrl: parsedInput.logoUrl ?? null,
     });
     return { businessId: business.id, slug: business.slug };
   });

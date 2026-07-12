@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
+import { cache } from "react";
 
 const GRACE_PERIOD_DAYS = 7;
 
-export const getBusinessBySlug = async (slug: string) => {
+// cache() : dédup par requête HTTP (generateMetadata + page appellent ceci).
+export const getBusinessBySlug = cache(async (slug: string) => {
   return prisma.business.findUnique({
     where: { slug },
     select: {
@@ -16,7 +18,7 @@ export const getBusinessBySlug = async (slug: string) => {
       cancelledAt: true,
     },
   });
-};
+});
 
 export type PublicBusiness = NonNullable<
   Awaited<ReturnType<typeof getBusinessBySlug>>
@@ -31,14 +33,17 @@ export const isFunnelActive = (business: {
   cancelledAt: Date | null;
 }): boolean => {
   if (business.subscriptionStatus !== "CANCELLED") return true;
-  if (!business.cancelledAt) return true;
+  // Fail-safe : un CANCELLED sans date d'annulation (import/manuel) est expiré,
+  // pas servi indéfiniment.
+  if (!business.cancelledAt) return false;
   const graceEnd = new Date(business.cancelledAt);
   graceEnd.setDate(graceEnd.getDate() + GRACE_PERIOD_DAYS);
   return graceEnd > new Date();
 };
 
-export const getBusinessByUserId = async (userId: string) => {
+// cache() : dédup par requête HTTP (layout + page appellent ceci).
+export const getBusinessByUserId = cache(async (userId: string) => {
   return prisma.business.findUnique({
     where: { userId },
   });
-};
+});

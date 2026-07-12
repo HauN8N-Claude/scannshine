@@ -15,16 +15,38 @@ export type PlaceIdResult =
 const MAX_REDIRECTS = 5;
 const FETCH_TIMEOUT_MS = 5000;
 
+// Allowlist stricte : uniquement les hôtes Google Maps légitimes. On exclut
+// volontairement les shorteners génériques (goo.gl) et google.com nu, qui
+// peuvent rediriger vers des cibles arbitraires (risque SSRF).
 const SHORT_LINK_HOSTS = [
   "maps.app.goo.gl",
-  "goo.gl",
   "g.co",
   "maps.google.com",
   "www.google.com",
-  "google.com",
   "www.google.fr",
-  "google.fr",
 ];
+
+// Plages IP privées / loopback / link-local à refuser même derrière un hôte
+// autorisé (défense en profondeur contre un DNS/redirection malveillant).
+const isPrivateHostname = (hostname: string): boolean => {
+  const host = hostname.toLowerCase();
+  if (host === "localhost" || host.endsWith(".localhost")) return true;
+  // IPv6 loopback / unspecified / unique-local / link-local
+  if (host === "::1" || host === "[::1]" || host.startsWith("fe80") || host.startsWith("fc") || host.startsWith("fd")) {
+    return true;
+  }
+  const ipv4 = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(host);
+  if (!ipv4) return false;
+  const [a, b] = [Number(ipv4[1]), Number(ipv4[2])];
+  return (
+    a === 10 ||
+    a === 127 ||
+    a === 0 ||
+    (a === 169 && b === 254) || // link-local (métadonnées cloud 169.254.169.254)
+    (a === 172 && b >= 16 && b <= 31) ||
+    (a === 192 && b === 168)
+  );
+};
 
 const PLACE_ID_REGEX = /(ChIJ[A-Za-z0-9_-]{10,})/;
 const MANUAL_PLACE_ID_REGEX = /^(ChIJ|GhIJ|EiC|Ei[A-Za-z0-9])[A-Za-z0-9_-]{8,}$/;
@@ -76,9 +98,12 @@ const extractPlaceIdFromUrl = (rawUrl: string): string | null => {
 
 const isAllowedHost = (rawUrl: string): boolean => {
   try {
-    const { hostname } = new URL(rawUrl);
+    const url = new URL(rawUrl);
+    // HTTPS uniquement + jamais une IP/host privé, même derrière un hôte listé.
+    if (url.protocol !== "https:") return false;
+    if (isPrivateHostname(url.hostname)) return false;
     return SHORT_LINK_HOSTS.some(
-      (host) => hostname === host || hostname.endsWith(`.${host}`),
+      (host) => url.hostname === host || url.hostname.endsWith(`.${host}`),
     );
   } catch {
     return false;
@@ -124,6 +149,9 @@ const followRedirects = async (startUrl: string): Promise<string | null> => {
       currentUrl = new URL(location, currentUrl).toString();
       // L'URL de destination contient souvent déjà le Place ID — inutile de la re-fetcher
       if (extractPlaceIdFromUrl(currentUrl)) return currentUrl;
+      // Anti-SSRF : re-valider l'hôte à CHAQUE saut avant de re-fetcher.
+      // Un lien autorisé peut rediriger vers une cible interne (169.254.x.x…).
+      if (!isAllowedHost(currentUrl)) return null;
       continue;
     }
 

@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MetaStartTrialTracker } from "@/features/analytics/meta-start-trial-tracker";
 import {
   Layout,
   LayoutContent,
@@ -79,6 +80,7 @@ async function DashboardPage(props: PageProps<"/dashboard">) {
 
   const searchParams = await props.searchParams;
   const period = parsePeriod(searchParams.periode);
+  const isCheckoutReturn = searchParams.paiement === "ok";
   const stats = await getBusinessStats(business.id, period);
 
   const [latestFeedbacks, totalScansAllTime] = await Promise.all([
@@ -132,6 +134,7 @@ async function DashboardPage(props: PageProps<"/dashboard">) {
 
   return (
     <Layout size="lg">
+      {isCheckoutReturn ? <MetaStartTrialTracker /> : null}
       <LayoutHeader>
         <LayoutTitle>Tableau de bord</LayoutTitle>
       </LayoutHeader>

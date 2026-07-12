@@ -2,6 +2,18 @@
 
 ## 2026-07-12
 
+FIX: Adversarial review batch — Dodo webhook: derive TRIALING from payload status (not trial dates) so paid renewals aren't reverted to trial; guard against out-of-order events reactivating a cancelled sub; stop grace-window sliding on CANCELLED retries; require webhook secret in production
+FIX: Harden place-id SSRF — re-validate host allowlist on every redirect hop, reject private/loopback/link-local IPs, https-only, drop generic goo.gl/google.com shorteners (+4 tests)
+FIX: Escape user-supplied feedback/contact content before markdown email interpolation (prevents phishing/tracking-pixel injection into owner inbox)
+FIX: Derive visitor IP from trusted rightmost XFF hop (not spoofable leftmost) + add per-business hourly feedback ceiling (anti email-bombing)
+FIX: Bucket dashboard stats in Pacific/Tahiti (UTC-10) instead of server timezone
+FIX: Handle slug unique-violation (P2002) with fresh-suffix retry in onboarding (concurrent same-name businesses)
+FIX: Treat CANCELLED business with null cancelledAt as expired (funnel no longer served indefinitely)
+PERF: Wrap getBusinessBySlug/getBusinessByUserId in React cache() to dedupe per-request queries (metadata+page, layout+page)
+CHORE: Validate logoUrl as https URL
+FEATURE: Add Meta Pixel (NEXT_PUBLIC_META_PIXEL_ID, optional) — PageView via root layout, CompleteRegistration on signup success, StartTrial on Dodo checkout return (/dashboard?paiement=ok)
+CHORE: Add organic content plan (docs/contenu-organique.md) — 4 pillars, 4-week calendar, week-1 scripts, organic-to-paid bridge
+CHORE: Add Meta Ads launch kit (docs/meta-ads.md) — campaign structure, budget tiers, 4 ad angles copy, creative briefs, tracking plan
 FIX: Trigger notFound() in funnel generateMetadata for cleaner unknown-slug handling (status stays 200 in dev due to PPR streaming — known cosmetic behavior, page is noindex)
 CHORE: Runtime smoke-test passed — funnel renders branded content, /go logs CLICK_GOOGLE + 307 to Google review form, 1h scan dedup verified in DB, unauthenticated dashboard shows unauthorized screen without data leak
 FEATURE: Transform boilerplate into ScanNShine — Google review QR funnel SaaS for French Polynesian businesses

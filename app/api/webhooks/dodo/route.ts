@@ -11,22 +11,31 @@ type SubscriptionPayload = {
   customer?: { customer_id?: string } | null;
   metadata?: Record<string, unknown> | null;
   status?: string | null;
-  trial_period_days?: number | null;
   next_billing_date?: Date | string | null;
   cancelled_at?: Date | string | null;
+  created_at?: Date | string | null;
+};
+
+// Rang de chaque état dans le cycle de vie, pour ignorer un webhook qui
+// tenterait de ré-avancer un abonnement déjà annulé (livraison hors-ordre).
+const STATE_RANK: Record<SubStatus, number> = {
+  ONBOARDING: 0,
+  TRIALING: 1,
+  ACTIVE: 2,
+  PAST_DUE: 3,
+  CANCELLED: 4,
 };
 
 /**
  * Retrouve le Business ciblé : d'abord par metadata.businessId (posé au
- * checkout), sinon par identifiants Dodo déjà connus. Idempotent : chaque
- * handler pose un état absolu, un retry Dodo ne change rien.
+ * checkout), sinon par identifiants Dodo déjà connus.
  */
 const findBusiness = async (payload: SubscriptionPayload) => {
   const businessId = payload.metadata?.businessId;
   if (typeof businessId === "string" && businessId.length > 0) {
     const business = await prisma.business.findUnique({
       where: { id: businessId },
-      select: { id: true },
+      select: { id: true, subscriptionStatus: true, cancelledAt: true },
     });
     if (business) return business;
   }
@@ -40,58 +49,79 @@ const findBusiness = async (payload: SubscriptionPayload) => {
           : []),
       ],
     },
-    select: { id: true },
+    select: { id: true, subscriptionStatus: true, cancelledAt: true },
   });
 };
 
 const applySubscriptionState = async (
   payload: SubscriptionPayload,
-  status: SubStatus,
+  target: SubStatus,
 ) => {
   const business = await findBusiness(payload);
 
   if (!business) {
     logger.error("[dodo webhook] Business introuvable", {
       subscriptionId: payload.subscription_id,
-      metadata: payload.metadata,
     });
     return;
   }
 
-  const isTrial =
-    status === "ACTIVE" &&
-    typeof payload.trial_period_days === "number" &&
-    payload.trial_period_days > 0 &&
-    payload.next_billing_date &&
-    new Date(payload.next_billing_date) > new Date();
+  // Le statut TRIALING vient EXCLUSIVEMENT du payload Dodo, jamais déduit des
+  // dates : un renouvellement post-essai arrive avec status="active" et ne doit
+  // pas repiéger un client payant en essai.
+  const nextStatus: SubStatus =
+    target === "ACTIVE" && payload.status === "trialing" ? "TRIALING" : target;
+
+  // Anti-régression : un CANCELLED ne peut pas être ré-activé par un événement
+  // en retard. On n'autorise ACTIVE/TRIALING que si l'état courant est antérieur.
+  const current = business.subscriptionStatus;
+  if (
+    current === "CANCELLED" &&
+    nextStatus !== "CANCELLED" &&
+    STATE_RANK[nextStatus] < STATE_RANK.CANCELLED
+  ) {
+    logger.info("[dodo webhook] événement ignoré (abonnement déjà annulé)", {
+      businessId: business.id,
+      attempted: nextStatus,
+    });
+    return;
+  }
 
   await prisma.business.update({
     where: { id: business.id },
     data: {
       dodoCustomerId: payload.customer?.customer_id ?? undefined,
       dodoSubscriptionId: payload.subscription_id,
-      subscriptionStatus: isTrial ? "TRIALING" : status,
+      subscriptionStatus: nextStatus,
       trialEndsAt:
-        isTrial && payload.next_billing_date
+        nextStatus === "TRIALING" && payload.next_billing_date
           ? new Date(payload.next_billing_date)
           : undefined,
       cancelledAt:
-        status === "CANCELLED"
-          ? payload.cancelled_at
-            ? new Date(payload.cancelled_at)
-            : new Date()
+        nextStatus === "CANCELLED"
+          ? // Ne pas faire glisser la fenêtre de grâce sur un retry : on garde
+            // la première date d'annulation connue.
+            (business.cancelledAt ??
+            (payload.cancelled_at ? new Date(payload.cancelled_at) : new Date()))
           : null,
     },
   });
 
   logger.info("[dodo webhook] Business mis à jour", {
     businessId: business.id,
-    status: isTrial ? "TRIALING" : status,
+    status: nextStatus,
   });
 };
 
+const webhookKey = env.DODO_PAYMENTS_WEBHOOK_KEY;
+if (!webhookKey && env.NODE_ENV === "production") {
+  throw new Error(
+    "DODO_PAYMENTS_WEBHOOK_KEY est requis en production pour vérifier la signature des webhooks Dodo.",
+  );
+}
+
 export const POST = Webhooks({
-  webhookKey: env.DODO_PAYMENTS_WEBHOOK_KEY ?? "",
+  webhookKey: webhookKey ?? "dev-unset-key",
   onSubscriptionActive: async (payload) => {
     await applySubscriptionState(payload.data, "ACTIVE");
   },

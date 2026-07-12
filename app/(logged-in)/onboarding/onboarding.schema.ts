@@ -8,7 +8,14 @@ export const BusinessInfoSchema = z.object({
   brandColor: z
     .string()
     .regex(/^#[0-9a-fA-F]{6}$/, "Couleur invalide"),
-  logoUrl: z.string().nullable().optional(),
+  // URL https uniquement (issue de l'upload Vercel Blob) — évite qu'un logo
+  // pointe vers une ressource externe de tracking affichée aux clients.
+  logoUrl: z
+    .string()
+    .url()
+    .startsWith("https://", "Le logo doit être une URL sécurisée")
+    .nullable()
+    .optional(),
 });
 
 export type BusinessInfoType = z.infer<typeof BusinessInfoSchema>;

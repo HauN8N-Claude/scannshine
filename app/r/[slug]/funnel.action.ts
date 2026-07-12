@@ -16,6 +16,21 @@ import {
   normalizePhone,
 } from "./funnel.schema";
 
+/**
+ * Neutralise le contenu fourni par un visiteur anonyme avant de l'injecter dans
+ * l'email markdown du gérant : échappe les caractères de contrôle markdown pour
+ * empêcher l'injection de liens/images (phishing, pixels de tracking).
+ */
+const escapeMarkdown = (value: string): string =>
+  value.replace(/[\\`*_{}[\]()#+\-!<>|]/g, "\\$&");
+
+/** Message multi-ligne rendu sûr dans un blockquote (chaque ligne préfixée). */
+const toBlockquote = (value: string): string =>
+  escapeMarkdown(value)
+    .split(/\r?\n/)
+    .map((line) => `> ${line}`)
+    .join("\n");
+
 export const submitFeedbackAction = action
   .inputSchema(FeedbackFormSchema)
   .action(async ({ parsedInput }) => {
@@ -35,6 +50,19 @@ export const submitFeedbackAction = action
     const business = await getBusinessBySlug(parsedInput.slug);
     if (!business) {
       throw new ApplicationError("Commerce introuvable.");
+    }
+
+    // Plafond GLOBAL par commerce, indépendant du visiteur : borne l'envoi
+    // d'emails au gérant même si le hash visiteur est contourné (anti-bombing).
+    if (
+      !checkRateLimit(`feedback-business:${business.id}`, {
+        max: 30,
+        windowMs: 60 * 60 * 1000,
+      })
+    ) {
+      throw new ApplicationError(
+        "Trop de messages reçus pour l'instant. Merci de réessayer plus tard.",
+      );
     }
 
     const feedback = await prisma.feedbackPrivate.create({
@@ -63,9 +91,12 @@ export const submitFeedbackAction = action
 
     if (owner?.user.email) {
       const contactLines = [
-        parsedInput.contactName && `- Nom : ${parsedInput.contactName}`,
-        parsedInput.contactPhone && `- Téléphone : ${parsedInput.contactPhone}`,
-        parsedInput.contactEmail && `- Email : ${parsedInput.contactEmail}`,
+        parsedInput.contactName &&
+          `- Nom : ${escapeMarkdown(parsedInput.contactName)}`,
+        parsedInput.contactPhone &&
+          `- Téléphone : ${escapeMarkdown(parsedInput.contactPhone)}`,
+        parsedInput.contactEmail &&
+          `- Email : ${escapeMarkdown(parsedInput.contactEmail)}`,
       ]
         .filter(Boolean)
         .join("\n");
@@ -82,7 +113,7 @@ Un client vient de laisser un **retour privé** sur ${business.name}${
             parsedInput.rating ? ` (ressenti : ${parsedInput.rating}/5)` : ""
           } :
 
-> ${parsedInput.message}
+${toBlockquote(parsedInput.message)}
 
 ${contactLines ? `**Ses coordonnées :**\n${contactLines}\n` : "Il n'a pas laissé de coordonnées.\n"}
 

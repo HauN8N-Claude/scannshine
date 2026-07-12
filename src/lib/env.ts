@@ -29,8 +29,11 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_EMAIL_CONTACT: z.string().min(1),
+    // Vide ("") tant que le pixel n'est pas créé — le composant ne rend rien dans ce cas
+    NEXT_PUBLIC_META_PIXEL_ID: z.string().optional(),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_EMAIL_CONTACT: process.env.NEXT_PUBLIC_EMAIL_CONTACT,
+    NEXT_PUBLIC_META_PIXEL_ID: process.env.NEXT_PUBLIC_META_PIXEL_ID,
   },
 });

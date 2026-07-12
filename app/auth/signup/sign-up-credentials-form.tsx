@@ -1,5 +1,6 @@
 "use client";
 
+import { trackMetaEvent } from "@/features/analytics/meta-pixel";
 import { Form, useForm } from "@/features/form/tanstack-form";
 import { authClient } from "@/lib/auth-client";
 import { getCallbackUrl } from "@/lib/auth/auth-utils";
@@ -25,6 +26,7 @@ export const SignUpCredentialsForm = () => {
       toast.error(error.message);
     },
     onSuccess: () => {
+      trackMetaEvent("CompleteRegistration");
       const newUrl = window.location.origin + getCallbackUrl("/orgs");
       window.location.href = newUrl;
     },

@@ -22,16 +22,23 @@ export type BusinessStats = {
   daily: DailyPoint[];
 };
 
+// La Polynésie française est à UTC-10 (Pacific/Tahiti, sans heure d'été).
+// On calcule les journées dans ce fuseau, pas celui du serveur (UTC en prod),
+// sinon les scans du soir local basculent dans le mauvais jour.
+const PF_OFFSET_MS = 10 * 60 * 60 * 1000;
+
 const startOfDay = (date: Date): Date => {
-  const copy = new Date(date);
-  copy.setHours(0, 0, 0, 0);
-  return copy;
+  // Minuit local PF = début de la journée décalé de -10h, ramené en UTC.
+  const shifted = new Date(date.getTime() - PF_OFFSET_MS);
+  shifted.setUTCHours(0, 0, 0, 0);
+  return new Date(shifted.getTime() + PF_OFFSET_MS);
 };
 
 const toDayKey = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
+  const local = new Date(date.getTime() - PF_OFFSET_MS);
+  const year = local.getUTCFullYear();
+  const month = String(local.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(local.getUTCDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 };
 

@@ -120,6 +120,28 @@ describe("resolvePlaceId", () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
+  it("rejects non-https Google URLs (SSRF hardening)", async () => {
+    const result = await resolvePlaceId("http://maps.app.goo.gl/abc");
+    expect(result).toEqual({ error: "UNRESOLVED" });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("rejects goo.gl generic shortener (removed from allowlist)", async () => {
+    const result = await resolvePlaceId("https://goo.gl/maps/abc");
+    expect(result).toEqual({ error: "UNRESOLVED" });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("stops following a redirect that points to an internal/private host (SSRF)", async () => {
+    mockFetchSequence([
+      { status: 302, location: "http://169.254.169.254/latest/meta-data/" },
+    ]);
+    const result = await resolvePlaceId("https://maps.app.goo.gl/evil");
+    expect(result).toEqual({ error: "UNRESOLVED" });
+    // Le premier hop est fetché, mais la cible interne n'est jamais requêtée.
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
   it("returns UNRESOLVED when redirects never expose a place id", async () => {
     mockFetchSequence([{ status: 200, body: "<html>rien ici</html>" }]);
     const result = await resolvePlaceId("https://maps.app.goo.gl/nothing");

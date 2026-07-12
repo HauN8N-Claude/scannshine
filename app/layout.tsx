@@ -1,3 +1,4 @@
+import { MetaPixel } from "@/features/analytics/meta-pixel";
 import { DebugPanel } from "@/features/debug";
 import { NextTopLoader } from "@/features/page/next-top-loader";
 import { ServerToaster } from "@/features/server-sonner/server-toaster";
@@ -44,6 +45,7 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
           CaptionFont.variable,
         )}
       >
+        <MetaPixel />
         <NuqsAdapter>
           <Providers>
             <NextTopLoader delay={100} showSpinner={false} />
