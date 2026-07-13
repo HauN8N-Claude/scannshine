@@ -114,13 +114,8 @@ const applySubscriptionState = async (
 };
 
 const webhookKey = env.DODO_PAYMENTS_WEBHOOK_KEY;
-if (!webhookKey && env.NODE_ENV === "production") {
-  throw new Error(
-    "DODO_PAYMENTS_WEBHOOK_KEY est requis en production pour vérifier la signature des webhooks Dodo.",
-  );
-}
 
-export const POST = Webhooks({
+const dodoWebhookHandler = Webhooks({
   webhookKey: webhookKey ?? "dev-unset-key",
   onSubscriptionActive: async (payload) => {
     await applySubscriptionState(payload.data, "ACTIVE");
@@ -147,3 +142,16 @@ export const POST = Webhooks({
     logger.debug("[dodo webhook] event reçu", { type: payload.type });
   },
 });
+
+// La clé est vérifiée à la requête (pas au chargement du module) pour ne pas
+// casser le build tant que le compte Dodo n'est pas configuré. Sans clé en
+// production : 503 explicite, jamais de webhook accepté sans signature.
+export const POST = async (request: Request) => {
+  if (!webhookKey) {
+    logger.error(
+      "[dodo webhook] DODO_PAYMENTS_WEBHOOK_KEY manquant — webhook rejeté (503)",
+    );
+    return new Response("Webhook non configuré", { status: 503 });
+  }
+  return dodoWebhookHandler(request);
+};
