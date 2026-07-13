@@ -44,7 +44,9 @@ export const startCheckoutAction = authAction
       // conversion USD flottante pour les clients polynésiens (ADR-002).
       billing_currency: "EUR",
       metadata: { businessId: business.id },
-      return_url: `${getServerUrl()}/dashboard?paiement=ok`,
+      // Retour sur l'onboarding : écran de confirmation qui attend le webhook
+      // puis bascule vers le dashboard une fois l'abonnement actif.
+      return_url: `${getServerUrl()}/onboarding?paiement=confirmation`,
     });
 
     if (!session.checkout_url) {

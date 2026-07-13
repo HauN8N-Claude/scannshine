@@ -88,12 +88,20 @@ const applySubscriptionState = async (
     return;
   }
 
+  // Le paiement est exigé à l'onboarding : dès que l'abonnement devient actif
+  // ou en essai, on termine l'onboarding (onboardingStep=4) pour débloquer le
+  // dashboard. C'est le SEUL point qui pose onboardingStep=4 → pas d'accès sans
+  // paiement.
+  const completesOnboarding =
+    nextStatus === "TRIALING" || nextStatus === "ACTIVE";
+
   await prisma.business.update({
     where: { id: business.id },
     data: {
       dodoCustomerId: payload.customer?.customer_id ?? undefined,
       dodoSubscriptionId: payload.subscription_id,
       subscriptionStatus: nextStatus,
+      onboardingStep: completesOnboarding ? 4 : undefined,
       trialEndsAt:
         nextStatus === "TRIALING" && payload.next_billing_date
           ? new Date(payload.next_billing_date)

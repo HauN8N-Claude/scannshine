@@ -4,6 +4,7 @@ import { getBusinessByUserId } from "@/query/business/get-business";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { PaymentConfirming } from "./payment-confirming";
 import { StepGoogle } from "./step-google";
 import { StepInfo } from "./step-info";
 import { StepQr } from "./step-qr";
@@ -39,11 +40,30 @@ async function OnboardingPage(props: PageProps<"/onboarding">) {
   const user = await getRequiredUser();
   const business = await getBusinessByUserId(user.id);
 
-  if (business && business.onboardingStep >= 4) {
+  // Abonnement actif/essai → onboarding terminé, direction le dashboard.
+  if (
+    business &&
+    (business.subscriptionStatus === "TRIALING" ||
+      business.subscriptionStatus === "ACTIVE" ||
+      business.onboardingStep >= 4)
+  ) {
     redirect("/dashboard");
   }
 
   const searchParams = await props.searchParams;
+
+  // Retour du checkout Dodo : on attend que le webhook active l'abonnement.
+  if (
+    searchParams.paiement === "confirmation" &&
+    business?.subscriptionStatus === "ONBOARDING"
+  ) {
+    return (
+      <main className="mx-auto flex min-h-svh w-full max-w-md flex-col justify-center gap-8 px-4 py-10">
+        <PaymentConfirming />
+      </main>
+    );
+  }
+
   const requestedStep =
     typeof searchParams.etape === "string"
       ? Number.parseInt(searchParams.etape, 10)

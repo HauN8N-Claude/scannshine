@@ -31,10 +31,10 @@ async function RouteLayout(props: LayoutProps<"/">) {
   }
 
   // Gating abonnement : le dashboard est réservé aux comptes en essai ou actifs.
+  // Le statut ONBOARDING (jamais payé) n'a PAS accès — normalement il a déjà été
+  // renvoyé vers /onboarding ci-dessus (onboardingStep < 4). Défense en profondeur.
   // La page publique /r/{slug} n'est jamais bloquée ici (grâce gérée côté funnel).
-  const hasAccess = ["ONBOARDING", "TRIALING", "ACTIVE"].includes(
-    business.subscriptionStatus,
-  );
+  const hasAccess = ["TRIALING", "ACTIVE"].includes(business.subscriptionStatus);
 
   if (!hasAccess) {
     return (

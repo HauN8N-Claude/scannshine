@@ -3,19 +3,17 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { resolveActionResult } from "@/lib/actions/actions-utils";
 import { useMutation } from "@tanstack/react-query";
+import { ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { completeOnboardingAction } from "./onboarding.action";
+import { startCheckoutAction } from "../billing/billing.action";
 
 export const StepQrActions = ({ slug }: { slug: string }) => {
-  const router = useRouter();
-
-  const completeMutation = useMutation({
-    mutationFn: async () => resolveActionResult(completeOnboardingAction({})),
-    onSuccess: () => {
-      router.push("/dashboard?bienvenue=1");
-      router.refresh();
+  const checkoutMutation = useMutation({
+    mutationFn: async () => resolveActionResult(startCheckoutAction({})),
+    onSuccess: (data) => {
+      // Redirection vers le paiement Dodo (essai 7 jours, carte requise).
+      window.location.href = data.checkoutUrl;
     },
     onError: (error) => toast.error(error.message),
   });
@@ -31,16 +29,17 @@ export const StepQrActions = ({ slug }: { slug: string }) => {
       </Link>
       <Button
         className="w-full"
-        disabled={completeMutation.isPending}
-        onClick={() => completeMutation.mutate()}
+        disabled={checkoutMutation.isPending}
+        onClick={() => checkoutMutation.mutate()}
       >
-        {completeMutation.isPending
-          ? "Finalisation..."
-          : "Accéder à mon tableau de bord"}
+        {checkoutMutation.isPending
+          ? "Redirection vers le paiement..."
+          : "Activer mon abonnement — 7 jours gratuits"}
       </Button>
-      <p className="text-muted-foreground text-center text-xs">
-        Votre essai gratuit de 7 jours démarre maintenant — le paiement se
-        configure depuis le tableau de bord.
+      <p className="text-muted-foreground flex items-center justify-center gap-1.5 text-center text-xs">
+        <ShieldCheck className="size-3.5 shrink-0" />
+        Aucun débit pendant les 7 jours d'essai. Sans engagement, annulable en
+        deux clics. Paiement sécurisé.
       </p>
     </div>
   );

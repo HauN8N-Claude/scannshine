@@ -7,7 +7,6 @@ import { Prisma } from "@/generated/prisma";
 import { resolvePlaceId, validateManualPlaceId } from "@/lib/place-id";
 import { prisma } from "@/lib/prisma";
 import { customAlphabet } from "nanoid";
-import { z } from "zod";
 import {
   BusinessInfoSchema,
   ConfirmPlaceSchema,
@@ -135,23 +134,7 @@ export const confirmGooglePlaceAction = authAction
     return { done: true };
   });
 
-/** Écran 3 : termine l'onboarding (le checkout est proposé mais ne bloque pas). */
-export const completeOnboardingAction = authAction
-  .inputSchema(z.object({}))
-  .action(async ({ ctx: { user } }) => {
-    const business = await prisma.business.findUnique({
-      where: { userId: user.id },
-      select: { id: true, googlePlaceId: true },
-    });
-
-    if (!business?.googlePlaceId) {
-      throw new ApplicationError("Connectez d'abord votre fiche Google.");
-    }
-
-    await prisma.business.update({
-      where: { id: business.id },
-      data: { onboardingStep: 4 },
-    });
-
-    return { done: true };
-  });
+// L'onboarding ne se termine PLUS via une action gratuite : `onboardingStep`
+// passe à 4 uniquement quand le webhook Dodo confirme l'abonnement (essai ou
+// actif). Voir app/api/webhooks/dodo/route.ts. Le CTA de l'écran 3 lance le
+// checkout (startCheckoutAction) — carte exigée.
