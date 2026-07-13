@@ -83,6 +83,7 @@ export const SignUpCredentialsForm = () => {
             <field.Label>Mot de passe</field.Label>
             <field.Content>
               <field.Input type="password" />
+              <field.Description>8 caractères minimum</field.Description>
               <field.Message />
             </field.Content>
           </field.Field>

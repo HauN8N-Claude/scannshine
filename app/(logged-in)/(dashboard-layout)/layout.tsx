@@ -42,8 +42,8 @@ async function RouteLayout(props: LayoutProps<"/">) {
         <h1 className="text-2xl font-bold">Votre abonnement est en pause</h1>
         <p className="text-muted-foreground max-w-md text-sm">
           {business.subscriptionStatus === "PAST_DUE"
-            ? "Votre dernier paiement n'a pas abouti. Mettez à jour votre moyen de paiement pour retrouver votre tableau de bord — votre QR code continue de fonctionner pendant 7 jours."
-            : "Votre abonnement a été annulé. Réactivez-le pour retrouver votre tableau de bord et garder votre QR code actif."}
+            ? "Votre dernier paiement n'a pas abouti. Mettez à jour votre moyen de paiement pour retrouver votre tableau de bord — votre QR code reste actif le temps de régulariser."
+            : "Votre abonnement a été annulé. Réactivez-le pour retrouver votre tableau de bord et garder votre QR code actif (il reste en ligne encore quelques jours)."}
         </p>
         <Button asChild>
           <Link href="/billing">Gérer mon abonnement</Link>

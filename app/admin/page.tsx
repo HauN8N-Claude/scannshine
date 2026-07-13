@@ -25,7 +25,7 @@ async function AdminPage() {
   return (
     <Layout size="lg">
       <LayoutHeader>
-        <LayoutTitle>Admin Dashboard</LayoutTitle>
+        <LayoutTitle>Tableau de bord</LayoutTitle>
       </LayoutHeader>
       <LayoutContent>
         <div className="flex flex-col gap-6">

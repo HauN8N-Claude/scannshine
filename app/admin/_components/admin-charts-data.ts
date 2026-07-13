@@ -1,5 +1,6 @@
 "use cache";
 
+import { SCANNSHINE_PLAN } from "@/lib/dodo";
 import { prisma } from "@/lib/prisma";
 import { cacheLife } from "next/dist/server/use-cache/cache-life";
 
@@ -14,12 +15,14 @@ export type UserGrowthDataPoint = {
   total: number;
 };
 
-// Prix mensuel de l'abonnement ScanNShine en EUR (3 990 XPF)
-const MONTHLY_PRICE_EUR = 33.5;
-
 /**
- * MRR approximé depuis la base : nombre de Business actifs (ACTIVE/TRIALING)
- * créés avant la fin de chaque mois × prix mensuel. Source de vérité fine :
+ * MRR approximé : nombre de Business PAYANTS (ACTIVE — les essais TRIALING sont
+ * exclus, ils ne paient pas) × prix mensuel, projeté par mois via la date
+ * d'inscription.
+ *
+ * ⚠️ Approximation : faute d'historiser les transitions d'abonnement, cette
+ * courbe ne reflète PAS le churn passé (un client annulé n'apparaît pas dans
+ * les mois où il était pourtant actif). Source de vérité fine du revenu :
  * le dashboard Dodo Payments.
  */
 export async function getMrrHistory(): Promise<MrrDataPoint[]> {
@@ -28,9 +31,7 @@ export async function getMrrHistory(): Promise<MrrDataPoint[]> {
   const now = new Date();
 
   const businesses = await prisma.business.findMany({
-    where: {
-      subscriptionStatus: { in: ["ACTIVE", "TRIALING"] },
-    },
+    where: { subscriptionStatus: "ACTIVE" },
     select: { createdAt: true },
   });
 
@@ -42,7 +43,7 @@ export async function getMrrHistory(): Promise<MrrDataPoint[]> {
     const activeCount = businesses.filter(
       (business) => business.createdAt <= endOfMonth,
     ).length;
-    points.push({ date: key, mrr: activeCount * MONTHLY_PRICE_EUR });
+    points.push({ date: key, mrr: activeCount * SCANNSHINE_PLAN.priceEur });
   }
 
   return points;

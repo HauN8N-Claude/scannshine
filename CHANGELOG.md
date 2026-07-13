@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-13
+FIX: audit M2-M4 — MRR admin = abonnes payants (ACTIVE) uniquement, essais comptes a part (tuile dediee), prix depuis SCANNSHINE_PLAN; MRR historique ACTIVE-only + note churn; texte lock PAST_DUE corrige (plus de fausse promesse 7j); validation signup (name min 2, confirmation mdp inline via refine, hint 8 caracteres); admin titre FR
 FIX: C2 tunnel — carte exigee a l onboarding: ecran 3 lance le checkout Dodo (essai 7j), onboardingStep=4 pose UNIQUEMENT par le webhook a l activation (plus d acces gratuit a vie), gating dashboard = TRIALING/ACTIVE seulement, ecran de confirmation paiement au retour, suppression de completeOnboardingAction
 FIX: C1 tunnel — signup/signin/root redirect to /dashboard (was /orgs boilerplate EN dashboard), disable org auto-creation (hook + autoCreateOrganizationOnSignUp) since ScanNShine is mono-establishment, /orgs now redirects to /dashboard, fix callbackUrl=null literal on signup link
 FIX: SEO technical pass — rewrite boilerplate sitemap (was announcing codeline.app URLs!) with real scannshine.com pages, add robots.ts (public allowed, app/auth/admin/upsell/demo-posts disallowed), html lang en→fr, OG+Twitter cards with generated 1200x630 og.jpg, canonical on prodUrl, FAQPage JSON-LD on landing

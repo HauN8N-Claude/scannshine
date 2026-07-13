@@ -1,28 +1,27 @@
 "use cache";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SCANNSHINE_PLAN } from "@/lib/dodo";
 import { prisma } from "@/lib/prisma";
-import { DollarSign, QrCode, Store, Users } from "lucide-react";
+import { Clock, CreditCard, DollarSign, Store } from "lucide-react";
 import { cacheLife } from "next/dist/server/use-cache/cache-life";
-
-// Prix mensuel ScanNShine en EUR (3 990 XPF). Source de vérité fine : Dodo Payments.
-const MONTHLY_PRICE_EUR = 33.5;
 
 export async function AdminStatsSection() {
   cacheLife("hours");
 
-  const [totalBusinesses, totalScans, payingBusinesses] = await Promise.all([
-    prisma.business.count(),
-    prisma.scanEvent.count({ where: { type: "SCAN" } }),
-    prisma.business.count({
-      where: { subscriptionStatus: { in: ["ACTIVE", "TRIALING"] } },
-    }),
-  ]);
+  const [totalBusinesses, activeBusinesses, trialingBusinesses] =
+    await Promise.all([
+      prisma.business.count(),
+      // MRR = abonnés PAYANTS uniquement (ACTIVE). Les essais (TRIALING) ne
+      // paient pas encore → comptés à part, jamais dans le revenu.
+      prisma.business.count({ where: { subscriptionStatus: "ACTIVE" } }),
+      prisma.business.count({ where: { subscriptionStatus: "TRIALING" } }),
+    ]);
 
   const mrrFormatted = new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR",
-  }).format(payingBusinesses * MONTHLY_PRICE_EUR);
+  }).format(activeBusinesses * SCANNSHINE_PLAN.priceEur);
 
   const stats = [
     {
@@ -32,21 +31,21 @@ export async function AdminStatsSection() {
       icon: Store,
     },
     {
-      title: "Scans",
-      value: totalScans.toLocaleString("fr-FR"),
-      description: "QR scannés (total)",
-      icon: Users,
+      title: "Abonnés payants",
+      value: activeBusinesses.toLocaleString("fr-FR"),
+      description: "Abonnements actifs",
+      icon: CreditCard,
     },
     {
-      title: "Abonnés actifs",
-      value: payingBusinesses.toLocaleString("fr-FR"),
-      description: "Essais + abonnements actifs",
-      icon: QrCode,
+      title: "Essais en cours",
+      value: trialingBusinesses.toLocaleString("fr-FR"),
+      description: "En période d'essai (7 j)",
+      icon: Clock,
     },
     {
-      title: "MRR estimé",
+      title: "MRR",
       value: mrrFormatted,
-      description: "Abonnés actifs × 33,50 €",
+      description: `Abonnés payants × ${SCANNSHINE_PLAN.priceEur.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`,
       icon: DollarSign,
     },
   ];
