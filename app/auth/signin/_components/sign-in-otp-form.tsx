@@ -69,7 +69,7 @@ export const SignInWithEmailOTP = (props: {
     },
     onSuccess: () => {
       toast.success("Connexion réussie");
-      const cb = getCallbackUrl(props.callbackUrl ?? "/orgs");
+      const cb = getCallbackUrl(props.callbackUrl ?? "/dashboard");
       window.location.href = cb;
     },
   });

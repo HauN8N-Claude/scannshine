@@ -34,7 +34,7 @@ async function AuthSignInPage() {
   const user = await getUser();
 
   if (user) {
-    redirect("/");
+    redirect("/dashboard");
   }
 
   return (

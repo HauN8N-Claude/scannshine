@@ -27,7 +27,7 @@ export const SignUpCredentialsForm = () => {
     },
     onSuccess: () => {
       trackMetaEvent("CompleteRegistration");
-      const newUrl = window.location.origin + getCallbackUrl("/orgs");
+      const newUrl = window.location.origin + getCallbackUrl("/dashboard");
       window.location.href = newUrl;
     },
   });

@@ -28,7 +28,7 @@ export function SignInOtpPage() {
         });
 
         toast.success("Connexion réussie");
-        const redirectUrl = getCallbackUrl(callbackUrl ?? "/home");
+        const redirectUrl = getCallbackUrl(callbackUrl ?? "/dashboard");
         window.location.href = redirectUrl;
       } catch {
         toast.error("Code invalide ou expiré");

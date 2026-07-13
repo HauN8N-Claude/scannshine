@@ -14,7 +14,6 @@ import { SiteConfig } from "@/site-config";
 import MarkdownEmail from "@email/markdown.email";
 import { setupResendCustomer } from "./auth/auth-config-setup";
 import { env } from "./env";
-import { generateSlug } from "./format/id";
 import { logger } from "./logger";
 import { prisma } from "./prisma";
 import { getServerUrl } from "./server-url";
@@ -53,22 +52,10 @@ export const auth = betterAuth({
     user: {
       create: {
         after: async (user, _req) => {
+          // ScanNShine est mono-établissement (1 user = 1 Business). On ne crée
+          // plus d'organisation fantôme à l'inscription (les orgs NOW.TS sont
+          // dormantes). Le commerce est créé pendant l'onboarding.
           await setupResendCustomer(user);
-
-          const emailName = user.email.slice(0, 8);
-          try {
-            await auth.api.createOrganization({
-              body: {
-                name: `${emailName}'s org`, // required
-                slug: generateSlug(emailName), // required
-                logo: `${getServerUrl()}/images/org-logo.png`,
-                userId: user.id,
-                keepCurrentActiveOrganization: false,
-              },
-            });
-          } catch (err) {
-            logger.error("Failed to create org", { err });
-          }
         },
       },
     },
@@ -167,7 +154,8 @@ export const auth = betterAuth({
       roles: roles,
       organizationLimit: 5,
       membershipLimit: 10,
-      autoCreateOrganizationOnSignUp: true,
+      // ScanNShine mono-établissement : pas d'org auto à l'inscription.
+      autoCreateOrganizationOnSignUp: false,
 
       async sendInvitationEmail({ id, email }) {
         const inviteLink = `${getServerUrl()}/orgs/accept-invitation/${id}`;

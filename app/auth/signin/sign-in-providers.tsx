@@ -44,7 +44,11 @@ export const SignInProviders = ({
         <Typography
           variant="link"
           as={Link}
-          href={`/auth/signup?callbackUrl=${callbackUrl}`}
+          href={
+            callbackUrl
+              ? `/auth/signup?callbackUrl=${callbackUrl}`
+              : "/auth/signup"
+          }
         >
           Créer un compte
         </Typography>

@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-13
+FIX: C1 tunnel — signup/signin/root redirect to /dashboard (was /orgs boilerplate EN dashboard), disable org auto-creation (hook + autoCreateOrganizationOnSignUp) since ScanNShine is mono-establishment, /orgs now redirects to /dashboard, fix callbackUrl=null literal on signup link
 FIX: SEO technical pass — rewrite boilerplate sitemap (was announcing codeline.app URLs!) with real scannshine.com pages, add robots.ts (public allowed, app/auth/admin/upsell/demo-posts disallowed), html lang en→fr, OG+Twitter cards with generated 1200x630 og.jpg, canonical on prodUrl, FAQPage JSON-LD on landing
 FEATURE: Add feedback/support email (haumoana@polynetia.com in SiteConfig.supportEmail) — landing footer "Donnez-nous votre avis" mailto link for leads + "Support client" mailto link in client dashboard sidebar footer (pre-filled subject with business name)
 FEATURE: Add /offre-crm-sms upsell page (AIDA: 30-min countdown + hook, problem cards, CRM+SMS benefits, payment section 2990 XPF/mois, noindex) — CTA points to /billing, Dodo add-on product not wired yet
