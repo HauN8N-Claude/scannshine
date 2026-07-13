@@ -35,7 +35,7 @@ const GeistMono = Geist_Mono({
 
 export default function RootLayout({ children, modal }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html lang="fr" className="h-full" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={cn(

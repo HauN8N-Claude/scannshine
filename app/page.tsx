@@ -8,12 +8,41 @@ import { ProblemSection } from "@/features/landing/problem-section";
 import { ScannshinePricing } from "@/features/landing/scannshine-pricing";
 import { SectionDivider } from "@/features/landing/section-divider";
 import { Footer } from "@/features/layout/footer";
+import { SiteConfig } from "@/site-config";
 import type { Metadata } from "next";
 
+const PAGE_TITLE = "ScanNShine — Plus d'avis Google pour votre commerce au fenua";
+const PAGE_DESCRIPTION =
+  "Un QR code en caisse qui transforme vos clients satisfaits en avis Google. Pensé pour les commerces de Polynésie française. Essai gratuit 7 jours, 3 990 XPF/mois.";
+
 export const metadata: Metadata = {
-  title: "ScanNShine — Plus d'avis Google pour votre commerce au fenua",
-  description:
-    "Un QR code en caisse qui transforme vos clients satisfaits en avis Google. Pensé pour les commerces de Polynésie française. Essai gratuit 7 jours, 3 990 XPF/mois.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  alternates: {
+    canonical: SiteConfig.prodUrl,
+  },
+  openGraph: {
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: SiteConfig.prodUrl,
+    siteName: "ScanNShine",
+    locale: "fr_FR",
+    type: "website",
+    images: [
+      {
+        url: `${SiteConfig.prodUrl}/images/og.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "ScanNShine — le QR code qui transforme vos clients satisfaits en avis Google",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    images: [`${SiteConfig.prodUrl}/images/og.jpg`],
+  },
 };
 
 const FAQ = [
@@ -49,9 +78,26 @@ const FAQ = [
   },
 ];
 
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((entry) => ({
+    "@type": "Question",
+    name: entry.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: entry.answer.replaceAll("**", ""),
+    },
+  })),
+};
+
 export default function HomePage() {
   return (
     <div className="bg-background text-foreground relative flex h-fit flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+      />
       <div className="mt-16"></div>
 
       <LandingHeader />

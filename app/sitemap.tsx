@@ -1,31 +1,25 @@
-import { getPosts } from "@/features/posts/post-manager";
+import { SiteConfig } from "@/site-config";
 import type { MetadataRoute } from "next";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPosts();
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://codeline.app",
+      url: SiteConfig.prodUrl,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
+      priority: 1,
     },
     {
-      url: "https://codeline.app/login",
+      url: `${SiteConfig.prodUrl}/creer-fiche-google`,
       lastModified: new Date(),
       changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
-      url: "https://codeline.app/home",
+      url: `${SiteConfig.prodUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly",
+      priority: 0.3,
     },
-    ...posts.map(
-      (post) =>
-        ({
-          url: `https://codeline.app/posts/${post.slug}`,
-          lastModified: new Date(post.attributes.date),
-          changeFrequency: "monthly",
-        }) as const,
-    ),
   ];
 }
