@@ -1,7 +1,18 @@
 # Changelog
 
+## 2026-07-13
+
+CHORE: Replace founder placeholder with real portrait (was dropped as fondateur.jpg.png — converted to optimized 900px JPG 127KB, object-top crop, Next image cache purged)
+FEATURE: Add landing FounderSection (photo + why-I-built-it copy: constat, problème, bénéfices) between pricing and FAQ — public/images/fondateur.jpg is a generated placeholder to replace with the real portrait
+FEATURE: Rework "Comment ça marche" into 4-step review-collection method (satisfied client → ask at the right moment → QR scan → review shines on Google fiche) + private-feedback note, anti-gating wording kept
+FIX: Mobile-friendly landing pass — hero h1 text-4xl on mobile, PainSection headline demoted to h2 (single h1 per page) and sized text-3xl/4xl, FAQ title responsive + gap when stacked, pain lists text-base on mobile, scroll-mt-20 on #tarif and #comment-ca-marche anchors (fixed header offset)
+
 ## 2026-07-12
 
+FEATURE: Add landing ProblemSection — 4 persona pain points as Lucide-icon cards (silent happy clients, better-rated competitor, surprise 1-star, no time/awkward to ask) between Hero and PainSection
+REFACTOR: Rework PainSection "Sans ScanNShine" bullets to consequences (avoid duplicating new ProblemSection) and replace emojis with Lucide ThumbsUp/ThumbsDown per ui-ux rule
+CHORE: Extend AI prompt library with 9 beauty-salon persona prompts (S1/S2/S3 + branding) in docs/prompts-visuels-ia.md
+CHORE: Add 3 beauty-salon persona ad creatives (docs/ads-creatives/salon-*) — angles A/B/C rewritten for salon owners, 1:1 + 9:16
 REFACTOR: Simplify landing footer — remove Product/Company/Legal link columns (dead links to boilerplate pages), keep brand + address + copyright in French
 CHORE: Add AI image-generation prompt library (docs/prompts-visuels-ia.md) — 13 optimized ChatGPT prompts for Meta Ads statics, mapped to the 4 ad angles
 CHORE: Add 8 Meta Ads static creatives (docs/ads-creatives/) — 4 angles x 2 formats (1:1, 9:16) with real QR code, generated from HTML/CSS

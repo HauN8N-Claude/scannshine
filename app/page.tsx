@@ -1,8 +1,10 @@
 import { FAQSection } from "@/features/landing/faq-section";
+import { FounderSection } from "@/features/landing/founder-section";
 import { Hero } from "@/features/landing/hero";
 import { HowItWorksSection } from "@/features/landing/how-it-works";
 import { LandingHeader } from "@/features/landing/landing-header";
 import { PainSection } from "@/features/landing/pain";
+import { ProblemSection } from "@/features/landing/problem-section";
 import { ScannshinePricing } from "@/features/landing/scannshine-pricing";
 import { SectionDivider } from "@/features/landing/section-divider";
 import { Footer } from "@/features/layout/footer";
@@ -56,6 +58,8 @@ export default function HomePage() {
 
       <Hero />
 
+      <ProblemSection />
+
       <PainSection />
 
       <SectionDivider />
@@ -65,6 +69,8 @@ export default function HomePage() {
       <ScannshinePricing />
 
       <SectionDivider />
+
+      <FounderSection />
 
       <FAQSection faq={FAQ} />
 

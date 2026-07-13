@@ -13,7 +13,7 @@ export const Hero = () => {
           <div className="mx-auto max-w-2xl text-center">
             <Typography
               variant="h1"
-              className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl lg:text-7xl"
+              className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
             >
               Transformez vos clients satisfaits en{" "}
               <span className="relative inline-block">

@@ -23,7 +23,12 @@ const FEATURES = [
 
 export const ScannshinePricing = () => {
   return (
-    <SectionLayout size="sm" id="tarif" className="flex flex-col gap-8">
+    <SectionLayout
+      size="sm"
+      id="tarif"
+      className="flex flex-col gap-8"
+      containerClassName="scroll-mt-20"
+    >
       <div className="flex flex-col items-center gap-3 text-center">
         <Typography variant="h2" className="text-3xl sm:text-4xl">
           Un tarif simple
