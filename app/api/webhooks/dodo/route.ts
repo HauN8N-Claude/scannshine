@@ -116,8 +116,12 @@ const applySubscriptionState = async (
 
 const webhookKey = env.DODO_PAYMENTS_WEBHOOK_KEY;
 
+// Placeholder base64 valide exigé par standardwebhooks au chargement du module.
+// Jamais utilisé pour vérifier une signature : sans vraie clé, POST renvoie 503.
+const PLACEHOLDER_KEY = "whsec_cGxhY2Vob2xkZXItamFtYWlzLXV0aWxpc2UtMDAwMDAw";
+
 const dodoWebhookHandler = Webhooks({
-  webhookKey: webhookKey ?? "dev-unset-key",
+  webhookKey: webhookKey ?? PLACEHOLDER_KEY,
   onSubscriptionActive: async (payload) => {
     await applySubscriptionState(payload.data, "ACTIVE");
   },
