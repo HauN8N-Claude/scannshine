@@ -3,6 +3,7 @@ import { env } from "@/lib/env";
 import { logger } from "@/lib/logger";
 import { prisma } from "@/lib/prisma";
 import { Webhooks } from "@dodopayments/nextjs";
+import type { NextRequest } from "next/server";
 
 export const maxDuration = 60;
 
@@ -146,7 +147,7 @@ const dodoWebhookHandler = Webhooks({
 // La clé est vérifiée à la requête (pas au chargement du module) pour ne pas
 // casser le build tant que le compte Dodo n'est pas configuré. Sans clé en
 // production : 503 explicite, jamais de webhook accepté sans signature.
-export const POST = async (request: Request) => {
+export const POST = async (request: NextRequest) => {
   if (!webhookKey) {
     logger.error(
       "[dodo webhook] DODO_PAYMENTS_WEBHOOK_KEY manquant — webhook rejeté (503)",
