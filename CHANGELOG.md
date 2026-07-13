@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-13
+FIX: Force billing_currency EUR on Dodo checkout sessions (E2E test revealed default USD conversion — XPF is euro-pegged, no floating FX for PF clients)
 
 FEATURE: Translate auth, account and transactional-email surfaces to French (vouvoiement)
 CHORE: Replace founder placeholder with real portrait (was dropped as fondateur.jpg.png — converted to optimized 900px JPG 127KB, object-top crop, Next image cache purged)

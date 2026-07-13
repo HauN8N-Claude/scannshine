@@ -40,6 +40,9 @@ export const startCheckoutAction = authAction
         email: user.email,
         name: business.name,
       },
+      // EUR forcé : le XPF est arrimé à l'euro (1 € = 119,33 XPF), jamais de
+      // conversion USD flottante pour les clients polynésiens (ADR-002).
+      billing_currency: "EUR",
       metadata: { businessId: business.id },
       return_url: `${getServerUrl()}/dashboard?paiement=ok`,
     });
