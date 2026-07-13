@@ -54,7 +54,7 @@ export const SignInWithEmailOTP = (props: {
   const verifyOtpMutation = useMutation({
     mutationFn: async (otp: string) => {
       if (!otpEmail) {
-        throw new Error("Email is required");
+        throw new Error("L’adresse e-mail est requise");
       }
 
       return unwrapSafePromise(
@@ -68,7 +68,7 @@ export const SignInWithEmailOTP = (props: {
       toast.error(error.message);
     },
     onSuccess: () => {
-      toast.success("Signed in successfully");
+      toast.success("Connexion réussie");
       const cb = getCallbackUrl(props.callbackUrl ?? "/orgs");
       window.location.href = cb;
     },
@@ -152,12 +152,12 @@ const OtpEmailForm = (props: {
       <form.AppField name="email">
         {(field) => (
           <field.Field>
-            <field.Label>Email</field.Label>
+            <field.Label>E-mail</field.Label>
             <field.Content>
               <field.Input
                 type="email"
                 data-testid="otp-email-input"
-                placeholder="john@doe.com"
+                placeholder="jean@exemple.com"
               />
               <field.Message />
             </field.Content>
@@ -170,7 +170,7 @@ const OtpEmailForm = (props: {
         type="submit"
         className="ring-offset-card w-full ring-offset-2"
       >
-        Sign in
+        Se connecter
       </LoadingButton>
     </Form>
   );
@@ -196,7 +196,7 @@ const OtpVerificationForm = (props: {
   return (
     <div className="flex w-full flex-col items-start gap-4">
       <Typography variant="muted">
-        A one-time password has been sent to{" "}
+        Un code à usage unique a été envoyé à{" "}
         <span className="font-bold">{props.email}</span>{" "}
         <Typography
           variant="link"
@@ -204,7 +204,7 @@ const OtpVerificationForm = (props: {
           onClick={props.onBack}
           className={cn("underline")}
         >
-          Edit email
+          Modifier l’e-mail
         </Typography>
       </Typography>
       <div className="flex items-center gap-2">
@@ -269,7 +269,7 @@ const ResendOtpButton = (props: {
         "disabled:opacity-50",
       )}
     >
-      Resend {countdown > 0 ? `(${countdown})` : ""}
+      Renvoyer {countdown > 0 ? `(${countdown})` : ""}
     </Typography>
   );
 };

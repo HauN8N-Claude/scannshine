@@ -81,15 +81,15 @@ export const auth = betterAuth({
     async sendResetPassword({ user, url }) {
       await sendEmail({
         to: user.email,
-        subject: "Reset your password",
+        subject: "Réinitialisez votre mot de passe",
         html: MarkdownEmail({
-          preview: `Reset your password for ${SiteConfig.title}`,
+          preview: `Réinitialisez votre mot de passe pour ${SiteConfig.title}`,
           markdown: `
-          Hello,
+          Bonjour,
 
-          You requested to reset your password.
+          Vous avez demandé la réinitialisation de votre mot de passe.
 
-          [Click here to reset your password](${url})
+          [Cliquez ici pour réinitialiser votre mot de passe](${url})
           `,
         }),
       });
@@ -107,15 +107,15 @@ export const auth = betterAuth({
       }) => {
         await sendEmail({
           to: newEmail,
-          subject: "Change email address",
+          subject: "Changement d’adresse e-mail",
           html: MarkdownEmail({
-            preview: `Change your email address for ${SiteConfig.title}`,
+            preview: `Changez votre adresse e-mail pour ${SiteConfig.title}`,
             markdown: `
-            Hello,
+            Bonjour,
 
-            You requested to change your email address.
+            Vous avez demandé à changer votre adresse e-mail.
 
-            [Click here to verify your new email address](${url})
+            [Cliquez ici pour vérifier votre nouvelle adresse e-mail](${url})
             `,
           }),
         });
@@ -127,15 +127,15 @@ export const auth = betterAuth({
         const url = `${getServerUrl()}/auth/confirm-delete?token=${token}&callbackUrl=/auth/goodbye`;
         await sendEmail({
           to: user.email,
-          subject: "Delete your account",
+          subject: "Suppression de votre compte",
           html: MarkdownEmail({
-            preview: `Delete your account from ${SiteConfig.title}`,
+            preview: `Supprimez votre compte ${SiteConfig.title}`,
             markdown: `
-            Hello,
+            Bonjour,
 
-            You requested to delete your account.
+            Vous avez demandé la suppression de votre compte.
 
-            [Click here to confirm account deletion](${url})
+            [Cliquez ici pour confirmer la suppression du compte](${url})
             `,
           }),
         });
@@ -146,15 +146,15 @@ export const auth = betterAuth({
     sendVerificationEmail: async ({ user, url }) => {
       await sendEmail({
         to: user.email,
-        subject: "Verify your email address",
+        subject: "Vérifiez votre adresse e-mail",
         html: MarkdownEmail({
-          preview: `Verify your email for ${SiteConfig.title}`,
+          preview: `Vérifiez votre e-mail pour ${SiteConfig.title}`,
           markdown: `
-          Hello,
+          Bonjour,
 
-          Welcome to ${SiteConfig.title}! Please verify your email address.
+          Bienvenue sur ${SiteConfig.title} ! Veuillez vérifier votre adresse e-mail.
 
-          [Click here to verify your email](${url})
+          [Cliquez ici pour vérifier votre e-mail](${url})
           `,
         }),
       });
@@ -173,15 +173,15 @@ export const auth = betterAuth({
         const inviteLink = `${getServerUrl()}/orgs/accept-invitation/${id}`;
         await sendEmail({
           to: email,
-          subject: "You are invited to join an organization",
+          subject: "Vous êtes invité à rejoindre une organisation",
           html: MarkdownEmail({
-            preview: `Join an organization on ${SiteConfig.title}`,
+            preview: `Rejoignez une organisation sur ${SiteConfig.title}`,
             markdown: `
-            Hello,
+            Bonjour,
 
-            You have been invited to join an organization on ${SiteConfig.title}.
+            Vous avez été invité à rejoindre une organisation sur ${SiteConfig.title}.
 
-            [Click here to accept the invitation](${inviteLink})
+            [Cliquez ici pour accepter l’invitation](${inviteLink})
             `,
           }),
         });
@@ -192,15 +192,15 @@ export const auth = betterAuth({
         logger.debug("Sending OTP", { email, otp });
         await sendEmail({
           to: email,
-          subject: `Your code to sign in to ${SiteConfig.title}`,
+          subject: `Votre code de connexion à ${SiteConfig.title}`,
           html: MarkdownEmail({
-            preview: `Your code to sign in to ${SiteConfig.title}`,
+            preview: `Votre code de connexion à ${SiteConfig.title}`,
             markdown: `
-            Hello,
+            Bonjour,
 
-            Your code to sign in: **${otp}**
+            Votre code de connexion : **${otp}**
 
-            [Or click here to sign in automatically](${getServerUrl()}/auth/signin/otp?email=${email}&otp=${otp})
+            [Ou cliquez ici pour vous connecter automatiquement](${getServerUrl()}/auth/signin/otp?email=${email}&otp=${otp})
             `,
           }),
         });

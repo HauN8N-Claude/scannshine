@@ -18,7 +18,7 @@ export const SignInCredentialsAndEmailOTP = (props: {
       <div className="max-w-lg space-y-4">
         <SignInWithEmailOTP callbackUrl={props.callbackUrl} />
         <Typography variant="muted" className="text-xs">
-          Prefer password sign in?{" "}
+          Vous préférez vous connecter avec un mot de passe ?{" "}
           <Typography
             variant="link"
             as="button"
@@ -27,7 +27,7 @@ export const SignInCredentialsAndEmailOTP = (props: {
               setIsUsingCredentials(true);
             }}
           >
-            Use password
+            Utiliser un mot de passe
           </Typography>
         </Typography>
       </div>
@@ -38,7 +38,7 @@ export const SignInCredentialsAndEmailOTP = (props: {
     <div className="max-w-lg space-y-4">
       <SignInPasswordForm callbackUrl={props.callbackUrl} />
       <Typography variant="muted" className="text-xs">
-        Want faster sign in?{" "}
+        Envie d’une connexion plus rapide ?{" "}
         <Typography
           variant="link"
           as="button"
@@ -47,7 +47,7 @@ export const SignInCredentialsAndEmailOTP = (props: {
             setIsUsingCredentials(false);
           }}
         >
-          Login with OTP code
+          Se connecter avec un code par e-mail
         </Typography>
       </Typography>
     </div>

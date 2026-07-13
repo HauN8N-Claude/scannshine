@@ -23,7 +23,7 @@ export const SignInProviders = ({
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <SignInCredentialsAndEmailOTP callbackUrl={callbackUrl} />
-      {providers.length > 0 && <Divider>or</Divider>}
+      {providers.length > 0 && <Divider>ou</Divider>}
 
       <div
         className={cn("grid gap-2 lg:gap-4", {
@@ -40,13 +40,13 @@ export const SignInProviders = ({
       </div>
 
       <Typography variant="muted" className="text-xs">
-        You don't have an account?{" "}
+        Vous n’avez pas encore de compte ?{" "}
         <Typography
           variant="link"
           as={Link}
           href={`/auth/signup?callbackUrl=${callbackUrl}`}
         >
-          Sign up
+          Créer un compte
         </Typography>
       </Typography>
     </div>

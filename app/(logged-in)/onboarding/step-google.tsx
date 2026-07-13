@@ -1,12 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, useForm } from "@/features/form/tanstack-form";
 import { resolveActionResult } from "@/lib/actions/actions-utils";
 import { useMutation } from "@tanstack/react-query";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, CircleHelp, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -102,6 +103,29 @@ export const StepGoogle = ({
           Trouver ma fiche
         </form.SubmitButton>
       </Form>
+
+      <div className="border-primary/40 bg-primary/5 flex flex-col gap-3 rounded-xl border p-4">
+        <div className="flex items-start gap-2">
+          <CircleHelp className="text-primary mt-0.5 size-5 shrink-0" aria-hidden />
+          <div className="flex flex-col gap-0.5">
+            <p className="text-sm font-medium">
+              Vous n'avez pas encore de fiche Google ?
+            </p>
+            <p className="text-muted-foreground text-xs">
+              Pas de panique : c'est gratuit et ça prend 15 minutes. On vous
+              guide pas à pas, puis vous revenez ici finir votre inscription.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/creer-fiche-google"
+          target="_blank"
+          className={buttonVariants({ variant: "outline", className: "w-full" })}
+        >
+          Créer ma fiche Google — guide pas à pas
+          <ExternalLink className="size-4" aria-hidden />
+        </Link>
+      </div>
 
       {resolved ? (
         <Card>

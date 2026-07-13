@@ -43,7 +43,7 @@ export const SignUpCredentialsForm = () => {
     },
     onSubmit: async (values) => {
       if (values.password !== values.verifyPassword) {
-        toast.error("Password does not match");
+        toast.error("Les mots de passe ne correspondent pas");
         return;
       }
 
@@ -56,9 +56,9 @@ export const SignUpCredentialsForm = () => {
       <form.AppField name="name">
         {(field) => (
           <field.Field>
-            <field.Label>Name</field.Label>
+            <field.Label>Nom</field.Label>
             <field.Content>
-              <field.Input placeholder="John Doe" />
+              <field.Input placeholder="Jean Dupont" />
               <field.Message />
             </field.Content>
           </field.Field>
@@ -68,9 +68,9 @@ export const SignUpCredentialsForm = () => {
       <form.AppField name="email">
         {(field) => (
           <field.Field>
-            <field.Label>Email</field.Label>
+            <field.Label>E-mail</field.Label>
             <field.Content>
-              <field.Input type="email" placeholder="john@doe.com" />
+              <field.Input type="email" placeholder="jean@exemple.com" />
               <field.Message />
             </field.Content>
           </field.Field>
@@ -80,7 +80,7 @@ export const SignUpCredentialsForm = () => {
       <form.AppField name="password">
         {(field) => (
           <field.Field>
-            <field.Label>Password</field.Label>
+            <field.Label>Mot de passe</field.Label>
             <field.Content>
               <field.Input type="password" />
               <field.Message />
@@ -92,7 +92,7 @@ export const SignUpCredentialsForm = () => {
       <form.AppField name="verifyPassword">
         {(field) => (
           <field.Field>
-            <field.Label>Verify Password</field.Label>
+            <field.Label>Confirmer le mot de passe</field.Label>
             <field.Content>
               <field.Input type="password" />
               <field.Message />
@@ -101,7 +101,7 @@ export const SignUpCredentialsForm = () => {
         )}
       </form.AppField>
 
-      <form.SubmitButton className="w-full">Sign up</form.SubmitButton>
+      <form.SubmitButton className="w-full">Créer un compte</form.SubmitButton>
     </Form>
   );
 };

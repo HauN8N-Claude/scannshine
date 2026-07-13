@@ -15,7 +15,7 @@ export default function RouteError({ error }: ErrorParams) {
     <Card>
       <CardHeader>
         <CardTitle>
-          You need to be authenticated to access this resource.
+          Vous devez être connecté pour accéder à cette ressource.
         </CardTitle>
       </CardHeader>
       <CardFooter>

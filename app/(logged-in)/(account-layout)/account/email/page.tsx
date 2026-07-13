@@ -16,8 +16,8 @@ import { Suspense } from "react";
 import { ToggleEmailCheckbox } from "./toggle-email-checkbox";
 
 export const generateMetadata = combineWithParentMetadata({
-  title: "Email",
-  description: "Update your email notifications settings.",
+  title: "E-mail",
+  description: "Ajustez vos préférences de notifications par e-mail.",
 });
 
 export default function Page() {
@@ -59,9 +59,9 @@ async function MailProfilePage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Mail settings</CardTitle>
+        <CardTitle>Préférences e-mail</CardTitle>
         <CardDescription>
-          Update your email notifications settings to match your preferences.
+          Ajustez vos préférences de notifications par e-mail.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -75,9 +75,10 @@ const ErrorComponent = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Resend not found</CardTitle>
+        <CardTitle>Contact introuvable</CardTitle>
         <CardDescription>
-          We couldn't find your Resend contact. Please contact support.
+          Nous n’avons pas trouvé votre contact Resend. Veuillez contacter le
+          support.
         </CardDescription>
       </CardHeader>
       <CardFooter>

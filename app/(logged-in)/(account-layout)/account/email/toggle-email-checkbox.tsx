@@ -25,10 +25,10 @@ export const ToggleEmailCheckbox = ({
       );
     },
     onSuccess: () => {
-      toast.success("You've updated your email settings.");
+      toast.success("Vos préférences e-mail ont été mises à jour.");
     },
     onError: () => {
-      toast.error("An error occurred");
+      toast.error("Une erreur est survenue");
     },
   });
 
@@ -52,10 +52,10 @@ export const ToggleEmailCheckbox = ({
         }}
       />
       <div className="space-y-1 leading-none">
-        <Label htmlFor="unsubscribed-checkbox">Unsubscribed</Label>
+        <Label htmlFor="unsubscribed-checkbox">Désabonné</Label>
         <Typography variant="muted">
-          If enabled, you will not receive any marketing or promotional emails
-          from us.
+          Si cette option est activée, vous ne recevrez plus aucun e-mail
+          marketing ou promotionnel de notre part.
         </Typography>
       </div>
     </div>

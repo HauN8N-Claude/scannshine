@@ -14,7 +14,7 @@ export default async function RouteLayout(props: LayoutProps<"/account">) {
   return (
     <Layout size="lg">
       <LayoutHeader>
-        <LayoutTitle>Settings</LayoutTitle>
+        <LayoutTitle>Paramètres</LayoutTitle>
       </LayoutHeader>
       <LayoutActions>
         <form>
@@ -27,7 +27,7 @@ export default async function RouteLayout(props: LayoutProps<"/account">) {
               redirect("/auth/signin");
             }}
           >
-            Sign out
+            Se déconnecter
           </SubmitButton>
         </form>
       </LayoutActions>

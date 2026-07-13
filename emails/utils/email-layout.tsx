@@ -56,7 +56,7 @@ export const EmailLayout = (
                     width={32}
                     height={32}
                     className="inline"
-                    alt={`${SiteConfig.title}'s logo`}
+                    alt={`Logo de ${SiteConfig.title}`}
                   />
                 </td>
                 <td>
@@ -82,7 +82,7 @@ export const EmailLayout = (
                     width={32}
                     height={32}
                     className="inline"
-                    alt={`${SiteConfig.title}'s logo`}
+                    alt={`Logo de ${SiteConfig.title}`}
                   />
                 </td>
                 <td>

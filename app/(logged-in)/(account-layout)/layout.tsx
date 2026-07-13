@@ -4,8 +4,8 @@ import { Suspense } from "react";
 import { AccountNavigation } from "./account-navigation";
 
 export const metadata: Metadata = {
-  title: "Account",
-  description: "Manage your account settings.",
+  title: "Compte",
+  description: "Gérez les paramètres de votre compte.",
 };
 
 export default function Layout(props: LayoutProps<"/">) {

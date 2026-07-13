@@ -31,7 +31,7 @@ export function ConfirmDeletePage({
   const confirmDeleteMutation = useMutation({
     mutationFn: async () => {
       if (!token) {
-        throw new Error("Invalid token");
+        throw new Error("Jeton invalide");
       }
       return unwrapSafePromise(
         authClient.deleteUser({
@@ -73,12 +73,12 @@ export function ConfirmDeletePage({
           </Avatar>
         </div>
         <CardHeader className="text-center">
-          Confirm Account Deletion
+          Confirmer la suppression du compte
         </CardHeader>
 
         <CardDescription className="text-center">
-          Are you sure you want to delete your account? This action is permanent
-          and cannot be undone.
+          Voulez-vous vraiment supprimer votre compte ? Cette action est
+          définitive et ne peut pas être annulée.
         </CardDescription>
       </CardHeader>
       <CardFooter className="border-t pt-6">
@@ -90,10 +90,10 @@ export function ConfirmDeletePage({
             onClick={handleConfirmDelete}
             className="flex-1"
           >
-            Yes, Delete My Account
+            Oui, supprimer mon compte
           </LoadingButton>
           <Button variant="outline" onClick={handleCancel} className="flex-1">
-            Cancel
+            Annuler
           </Button>
         </div>
       </CardFooter>

@@ -2,6 +2,7 @@
 
 ## 2026-07-13
 
+FEATURE: Translate auth, account and transactional-email surfaces to French (vouvoiement)
 CHORE: Replace founder placeholder with real portrait (was dropped as fondateur.jpg.png — converted to optimized 900px JPG 127KB, object-top crop, Next image cache purged)
 FEATURE: Add landing FounderSection (photo + why-I-built-it copy: constat, problème, bénéfices) between pricing and FAQ — public/images/fondateur.jpg is a generated placeholder to replace with the real portrait
 FEATURE: Rework "Comment ça marche" into 4-step review-collection method (satisfied client → ask at the right moment → QR scan → review shines on Google fiche) + private-feedback note, anti-gating wording kept

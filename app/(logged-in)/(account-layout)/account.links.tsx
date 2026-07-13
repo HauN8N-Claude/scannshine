@@ -7,22 +7,22 @@ export const getAccountNavigation = (): NavigationGroup[] => {
 
 const ACCOUNT_LINKS: NavigationGroup[] = [
   {
-    title: "Your profile",
+    title: "Votre profil",
     links: [
       {
         href: "/account",
         Icon: User2,
-        label: "Profile",
+        label: "Profil",
       },
       {
         href: "/account/email",
         Icon: Mail,
-        label: "Mail",
+        label: "E-mails",
       },
       {
         href: "/account/danger",
         Icon: AlertCircle,
-        label: "Danger",
+        label: "Zone de danger",
       },
     ],
   },

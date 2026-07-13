@@ -16,7 +16,7 @@ export function SignInOtpPage() {
   useEffect(() => {
     const verifyOtp = async () => {
       if (!email || !otp) {
-        toast.error("Missing email or OTP parameters");
+        toast.error("Paramètres e-mail ou code manquants");
         window.location.href = "/auth/signin?error=missing-params";
         return;
       }
@@ -27,11 +27,11 @@ export function SignInOtpPage() {
           otp,
         });
 
-        toast.success("Signed in successfully");
+        toast.success("Connexion réussie");
         const redirectUrl = getCallbackUrl(callbackUrl ?? "/home");
         window.location.href = redirectUrl;
       } catch {
-        toast.error("Invalid or expired OTP");
+        toast.error("Code invalide ou expiré");
         window.location.href = "/auth/signin?error=invalid-otp";
       }
     };
@@ -43,10 +43,10 @@ export function SignInOtpPage() {
     <div className="flex min-h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <LoadingButton loading className="w-32">
-          Verifying...
+          Vérification…
         </LoadingButton>
         <p className="text-muted-foreground text-sm">
-          Please wait while we verify your code
+          Veuillez patienter pendant la vérification de votre code
         </p>
       </div>
     </div>

@@ -11,7 +11,7 @@ import { z } from "zod";
 
 const LoginCredentialsFormScheme = z.object({
   email: z.string().email(),
-  password: z.string().min(1, "Password is required"),
+  password: z.string().min(1, "Le mot de passe est requis"),
 });
 
 type LoginCredentialsFormType = z.infer<typeof LoginCredentialsFormScheme>;
@@ -57,9 +57,9 @@ export const SignInPasswordForm = (props: {
       <form.AppField name="email">
         {(field) => (
           <field.Field>
-            <field.Label>Email</field.Label>
+            <field.Label>E-mail</field.Label>
             <field.Content>
-              <field.Input type="email" placeholder="john@doe.com" />
+              <field.Input type="email" placeholder="jean@exemple.com" />
               <field.Message />
             </field.Content>
           </field.Field>
@@ -70,13 +70,13 @@ export const SignInPasswordForm = (props: {
         {(field) => (
           <field.Field className="flex-1">
             <div className="flex items-center justify-between">
-              <field.Label>Password</field.Label>
+              <field.Label>Mot de passe</field.Label>
               <Link
                 href="/auth/forget-password"
                 className="text-muted-foreground hover:text-foreground text-xs transition-colors"
                 tabIndex={-1}
               >
-                Forgot password ?
+                Mot de passe oublié ?
               </Link>
             </div>
             <field.Content>
@@ -88,7 +88,7 @@ export const SignInPasswordForm = (props: {
       </form.AppField>
 
       <form.SubmitButton className="ring-offset-card w-full ring-offset-2">
-        Sign in
+        Se connecter
       </form.SubmitButton>
     </Form>
   );

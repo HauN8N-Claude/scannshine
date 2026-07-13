@@ -16,7 +16,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const ChangeEmailFormSchema = z.object({
-  newEmail: z.string().email("Please enter a valid email address"),
+  newEmail: z.string().email("Veuillez saisir une adresse e-mail valide"),
 });
 
 type ChangeEmailFormType = z.infer<typeof ChangeEmailFormSchema>;
@@ -37,7 +37,9 @@ export default function ChangeEmailPage() {
       toast.error(error.message);
     },
     onSuccess: () => {
-      toast.success("Verification email sent. Please check your inbox.");
+      toast.success(
+        "E-mail de vérification envoyé. Consultez votre boîte de réception.",
+      );
       router.push("/account");
     },
   });
@@ -55,10 +57,10 @@ export default function ChangeEmailPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Change Email</CardTitle>
+        <CardTitle>Changer d’e-mail</CardTitle>
         <CardDescription>
-          Enter your new email address. We'll send a verification link to
-          confirm the change.
+          Saisissez votre nouvelle adresse e-mail. Nous vous enverrons un lien
+          de vérification pour confirmer le changement.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -66,18 +68,20 @@ export default function ChangeEmailPage() {
           <form.AppField name="newEmail">
             {(field) => (
               <field.Field>
-                <field.Label>New Email</field.Label>
+                <field.Label>Nouvel e-mail</field.Label>
                 <field.Content>
                   <field.Input
                     type="email"
-                    placeholder="new-email@example.com"
+                    placeholder="nouvel-email@exemple.com"
                   />
                   <field.Message />
                 </field.Content>
               </field.Field>
             )}
           </form.AppField>
-          <form.SubmitButton className="w-full">Change Email</form.SubmitButton>
+          <form.SubmitButton className="w-full">
+            Changer d’e-mail
+          </form.SubmitButton>
         </Form>
       </CardContent>
     </Card>

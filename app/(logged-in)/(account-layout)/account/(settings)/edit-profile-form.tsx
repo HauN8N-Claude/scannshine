@@ -45,7 +45,7 @@ export const EditProfileCardForm = ({
       );
     },
     onSuccess: () => {
-      toast.success("Profile updated");
+      toast.success("Profil mis à jour");
       router.refresh();
     },
     onError: (error) => {
@@ -88,7 +88,7 @@ export const EditProfileCardForm = ({
       );
     },
     onSuccess: () => {
-      toast.success("Verification email sent");
+      toast.success("E-mail de vérification envoyé");
     },
     onError: (error) => {
       toast.error(error.message);
@@ -116,7 +116,7 @@ export const EditProfileCardForm = ({
           <form.AppField name="name">
             {(field) => (
               <field.Field>
-                <field.Label>Name</field.Label>
+                <field.Label>Nom</field.Label>
                 <field.Content>
                   <field.Input placeholder="" />
                   <field.Message />
@@ -126,9 +126,9 @@ export const EditProfileCardForm = ({
           </form.AppField>
           <div className="flex flex-col gap-2">
             <Label className="flex items-center gap-4">
-              <span>Email</span>
+              <span>E-mail</span>
               {defaultValues.emailVerified ? (
-                <InlineTooltip title="Email verified. If you change your email, you will need to verify it again.">
+                <InlineTooltip title="E-mail vérifié. Si vous changez d’adresse e-mail, vous devrez la vérifier à nouveau.">
                   <BadgeCheck size={16} />
                 </InlineTooltip>
               ) : (
@@ -140,7 +140,7 @@ export const EditProfileCardForm = ({
                   onClick={() => verifyEmailMutation.mutate()}
                   loading={verifyEmailMutation.isPending}
                 >
-                  Verify email
+                  Vérifier l’e-mail
                 </LoadingButton>
               )}
             </Label>
@@ -152,16 +152,16 @@ export const EditProfileCardForm = ({
             className={buttonVariants({ size: "sm", variant: "link" })}
             href="/account/change-email"
           >
-            Change email
+            Changer d’e-mail
           </Link>
           <Link
             className={buttonVariants({ size: "sm", variant: "link" })}
             href="/account/change-password"
           >
-            Change password
+            Changer de mot de passe
           </Link>
           <div className="flex-1"></div>
-          <form.SubmitButton>Save</form.SubmitButton>
+          <form.SubmitButton>Enregistrer</form.SubmitButton>
         </CardFooter>
       </Card>
     </Form>

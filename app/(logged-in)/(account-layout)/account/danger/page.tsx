@@ -33,12 +33,12 @@ export default function DeleteProfilePage() {
         <div className="flex items-center gap-2">
           <AlertTriangle className="text-destructive size-5" />
           <CardTitle className="text-xl font-semibold">
-            Delete Account
+            Supprimer le compte
           </CardTitle>
         </div>
         <CardDescription className="text-muted-foreground text-base">
-          This action will permanently delete your account and all associated
-          data
+          Cette action supprimera définitivement votre compte et toutes les
+          données associées
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -46,10 +46,10 @@ export default function DeleteProfilePage() {
           <div className="flex items-start gap-4">
             <UserX2 className="text-muted-foreground mt-0.5 size-5" />
             <div className="space-y-1">
-              <p className="leading-none font-medium">Personal Data</p>
+              <p className="leading-none font-medium">Données personnelles</p>
               <p className="text-muted-foreground text-sm">
-                All your personal information and settings will be permanently
-                erased
+                Toutes vos informations personnelles et vos paramètres seront
+                définitivement effacés
               </p>
             </div>
           </div>
@@ -58,10 +58,12 @@ export default function DeleteProfilePage() {
           <div className="flex items-start gap-4">
             <Building2 className="text-muted-foreground mt-0.5 size-5" />
             <div className="space-y-1">
-              <p className="leading-none font-medium">Organization Data</p>
+              <p className="leading-none font-medium">
+                Données d’organisation
+              </p>
               <p className="text-muted-foreground text-sm">
-                If you&apos;re an organization owner, all organization data will
-                be deleted and subscriptions cancelled
+                Si vous êtes propriétaire d’une organisation, toutes ses données
+                seront supprimées et les abonnements résiliés
               </p>
             </div>
           </div>
@@ -74,23 +76,24 @@ export default function DeleteProfilePage() {
           loading={deleteAccountMutation.isPending}
           onClick={() => {
             dialogManager.confirm({
-              title: "Delete your account ?",
-              description: "Are you sure you want to delete your profile?",
-              confirmText: "Delete",
+              title: "Supprimer votre compte ?",
+              description:
+                "Voulez-vous vraiment supprimer votre compte ?",
+              confirmText: "Supprimer",
               action: {
-                label: "Delete",
+                label: "Supprimer",
                 onClick: async () => {
                   await deleteAccountMutation.mutateAsync();
-                  toast.success("Your deletion has been asked.", {
+                  toast.success("Votre demande de suppression a été prise en compte.", {
                     description:
-                      "Please check your email for further instructions.",
+                      "Consultez votre boîte e-mail pour la suite des instructions.",
                   });
                 },
               },
             });
           }}
         >
-          Delete
+          Supprimer
         </LoadingButton>
       </CardFooter>
     </Card>

@@ -15,9 +15,9 @@ import { Suspense } from "react";
 import { SignInProviders } from "./sign-in-providers";
 
 export const metadata: Metadata = {
-  title: `Sign In | ${SiteConfig.title}`,
+  title: `Connexion | ${SiteConfig.title}`,
   description:
-    "Sign in to your account to access testimonials and manage your projects.",
+    "Connectez-vous à votre compte pour accéder à votre tableau de bord et gérer vos avis.",
 };
 
 export default function Page() {
@@ -51,7 +51,7 @@ async function AuthSignInPage() {
         </div>
 
         <CardDescription className="text-center">
-          Please sign in to your account to continue.
+          Connectez-vous à votre compte pour continuer.
         </CardDescription>
       </CardHeader>
       <CardContent className="mt-4">

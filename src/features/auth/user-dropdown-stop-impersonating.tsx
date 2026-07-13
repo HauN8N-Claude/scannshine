@@ -28,7 +28,7 @@ export const UserDropdownStopImpersonating = () => {
       ) : (
         <LogOut className="mr-2 size-4" />
       )}
-      Stop Impersonating
+      Cesser l’emprunt d’identité
     </DropdownMenuItem>
   );
 };

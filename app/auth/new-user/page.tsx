@@ -14,9 +14,9 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: `Welcome | ${SiteConfig.title}`,
+  title: `Bienvenue | ${SiteConfig.title}`,
   description:
-    "Welcome to your new account! You're all set up and ready to start collecting testimonials.",
+    "Bienvenue sur votre nouveau compte ! Tout est prêt pour commencer à collecter des avis.",
 };
 
 /**
@@ -44,12 +44,14 @@ async function NewUserPage(props: PageProps<"/auth/new-user">) {
       <Header />
       <Layout>
         <LayoutHeader>
-          <LayoutTitle>Successfully login</LayoutTitle>
-          <LayoutDescription>You can now use the app</LayoutDescription>
+          <LayoutTitle>Connexion réussie</LayoutTitle>
+          <LayoutDescription>
+            Vous pouvez maintenant utiliser l’application
+          </LayoutDescription>
         </LayoutHeader>
         <LayoutContent>
           <Link href="/" className={buttonVariants({ size: "lg" })}>
-            Get Started
+            Commencer
           </Link>
         </LayoutContent>
       </Layout>

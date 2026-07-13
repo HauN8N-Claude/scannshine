@@ -53,7 +53,7 @@ export const ProviderButton = (props: ProviderButtonProps) => {
           variant="secondary"
           className="absolute -top-2.5 -right-2.5 z-10"
         >
-          Last used
+          Utilisé en dernier
         </Badge>
       )}
       <LoadingButton
@@ -70,7 +70,7 @@ export const ProviderButton = (props: ProviderButtonProps) => {
         }}
       >
         {data.icon}
-        <span className="ml-2">Sign in with {data.name}</span>
+        <span className="ml-2">Se connecter avec {data.name}</span>
       </LoadingButton>
     </div>
   );

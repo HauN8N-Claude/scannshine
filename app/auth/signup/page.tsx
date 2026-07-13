@@ -17,9 +17,9 @@ import { Suspense } from "react";
 import { SignUpCredentialsForm } from "./sign-up-credentials-form";
 
 export const metadata: Metadata = {
-  title: `Sign Up | ${SiteConfig.title}`,
+  title: `Créer un compte | ${SiteConfig.title}`,
   description:
-    "Create your account to start collecting powerful testimonials for your projects.",
+    "Créez votre compte pour commencer à collecter des avis Google pour votre établissement.",
 };
 
 export default function Page() {
@@ -46,9 +46,9 @@ async function AuthSignInPage() {
             {SiteConfig.title.substring(0, 1).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <CardTitle>Sign up to {SiteConfig.title}</CardTitle>
+        <CardTitle>Créer un compte sur {SiteConfig.title}</CardTitle>
         <CardDescription>
-          We just need a few details to get you started.
+          Quelques informations suffisent pour commencer.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -57,9 +57,9 @@ async function AuthSignInPage() {
         </Suspense>
 
         <Typography variant="muted" className="mt-4 text-xs">
-          You already have an account?{" "}
+          Vous avez déjà un compte ?{" "}
           <Typography variant="link" as={Link} href="/auth/signin">
-            Sign in
+            Se connecter
           </Typography>
         </Typography>
       </CardContent>
