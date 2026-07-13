@@ -2,8 +2,15 @@
 
 import { Layout, LayoutContent } from "@/features/page/layout";
 import { SiteConfig } from "@/site-config";
+import { MessageSquareText } from "lucide-react";
 
 export function Footer() {
+  const feedbackHref = `mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
+    "Mon avis sur ScanNShine",
+  )}&body=${encodeURIComponent(
+    "Bonjour,\n\nVoici mon retour sur ScanNShine :\n\n",
+  )}`;
+
   return (
     <footer className="bg-background border-t pb-8">
       <Layout className="my-14">
@@ -18,13 +25,22 @@ export function Footer() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-1 md:text-right">
-              <p className="text-muted-foreground text-sm">
-                {SiteConfig.company.address}
-              </p>
-              <p className="text-muted-foreground text-sm">
-                © 2026 {SiteConfig.company.name}. Tous droits réservés.
-              </p>
+            <div className="flex flex-col gap-3 md:items-end md:text-right">
+              <a
+                href={feedbackHref}
+                className="text-primary inline-flex items-center gap-2 text-sm font-medium hover:underline"
+              >
+                <MessageSquareText className="size-4" />
+                Une question, une idée ? Donnez-nous votre avis
+              </a>
+              <div className="flex flex-col gap-1">
+                <p className="text-muted-foreground text-sm">
+                  {SiteConfig.company.address}
+                </p>
+                <p className="text-muted-foreground text-sm">
+                  © 2026 {SiteConfig.company.name}. Tous droits réservés.
+                </p>
+              </div>
             </div>
           </div>
         </LayoutContent>

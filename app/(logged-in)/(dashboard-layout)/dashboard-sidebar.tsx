@@ -14,6 +14,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { SidebarUserButton } from "@/features/sidebar/sidebar-user-button";
+import { SiteConfig } from "@/site-config";
+import { LifeBuoy } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getDashboardNavigation } from "./dashboard.links";
@@ -77,6 +79,20 @@ export function DashboardSidebar({
         ))}
       </SidebarContent>
       <SidebarFooter className="flex flex-col gap-2">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a
+                href={`mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
+                  `Support ScanNShine — ${  businessName}`,
+                )}`}
+              >
+                <LifeBuoy />
+                <span>Support client</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
         <SidebarUserButton />
       </SidebarFooter>
       <SidebarRail />

@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-13
+FEATURE: Add feedback/support email (haumoana@polynetia.com in SiteConfig.supportEmail) — landing footer "Donnez-nous votre avis" mailto link for leads + "Support client" mailto link in client dashboard sidebar footer (pre-filled subject with business name)
 FEATURE: Add /offre-crm-sms upsell page (AIDA: 30-min countdown + hook, problem cards, CRM+SMS benefits, payment section 2990 XPF/mois, noindex) — CTA points to /billing, Dodo add-on product not wired yet
 FEATURE: Add /creer-fiche-google public guide (why + 6 steps to create a GMB fiche, CTAs to Google Business and back to onboarding) + prominent "no GMB fiche?" help block with guide button on onboarding step 2 (StepGoogle)
 CHORE: Add prisma/set-demo-password.ts and prisma/set-demo-step.ts dev utilities (demo account credential + onboarding step for previews/e2e)

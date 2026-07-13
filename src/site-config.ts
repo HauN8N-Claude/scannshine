@@ -10,6 +10,8 @@ export const SiteConfig = {
     name: "ScanNShine",
     address: "Papeete, Polynésie française",
   },
+  // Adresse de contact / support / feedback (leads et clients abonnés)
+  supportEmail: "haumoana@polynetia.com",
   brand: {
     primary: "#0ea5e9",
   },
