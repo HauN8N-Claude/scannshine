@@ -1,6 +1,10 @@
 # Changelog
 
 ## 2026-07-13
+FEATURE: Add /offre-crm-sms upsell page (AIDA: 30-min countdown + hook, problem cards, CRM+SMS benefits, payment section 2990 XPF/mois, noindex) — CTA points to /billing, Dodo add-on product not wired yet
+FEATURE: Add /creer-fiche-google public guide (why + 6 steps to create a GMB fiche, CTAs to Google Business and back to onboarding) + prominent "no GMB fiche?" help block with guide button on onboarding step 2 (StepGoogle)
+CHORE: Add prisma/set-demo-password.ts and prisma/set-demo-step.ts dev utilities (demo account credential + onboarding step for previews/e2e)
+FEATURE: Add owner admin page /admin/commerces — client list with subscription-validity badges (Abonné/En essai+date/Paiement en retard/Annulé+date/Inscription), owner contact, 30-day scans, summary tiles, search; responsive table (desktop) + cards (mobile); NO reviews-generated metric (belongs to client dashboard); admin nav relabeled to French
 FIX: Force billing_currency EUR on Dodo checkout sessions (E2E test revealed default USD conversion — XPF is euro-pegged, no floating FX for PF clients)
 
 FEATURE: Translate auth, account and transactional-email surfaces to French (vouvoiement)
