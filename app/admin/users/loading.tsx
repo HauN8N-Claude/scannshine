@@ -10,7 +10,7 @@ export default function RouteLoading() {
   return (
     <Layout size="lg">
       <LayoutHeader>
-        <LayoutTitle>User Management</LayoutTitle>
+        <LayoutTitle>Utilisateurs</LayoutTitle>
       </LayoutHeader>
       <LayoutContent>
         <div className="flex flex-col gap-4">

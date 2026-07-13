@@ -33,7 +33,7 @@ export default async function Page(props: PageProps<"/admin/users">) {
   return (
     <Layout size="lg">
       <LayoutHeader>
-        <LayoutTitle>User Management</LayoutTitle>
+        <LayoutTitle>Utilisateurs</LayoutTitle>
       </LayoutHeader>
 
       <LayoutContent>
