@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-14
+CHORE: Ajout guide docs/guide-dodo-live.md (passage Dodo Payments en live à faire soi-même : produit EUR/mensuel/essai 7j, webhook /api/webhooks/dodo, 4 variables Vercel, tests, dépannage)
 FEATURE: CGV/confidentialité — identité réelle PolynetIA (EI, N° Tahiti F95709, Punaauia) via SiteConfig.legal, clause anti-review-gating + engagements Google du Client, rôle éditeur=sous-traitant / client=responsable (art. 28), base légale prospection SMS/e-mail (consentement + STOP) pour l'upsell CRM ; recherche juridique consolidée dans docs/recherche-juridique-avis-crm.md
 FEATURE: M5 vues owner — section « À suivre » sur /admin (churn du mois approxime via cancelledAt, inscriptions non finalisees ONBOARDING, commerces inactifs 0 scan/30j, essais qui expirent sous 3j avec contact) + filtre par statut cliquable sur /admin/commerces
 FEATURE: d3 pages legales FR — vraies CGV/CGU + politique de confidentialite (RGPD/PF) avec placeholders societe a completer, remplacent le boilerplate anglais; liens legaux ajoutes au footer
