@@ -4,6 +4,7 @@ import {
   LayoutHeader,
   LayoutTitle,
 } from "@/features/page/layout";
+import type { SubStatus } from "@/generated/prisma";
 import { getRequiredAdmin } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import {
@@ -16,14 +17,27 @@ import type { CommerceRow } from "./_components/commerces-list";
 
 const searchParamsCache = createSearchParamsCache({
   q: parseAsString.withDefault(""),
+  statut: parseAsString.withDefault(""),
   page: parseAsInteger.withDefault(1),
 });
 
 const PAGE_SIZE = 20;
 
+const VALID_STATUSES: SubStatus[] = [
+  "ONBOARDING",
+  "TRIALING",
+  "ACTIVE",
+  "PAST_DUE",
+  "CANCELLED",
+];
+
 // Chargement hors composant : fonctions impures (dates) interdites en render.
-async function getCommercesData(q: string, page: number) {
-  const where = q
+async function getCommercesData(q: string, statut: string, page: number) {
+  const statusFilter = VALID_STATUSES.includes(statut as SubStatus)
+    ? { subscriptionStatus: statut as SubStatus }
+    : {};
+
+  const searchFilter = q
     ? {
         OR: [
           { name: { contains: q, mode: "insensitive" as const } },
@@ -41,6 +55,8 @@ async function getCommercesData(q: string, page: number) {
         ],
       }
     : {};
+
+  const where = { ...statusFilter, ...searchFilter };
 
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
 
@@ -119,8 +135,10 @@ async function getCommercesData(q: string, page: number) {
 export default async function Page(props: PageProps<"/admin/commerces">) {
   await getRequiredAdmin();
 
-  const { q, page } = await searchParamsCache.parse(props.searchParams);
-  const { rows, summary, total } = await getCommercesData(q, page);
+  const { q, statut, page } = await searchParamsCache.parse(
+    props.searchParams,
+  );
+  const { rows, summary, total } = await getCommercesData(q, statut, page);
 
   return (
     <Layout size="lg">

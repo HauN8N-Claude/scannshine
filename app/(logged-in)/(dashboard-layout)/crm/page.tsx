@@ -18,8 +18,9 @@ import {
 } from "@/features/page/layout";
 import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
+import { startOfMonthPF } from "@/lib/date/pf-timezone";
 import { getBusinessByUserId } from "@/query/business/get-business";
-import { Download, UsersRound } from "lucide-react";
+import { Download, Sparkles, UsersRound } from "lucide-react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -69,9 +70,9 @@ async function CrmPage(props: PageProps<"/crm">) {
       : {}),
   };
 
-  const monthStart = new Date();
-  monthStart.setDate(1);
-  monthStart.setHours(0, 0, 0, 0);
+  // Début de mois dans le fuseau Tahiti (UTC-10), pas celui du serveur (UTC) :
+  // sinon le « +X ce mois » bascule ~10 h trop tôt aux bornes de mois.
+  const monthStart = startOfMonthPF(new Date());
 
   const [contacts, total, thisMonth] = await Promise.all([
     prisma.contact.findMany({
@@ -113,9 +114,12 @@ async function CrmPage(props: PageProps<"/crm">) {
         </a>
       </LayoutActions>
       <LayoutContent className="flex flex-col gap-4">
-        <div className="bg-muted/50 rounded-lg border border-dashed p-3 text-sm">
-          🚀 Bientôt : envoyez vos promos par SMS à toute votre base, en deux
-          clics.
+        <div className="bg-muted/50 text-muted-foreground flex items-center gap-2 rounded-lg border border-dashed p-3 text-sm">
+          <Sparkles className="size-4 shrink-0" aria-hidden />
+          <span>
+            Bientôt : envoyez vos promos par SMS à toute votre base, en deux
+            clics.
+          </span>
         </div>
 
         <CrmSearch />

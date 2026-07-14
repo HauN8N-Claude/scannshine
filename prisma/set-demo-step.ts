@@ -23,7 +23,7 @@ async function main() {
   logger.info(`Business démo -> étape ${step}`);
 }
 
-main()
+void main()
   .catch((error: unknown) => {
     logger.error("set-demo-step a échoué", error);
     process.exit(1);

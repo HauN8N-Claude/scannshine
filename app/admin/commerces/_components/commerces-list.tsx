@@ -101,11 +101,30 @@ const StatusBadge = ({ row }: { row: CommerceRow }) => {
   );
 };
 
-const SummaryTile = ({ label, value }: { label: string; value: number }) => (
-  <div className="bg-muted/40 flex flex-col rounded-lg border px-3 py-2">
+const FilterTile = ({
+  label,
+  value,
+  active,
+  onSelect,
+}: {
+  label: string;
+  value: number;
+  active: boolean;
+  onSelect: () => void;
+}) => (
+  <button
+    type="button"
+    onClick={onSelect}
+    aria-pressed={active}
+    className={`flex flex-col rounded-lg border px-3 py-2 text-left transition-colors ${
+      active
+        ? "border-primary bg-primary/10"
+        : "bg-muted/40 hover:bg-muted/70"
+    }`}
+  >
     <span className="text-lg font-semibold tabular-nums">{value}</span>
     <span className="text-muted-foreground text-xs">{label}</span>
-  </div>
+  </button>
 );
 
 export function CommercesList({
@@ -121,17 +140,44 @@ export function CommercesList({
       .withDefault("")
       .withOptions({ shallow: false, throttleMs: 1000 }),
   );
+  const [statut, setStatut] = useQueryState(
+    "statut",
+    parseAsString.withDefault("").withOptions({ shallow: false }),
+  );
+  const [, setPage] = useQueryState(
+    "page",
+    parseAsString.withOptions({ shallow: false }),
+  );
+
+  const selectStatus = async (value: string) => {
+    // Bascule : recliquer sur le filtre actif le désactive. On revient page 1.
+    await setPage(null);
+    await setStatut(statut === value ? null : value);
+  };
 
   const totalPages = Math.ceil(total / limit);
 
+  const filters: { label: string; value: string; count: number }[] = [
+    { label: "Commerces", value: "", count: summary.total },
+    { label: "Abonnés", value: "ACTIVE", count: summary.active },
+    { label: "En essai", value: "TRIALING", count: summary.trialing },
+    { label: "Paiement en retard", value: "PAST_DUE", count: summary.pastDue },
+    { label: "Annulés", value: "CANCELLED", count: summary.cancelled },
+    { label: "Inscription", value: "ONBOARDING", count: summary.onboarding },
+  ];
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
-        <SummaryTile label="Commerces" value={summary.total} />
-        <SummaryTile label="Abonnés" value={summary.active} />
-        <SummaryTile label="En essai" value={summary.trialing} />
-        <SummaryTile label="Paiement en retard" value={summary.pastDue} />
-        <SummaryTile label="Annulés" value={summary.cancelled} />
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        {filters.map((filter) => (
+          <FilterTile
+            key={filter.value || "all"}
+            label={filter.label}
+            value={filter.count}
+            active={statut === filter.value}
+            onSelect={async () => selectStatus(filter.value)}
+          />
+        ))}
       </div>
 
       <Card>

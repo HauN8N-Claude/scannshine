@@ -3,6 +3,7 @@
 import { Layout, LayoutContent } from "@/features/page/layout";
 import { SiteConfig } from "@/site-config";
 import { MessageSquareText } from "lucide-react";
+import Link from "next/link";
 
 export function Footer() {
   const feedbackHref = `mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
@@ -33,6 +34,21 @@ export function Footer() {
                 <MessageSquareText className="size-4" />
                 Une question, une idée ? Donnez-nous votre avis
               </a>
+              <div className="text-muted-foreground flex items-center gap-3 text-sm">
+                <Link
+                  href="/legal/terms"
+                  className="hover:text-foreground hover:underline"
+                >
+                  Conditions générales
+                </Link>
+                <span aria-hidden>·</span>
+                <Link
+                  href="/legal/privacy"
+                  className="hover:text-foreground hover:underline"
+                >
+                  Confidentialité
+                </Link>
+              </div>
               <div className="flex flex-col gap-1">
                 <p className="text-muted-foreground text-sm">
                   {SiteConfig.company.address}

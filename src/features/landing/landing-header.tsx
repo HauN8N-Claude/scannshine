@@ -81,20 +81,24 @@ export function LandingHeader() {
             {SiteConfig.title}
           </motion.p>
         </div>
-        <motion.nav
-          style={{
-            opacity: useTransform(
-              scrollYBoundedProgressDelayed,
-              [0, 1],
-              [1, 0],
-            ),
-          }}
-          className="text-muted-foreground flex items-center gap-4 text-sm font-medium"
-        >
-          <Link href="#comment-ca-marche">Comment ça marche</Link>
-          <Link href="#tarif">Tarif</Link>
+        <nav className="text-muted-foreground flex items-center gap-4 text-sm font-medium">
+          {/* Seuls les liens d'ancre s'estompent au scroll — le CTA d'auth
+              reste toujours visible (sinon on perd l'inscription en scrollant). */}
+          <motion.div
+            style={{
+              opacity: useTransform(
+                scrollYBoundedProgressDelayed,
+                [0, 1],
+                [1, 0],
+              ),
+            }}
+            className="flex items-center gap-4"
+          >
+            <Link href="#comment-ca-marche">Comment ça marche</Link>
+            <Link href="#tarif">Tarif</Link>
+          </motion.div>
           <AuthButtonClient />
-        </motion.nav>
+        </nav>
       </div>
     </motion.header>
   );

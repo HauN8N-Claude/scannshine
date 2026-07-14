@@ -55,8 +55,17 @@ const TrendBadge = ({
   previous: number;
 }) => {
   if (previous === 0 && current === 0) return null;
-  const delta =
-    previous === 0 ? 100 : Math.round(((current - previous) / previous) * 100);
+  // Pas de base de comparaison (période précédente vide) : un pourcentage
+  // (+100 %) serait trompeur quelle que soit l'ampleur. On affiche « nouveau ».
+  if (previous === 0) {
+    return (
+      <span className="flex items-center gap-1 text-xs text-emerald-600">
+        <TrendingUp className="size-3" aria-hidden />
+        nouveau
+      </span>
+    );
+  }
+  const delta = Math.round(((current - previous) / previous) * 100);
   const isUp = delta >= 0;
   const Icon = isUp ? TrendingUp : TrendingDown;
   return (

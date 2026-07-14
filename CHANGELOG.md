@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-07-14
+FEATURE: M5 vues owner — section « À suivre » sur /admin (churn du mois approxime via cancelledAt, inscriptions non finalisees ONBOARDING, commerces inactifs 0 scan/30j, essais qui expirent sous 3j avec contact) + filtre par statut cliquable sur /admin/commerces
+FEATURE: d3 pages legales FR — vraies CGV/CGU + politique de confidentialite (RGPD/PF) avec placeholders societe a completer, remplacent le boilerplate anglais; liens legaux ajoutes au footer
+FIX: m3 CRM « +X ce mois » calcule en fuseau Tahiti (UTC-10) via helper partage pf-timezone (extrait de get-stats), plus de bascule ~10h trop tot aux bornes de mois
+FIX: m5 TrendBadge affiche « nouveau » au lieu de +100% quand la periode precedente est vide
+FIX: m6 landing — le CTA d inscription/connexion reste visible en permanence (seuls les liens d ancre s estompent au scroll)
+FIX: m1 bouton Connexion — plus de ?callbackUrl= vide au SSR (parametre ajoute seulement si present, encode)
+CHORE: d2 emojis hors-funnel remplaces par icones Lucide (CRM Sparkles, billing Check); d6 floating promise set-demo-step; titres FR squelettes admin (loading) + page users
+
 ## 2026-07-13
 FIX: audit M2-M4 — MRR admin = abonnes payants (ACTIVE) uniquement, essais comptes a part (tuile dediee), prix depuis SCANNSHINE_PLAN; MRR historique ACTIVE-only + note churn; texte lock PAST_DUE corrige (plus de fausse promesse 7j); validation signup (name min 2, confirmation mdp inline via refine, hint 8 caracteres); admin titre FR
 FIX: C2 tunnel — carte exigee a l onboarding: ecran 3 lance le checkout Dodo (essai 7j), onboardingStep=4 pose UNIQUEMENT par le webhook a l activation (plus d acces gratuit a vie), gating dashboard = TRIALING/ACTIVE seulement, ecran de confirmation paiement au retour, suppression de completeOnboardingAction

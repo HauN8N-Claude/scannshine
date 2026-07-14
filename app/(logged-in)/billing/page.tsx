@@ -9,6 +9,7 @@ import {
 import { getRequiredUser } from "@/lib/auth/auth-user";
 import { SCANNSHINE_PLAN } from "@/lib/dodo";
 import { getBusinessByUserId } from "@/query/business/get-business";
+import { Check } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -70,11 +71,21 @@ async function BillingPage() {
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <ul className="text-muted-foreground flex flex-col gap-1.5 text-sm">
-            <li>✓ QR code + page de collecte à vos couleurs</li>
-            <li>✓ Retours négatifs captés en privé</li>
-            <li>✓ Statistiques scans et clics vers Google</li>
-            <li>✓ Base contacts clients + export</li>
-            <li>✓ Sans engagement — annulable à tout moment</li>
+            {[
+              "QR code + page de collecte à vos couleurs",
+              "Retours négatifs captés en privé",
+              "Statistiques scans et clics vers Google",
+              "Base contacts clients + export",
+              "Sans engagement — annulable à tout moment",
+            ].map((feature) => (
+              <li key={feature} className="flex items-start gap-2">
+                <Check
+                  className="mt-0.5 size-4 shrink-0 text-emerald-600"
+                  aria-hidden
+                />
+                <span>{feature}</span>
+              </li>
+            ))}
           </ul>
 
           {business.subscriptionStatus === "TRIALING" &&

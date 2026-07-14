@@ -1,3 +1,4 @@
+import { startOfDayPF, toDayKeyPF } from "@/lib/date/pf-timezone";
 import { prisma } from "@/lib/prisma";
 
 export type StatsPeriod = 7 | 30 | 90;
@@ -22,32 +23,12 @@ export type BusinessStats = {
   daily: DailyPoint[];
 };
 
-// La Polynésie française est à UTC-10 (Pacific/Tahiti, sans heure d'été).
-// On calcule les journées dans ce fuseau, pas celui du serveur (UTC en prod),
-// sinon les scans du soir local basculent dans le mauvais jour.
-const PF_OFFSET_MS = 10 * 60 * 60 * 1000;
-
-const startOfDay = (date: Date): Date => {
-  // Minuit local PF = début de la journée décalé de -10h, ramené en UTC.
-  const shifted = new Date(date.getTime() - PF_OFFSET_MS);
-  shifted.setUTCHours(0, 0, 0, 0);
-  return new Date(shifted.getTime() + PF_OFFSET_MS);
-};
-
-const toDayKey = (date: Date): string => {
-  const local = new Date(date.getTime() - PF_OFFSET_MS);
-  const year = local.getUTCFullYear();
-  const month = String(local.getUTCMonth() + 1).padStart(2, "0");
-  const day = String(local.getUTCDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
-
 export const getBusinessStats = async (
   businessId: string,
   period: StatsPeriod,
 ): Promise<BusinessStats> => {
   const now = new Date();
-  const periodStart = startOfDay(
+  const periodStart = startOfDayPF(
     new Date(now.getTime() - (period - 1) * 24 * 60 * 60 * 1000),
   );
   const previousStart = new Date(
@@ -84,12 +65,12 @@ export const getBusinessStats = async (
 
   for (let i = 0; i < period; i++) {
     const day = new Date(periodStart.getTime() + i * 24 * 60 * 60 * 1000);
-    dailyMap.set(toDayKey(day), { scans: 0, clicks: 0 });
+    dailyMap.set(toDayKeyPF(day), { scans: 0, clicks: 0 });
   }
 
   for (const event of events) {
     counts[event.type]++;
-    const key = toDayKey(event.createdAt);
+    const key = toDayKeyPF(event.createdAt);
     const bucket = dailyMap.get(key);
     if (!bucket) continue;
     if (event.type === "SCAN") bucket.scans++;

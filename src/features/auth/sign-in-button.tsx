@@ -26,7 +26,11 @@ export const SignInButton = (props: VariantProps<typeof buttonVariants>) => {
   return (
     <Link
       className={buttonVariants({ size: "sm", variant: "outline", ...props })}
-      href={`/auth/signin?callbackUrl=${href}`}
+      href={
+        href
+          ? `/auth/signin?callbackUrl=${encodeURIComponent(href)}`
+          : "/auth/signin"
+      }
     >
       Connexion
     </Link>
