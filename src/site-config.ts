@@ -10,6 +10,14 @@ export const SiteConfig = {
     name: "ScanNShine",
     address: "Papeete, Polynésie française",
   },
+  // Identité légale de l'éditeur (mentions légales, CGV, confidentialité, DPA)
+  legal: {
+    publisher: "PolynetIA",
+    form: "Entreprise individuelle",
+    tahitiNumber: "F95709",
+    address: "BP 380968, 98718 Punaauia, Polynésie française",
+    email: "contact@polynetia.com",
+  },
   // Adresse de contact / support / feedback (leads et clients abonnés)
   supportEmail: "haumoana@polynetia.com",
   brand: {

@@ -4,69 +4,75 @@ import { SiteConfig } from "@/site-config";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 
-// ⚠️ Modèle de politique de confidentialité à faire relire par un juriste.
-// Les mentions entre crochets […] doivent être complétées avec les
-// informations réelles (responsable de traitement, hébergeur, DPO éventuel).
+// ⚠️ Politique de confidentialité + accord de traitement (art. 28 RGPD) à faire
+// relire par un juriste. Elle décrit deux relations : l'Éditeur responsable de
+// traitement (données du Client) et l'Éditeur sous-traitant (données des clients
+// finaux, dont le Client est responsable de traitement).
 const markdown = `_Dernière mise à jour : 14 juillet 2026_
 
 ## 1. Responsable du traitement
 
-Le responsable du traitement des données collectées via **${SiteConfig.title}** (${SiteConfig.prodUrl}) est **[Raison sociale de l'éditeur]**, ${SiteConfig.company.address}.
+Les données collectées via **${SiteConfig.title}** (${SiteConfig.prodUrl}) sont traitées par **${SiteConfig.legal.publisher}** — ${SiteConfig.legal.form} (N° Tahiti ${SiteConfig.legal.tahitiNumber}), ${SiteConfig.legal.address} (ci-après « l'Éditeur »).
 
-Contact : ${SiteConfig.supportEmail}
+Contact : ${SiteConfig.legal.email}
 
-## 2. Données que nous collectons
+## 2. Deux rôles distincts
 
-**Pour les commerces clients :**
+- Pour les **données du commerce Client** (compte, facturation, usage), l'Éditeur est **responsable de traitement**.
+- Pour les **données des clients finaux** (contacts, retours privés) collectées via le QR code, c'est le **commerce Client qui est responsable de traitement** ; l'Éditeur agit comme **sous-traitant** au sens de l'article 28 du RGPD et ne traite ces données que sur instruction du Client, pour lui fournir le Service.
+
+## 3. Données que nous collectons
+
+**Données du commerce Client :**
 - Identité et contact du gérant (nom, adresse e-mail) ;
 - Informations sur le commerce (nom, fiche Google, couleur de marque, logo) ;
 - Données de facturation gérées par notre prestataire de paiement Dodo Payments ;
 - Statistiques d'usage du Service (scans, clics, retours).
 
-**Pour les clients finaux des commerces (visiteurs du QR code) :**
+**Données des clients finaux (visiteurs du QR code) :**
 - Coordonnées laissées volontairement et avec consentement explicite (nom, téléphone, e-mail) en vue de recevoir des offres du commerce ;
 - Retours privés éventuellement laissés (message, note).
 
-Ces données sont collectées **pour le compte du commerce**, qui en est le destinataire.
-
-## 3. Finalités et base légale
+## 4. Finalités et base légale
 
 - **Fourniture du Service** (exécution du contrat) : gestion du compte, du QR code, des statistiques.
 - **Facturation** (obligation légale / exécution du contrat).
-- **Constitution d'une base de contacts** (consentement du visiteur) : les coordonnées ne sont enregistrées qu'après acceptation explicite.
+- **Constitution d'une base de contacts** (consentement du client final) : les coordonnées ne sont enregistrées qu'après acceptation explicite, et destinées au seul commerce.
+- **Envoi de messages commerciaux (SMS / e-mail) par le commerce** à ses contacts, lorsque l'option est activée : ce traitement repose sur le **consentement préalable** du client final recueilli lors de la collecte. Chaque message indique l'identité de l'expéditeur et un moyen simple de se désinscrire (« STOP » par SMS, lien de désinscription par e-mail). Le commerce est responsable de la licéité de ses envois.
 - **Amélioration du Service et mesure d'audience** (intérêt légitime), au moyen d'outils d'analyse.
 
-## 4. Destinataires et sous-traitants
+## 5. Destinataires et sous-traitants ultérieurs
 
-Nous faisons appel à des sous-traitants techniques agissant pour notre compte :
-- **Hébergement et infrastructure** : [Vercel / Neon — à préciser] ;
-- **Paiement** : Dodo Payments (Merchant of Record) ;
-- **Envoi d'e-mails transactionnels** : Resend ;
-- **Mesure d'audience** : [PostHog / Meta — à préciser].
+Nous faisons appel à des prestataires techniques agissant pour notre compte :
+- **Hébergement applicatif** : Vercel Inc. ;
+- **Base de données** : Neon ;
+- **Paiement** : Dodo Payments (marchand de référence) ;
+- **E-mails transactionnels** : Resend ;
+- **Mesure d'audience** : PostHog.
 
-Aucune donnée n'est vendue à des tiers.
+Certains de ces prestataires peuvent héberger des données hors de Polynésie française ; les transferts sont encadrés par les garanties appropriées. Aucune donnée n'est vendue à des tiers.
 
-## 5. Durée de conservation
+## 6. Durée de conservation
 
-Les données de compte sont conservées pendant la durée de l'abonnement, puis archivées ou supprimées dans un délai raisonnable après résiliation. Les données de facturation sont conservées conformément aux obligations légales. Un contact peut être supprimé à tout moment par le commerce depuis son espace.
+Les données de compte sont conservées pendant la durée de l'abonnement, puis supprimées ou anonymisées dans un délai raisonnable après résiliation. Les données de facturation sont conservées conformément aux obligations légales. Un contact peut être supprimé à tout moment par le commerce depuis son espace ; à la fin du contrat, les données des clients finaux sont supprimées ou restituées au Client responsable de traitement.
 
-## 6. Vos droits
+## 7. Vos droits
 
-Conformément à la réglementation applicable en matière de protection des données, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données. Vous pouvez les exercer en écrivant à ${SiteConfig.supportEmail}.
+Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données, exerçables en écrivant à ${SiteConfig.legal.email}.
 
-Un client final souhaitant faire valoir ses droits sur des coordonnées laissées auprès d'un commerce peut s'adresser directement à ce commerce, responsable de ces données, ou nous contacter qui transmettrons.
+Un client final souhaitant faire valoir ses droits sur des coordonnées laissées auprès d'un commerce s'adresse en priorité à ce commerce (responsable de traitement) ; l'Éditeur relaie la demande le cas échéant.
 
-## 7. Cookies et traceurs
+## 8. Cookies et traceurs
 
 Le Service utilise des cookies strictement nécessaires à son fonctionnement (authentification) ainsi que, sous réserve de votre consentement, des cookies de mesure d'audience. Vous pouvez configurer votre navigateur pour les refuser.
 
-## 8. Sécurité
+## 9. Sécurité
 
-Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables pour protéger les données. Les mots de passe sont stockés sous forme chiffrée et les données de carte bancaire ne transitent jamais par nos serveurs.
+Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables pour protéger les données. Les mots de passe sont stockés sous forme chiffrée et les données complètes de carte bancaire ne transitent jamais par nos serveurs.
 
 ---
 
-_Pour toute question relative à vos données : ${SiteConfig.supportEmail}._
+_Pour toute question relative à vos données : ${SiteConfig.legal.email}._
 `;
 
 export const metadata: Metadata = {

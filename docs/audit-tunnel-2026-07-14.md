@@ -1,5 +1,19 @@
 # Audit du tunnel ScanNShine — 2026-07-14
 
+> ### État au 2026-07-14 (soir) — corrections déployées en production
+> **Traités et vérifiés :** C1, C2 (modèle « carte exigée »), M2, M3, M4, M5,
+> m1, m3, m4, m5, m6, d1, d2 (hors funnel), d3, d6.
+> **Restants (hors de portée autonome) :**
+> - **M1** — Resend en attente de propagation SES (rien à coder).
+> - **C3** — cron d'expiration : *optionnel* (Option A retenue → Dodo convertit seul).
+> - **m7** (preuve sociale), **m8** (nom fondateur) — nécessitent de vraies données/décision.
+> - **m9** — recommandation de monitoring, pas une tâche de code.
+> - **d4** — Meta Pixel : code prêt, manque `NEXT_PUBLIC_META_PIXEL_ID` (à créer côté Meta).
+> - **d5** — KYC Dodo : action à mener dans le back-office Dodo.
+
+---
+
+
 > Audit end-to-end du parcours **lead → client** et de l'espace **owner**, réalisé sur la production (scannshine.com) + revue du code par 2 agents spécialisés + tests runtime. Rien n'a été modifié pendant l'audit.
 >
 > **Verdict global :** le produit est soigné, le copywriting FR local est excellent, l'infra tient. **Mais deux trous critiques sabotent la conversion et le revenu** — à traiter en priorité absolue. Le reste est du polish et de l'outillage owner.
