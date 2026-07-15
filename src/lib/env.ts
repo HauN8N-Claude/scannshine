@@ -21,6 +21,10 @@ export const env = createEnv({
     DODO_PAYMENTS_WEBHOOK_KEY: z.string().optional(),
     DODO_PAYMENTS_ENVIRONMENT: z.enum(["test_mode", "live_mode"]).optional(),
     DODO_PRODUCT_ID: z.string().optional(),
+    // Secret partagé avec Vercel Cron : Vercel l'envoie en `Authorization:
+    // Bearer <CRON_SECRET>` sur les appels planifiés. Tant qu'il est absent, la
+    // route de cron renvoie 503 (fail-closed).
+    CRON_SECRET: z.string().optional(),
     CI: z.coerce.boolean().optional(),
   },
   /**
