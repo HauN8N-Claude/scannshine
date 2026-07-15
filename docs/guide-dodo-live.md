@@ -17,7 +17,7 @@ Dans le dashboard Dodo, en haut, bascule l'interrupteur **Test → Live**.
 ## Étape 2 — Recréer le produit (en Live)
 **Products → Create product** :
 - Type : **Subscription**
-- Prix : **33.50** — devise **EUR** (⚠️ jamais USD)
+- Prix : **16.90** — devise **EUR** (⚠️ jamais USD)
 - Billing period : **Monthly**
 - **Trial period : 7 days**
 - Nom : **ScanNShine — Abonnement mensuel**
@@ -57,7 +57,7 @@ Les variables d'environnement ne s'appliquent qu'au **prochain déploiement**.
 ## Étape 8 — Test réel de bout en bout
 Une fois redéployé :
 1. Inscris-toi avec un **email de test à toi** sur scannshine.com
-2. Va jusqu'au checkout et paie avec une **vraie carte** (ce sera un vrai débit de 0 € pendant l'essai, puis 33,50 € à J+7 — ou annule avant)
+2. Va jusqu'au checkout et paie avec une **vraie carte** (ce sera un vrai débit de 0 € pendant l'essai, puis 16,90 € à J+7 — ou annule avant)
 3. Vérifie : retour sur le tableau de bord, statut **« Abonnement actif »** dans « Mon abonnement »
 4. Dans **Dodo → Payments/Subscriptions**, l'abonnement doit apparaître
 5. Dans **Dodo → Webhooks**, l'endpoint doit montrer des livraisons en **succès (2xx)**
