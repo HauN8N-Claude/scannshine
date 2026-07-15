@@ -4,7 +4,7 @@
 > **Traités et vérifiés :** C1, C2 (modèle « carte exigée »), M2, M3, M4, M5,
 > m1, m3, m4, m5, m6, d1, d2 (hors funnel), d3, d6.
 > **Restants (hors de portée autonome) :**
-> - **M1** — Resend en attente de propagation SES (rien à coder).
+> - ~~**M1** — Resend~~ ✅ **RÉSOLU le 2026-07-15** : domaine `verified`, DNS (MX/SPF/DKIM) OK, email réel reçu via l'app en prod.
 > - **C3** — cron d'expiration : *optionnel* (Option A retenue → Dodo convertit seul).
 > - **m7** (preuve sociale), **m8** (nom fondateur) — nécessitent de vraies données/décision.
 > - **m9** — recommandation de monitoring, pas une tâche de code.
