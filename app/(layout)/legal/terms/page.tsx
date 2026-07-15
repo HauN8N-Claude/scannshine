@@ -35,7 +35,7 @@ Le Service dirige **tous** les clients du Client vers sa fiche Google, sans jama
 
 ## 4. Abonnement, essai et tarifs
 
-- L'abonnement de base est proposé au tarif de **3 990 XPF/mois** (débité en euros, soit environ 33,50 €/mois, le franc pacifique étant à parité fixe avec l'euro).
+- L'abonnement de base est proposé au tarif de **1 990 XPF/mois** (débité en euros, soit environ 16,68 €/mois, le franc pacifique étant à parité fixe avec l'euro).
 - Des **options payantes** peuvent être proposées en supplément (ex. gestion de contacts et envoi de messages), à leur tarif affiché lors de la souscription.
 - L'inscription ouvre une **période d'essai de 7 jours**. Un moyen de paiement est demandé à l'inscription ; il n'est débité qu'à l'issue de l'essai, sauf résiliation avant son terme.
 - L'abonnement est **mensuel, sans engagement**, reconduit tacitement chaque mois.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-15
+FEATURE: FAQ landing retravaillee objection-par-objection (efficacite reelle, pas besoin d etre techno, zero travail quotidien, gestion du client mecontent conforme anti-gating, autorise par Google, rentabilite 1990 XPF, resiliation sans engagement, sans site/iles) + benefices persona TPE et poussee a l achat ; CTA de conversion ajoute en fin de section FAQ (essai 7j + contact)
+CHORE: reconcilier affichage prix SCANNSHINE_PLAN a 1 990 XPF / 16,68 EUR (supprime la contradiction avec la carte de prix) ; rappel d aligner le produit Dodo
+
 ## 2026-07-14
 CHORE: Ajout guide docs/guide-dodo-live.md (passage Dodo Payments en live à faire soi-même : produit EUR/mensuel/essai 7j, webhook /api/webhooks/dodo, 4 variables Vercel, tests, dépannage)
 FEATURE: CGV/confidentialité — identité réelle PolynetIA (EI, N° Tahiti F95709, Punaauia) via SiteConfig.legal, clause anti-review-gating + engagements Google du Client, rôle éditeur=sous-traitant / client=responsable (art. 28), base légale prospection SMS/e-mail (consentement + STOP) pour l'upsell CRM ; recherche juridique consolidée dans docs/recherche-juridique-avis-crm.md

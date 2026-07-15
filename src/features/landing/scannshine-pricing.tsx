@@ -42,7 +42,7 @@ export const ScannshinePricing = () => {
         <CardHeader className="text-center">
           <CardTitle className="text-xl">ScanNShine</CardTitle>
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-5xl font-bold">3 990</span>
+            <span className="text-5xl font-bold">1 990</span>
             <span className="text-muted-foreground text-lg">XPF/mois</span>
           </div>
           <CardDescription>
