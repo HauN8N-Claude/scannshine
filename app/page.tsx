@@ -79,7 +79,7 @@ const FAQ = [
   {
     question: "Je peux arrêter quand je veux ?",
     answer:
-      "Oui, **en deux clics** depuis votre espace, sans justification ni préavis. L'essai de 7 jours est gratuit et vous n'êtes débité qu'après. Sans engagement : vous restez parce que ça marche, pas parce que vous êtes coincé. Le paiement passe par Dodo Payments, sécurisé et pensé pour les entreprises de Polynésie (1 990 XPF/mois, débité ≈ 16,68 € — le franc pacifique est à parité fixe avec l'euro).",
+      "Oui, **en deux clics** depuis votre espace, sans justification ni préavis. L'essai de 7 jours est gratuit et vous n'êtes débité qu'après. Sans engagement : vous restez parce que ça marche, pas parce que vous êtes coincé. Le paiement passe par Dodo Payments, sécurisé et pensé pour les entreprises de Polynésie (1 990 XPF/mois, débité ≈ 16,90 € — le franc pacifique est à parité fixe avec l'euro).",
   },
   {
     question: "Ça marche sans site web, et jusque dans les îles ?",

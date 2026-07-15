@@ -9,7 +9,7 @@ import { getServerUrl } from "@/lib/server-url";
 import { z } from "zod";
 
 /**
- * Démarre le checkout Dodo : abonnement 16,68 €/mois (affiché 1 990 XPF)
+ * Démarre le checkout Dodo : abonnement 16,90 €/mois (affiché 1 990 XPF)
  * avec 7 jours d'essai. Le webhook activera le compte automatiquement.
  */
 export const startCheckoutAction = authAction

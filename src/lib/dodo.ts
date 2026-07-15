@@ -8,13 +8,13 @@ import { env } from "./env";
 
 export const SCANNSHINE_PLAN = {
   priceXpf: 1990,
-  priceEur: 16.68,
+  priceEur: 16.9,
   trialDays: 7,
   // 1 € = 119,33 XPF (parité fixe) — on affiche le XPF, on facture l'EUR (ADR-002).
   // ⚠️ Le montant réellement débité est celui du produit Dodo (dashboard Dodo) :
   // il doit correspondre à priceEur ci-dessus.
   displayPrice: "1 990 XPF/mois",
-  displayPriceDetail: "≈ 16,68 €, débité en euros",
+  displayPriceDetail: "≈ 16,90 €, débité en euros",
 } as const;
 
 export const isDodoConfigured = (): boolean =>

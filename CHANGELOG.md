@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-15
+CHORE: Baisse du prix de l'abonnement de base 3 990 → 1 990 XPF (≈ 16,90 € facturé en EUR) dans SCANNSHINE_PLAN + landing, FAQ, CGV, billing ; ⚠️ le produit Dodo doit être mis à 16,90 EUR pour correspondre
 FEATURE: FAQ landing retravaillee objection-par-objection (efficacite reelle, pas besoin d etre techno, zero travail quotidien, gestion du client mecontent conforme anti-gating, autorise par Google, rentabilite 1990 XPF, resiliation sans engagement, sans site/iles) + benefices persona TPE et poussee a l achat ; CTA de conversion ajoute en fin de section FAQ (essai 7j + contact)
 CHORE: reconcilier affichage prix SCANNSHINE_PLAN a 1 990 XPF / 16,68 EUR (supprime la contradiction avec la carte de prix) ; rappel d aligner le produit Dodo
 
