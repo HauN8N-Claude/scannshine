@@ -8,7 +8,7 @@ import { PartyPopper } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { saveContactAction } from "../funnel.action";
-import { ContactCaptureSchema } from "../funnel.schema";
+import { ContactCaptureClientSchema } from "../funnel.schema";
 
 export const ContactCapture = ({
   slug,
@@ -41,7 +41,7 @@ export const ContactCapture = ({
   });
 
   const form = useForm({
-    schema: ContactCaptureSchema.omit({ slug: true }),
+    schema: ContactCaptureClientSchema,
     defaultValues: {
       name: "",
       phone: "",
@@ -125,8 +125,9 @@ export const ContactCapture = ({
               <div className="flex items-start gap-2">
                 <field.Checkbox className="mt-0.5" />
                 <field.Label className="text-xs font-normal text-neutral-500">
-                  J'accepte de recevoir les offres de {businessName}.
-                  Désinscription possible à tout moment.
+                  J'accepte de recevoir les offres et actualités de{" "}
+                  {businessName} par SMS et/ou e-mail. Je peux me désinscrire à
+                  tout moment (STOP par SMS, lien de désinscription par e-mail).
                 </field.Label>
               </div>
               <field.Message />

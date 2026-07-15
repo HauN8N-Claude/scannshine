@@ -1,11 +1,14 @@
 "use client";
 
+import { useCookieConsent } from "@/features/analytics/cookie-consent-store";
 import { Layout, LayoutContent } from "@/features/page/layout";
 import { SiteConfig } from "@/site-config";
 import { MessageSquareText } from "lucide-react";
 import Link from "next/link";
 
 export function Footer() {
+  const reopenCookieBanner = useCookieConsent((state) => state.reopen);
+
   const feedbackHref = `mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
     "Mon avis sur ScanNShine",
   )}&body=${encodeURIComponent(
@@ -48,6 +51,14 @@ export function Footer() {
                 >
                   Confidentialité
                 </Link>
+                <span aria-hidden>·</span>
+                <button
+                  type="button"
+                  onClick={reopenCookieBanner}
+                  className="cursor-pointer hover:text-foreground hover:underline"
+                >
+                  Gérer les cookies
+                </button>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-muted-foreground text-sm">

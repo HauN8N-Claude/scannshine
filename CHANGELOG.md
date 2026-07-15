@@ -1,6 +1,10 @@
 # Changelog
 
 ## 2026-07-15
+
+FIX: Formulaire /club cassé (révélé par la vérif runtime) — ContactCaptureSchema.omit() plantait sur un schéma refined (« .omit() cannot be used on object schemas containing refinements ») → page 400, aucun contact capté ; extraction d'un objet de base + ContactCaptureClientSchema dédié
+FIX: RGPD — révoquer le consentement (via « Gérer les cookies ») suspend le pixel Meta immédiatement (fbq consent grant/revoke), sans attendre un rechargement ; curseur pointer sur le bouton du footer
+FEATURE: Consentement RGPD affiné — lien « Gérer les cookies » dans le footer (rouvre la bannière via reopen()) + libellé de consentement /club rendu explicite (prospection par SMS et/ou e-mail + mention STOP/désinscription), pour rendre les contacts réutilisables par l'upsell CRM/SMS
 FEATURE: Bandeau de consentement cookies (RGPD/CNIL) — store Zustand persisté (localStorage), bannière Refuser/Tout accepter à poids égal + lien politique de confidentialité ; le pixel Meta ne se charge QU'APRÈS acceptation (opt-in préalable), choix mémorisé et révocable
 FEATURE: C3 cron de securite — /api/cron/reconcile-subscriptions (Vercel Cron quotidien) reconcilie les etats a risque (essais expires, impayes) avec Dodo (source de verite) en cas de webhook manque ; auth par CRON_SECRET (fail-closed 503/401), ne touche jamais CANCELLED/ONBOARDING, ajout CRON_SECRET a l env + vercel.json
 FEATURE: m8 landing — nom du fondateur affiche (Haumoana) dans la signature et l alt de la photo
@@ -10,6 +14,7 @@ FEATURE: FAQ landing retravaillee objection-par-objection (efficacite reelle, pa
 CHORE: reconcilier affichage prix SCANNSHINE_PLAN a 1 990 XPF / 16,68 EUR (supprime la contradiction avec la carte de prix) ; rappel d aligner le produit Dodo
 
 ## 2026-07-14
+
 CHORE: Ajout guide docs/guide-dodo-live.md (passage Dodo Payments en live à faire soi-même : produit EUR/mensuel/essai 7j, webhook /api/webhooks/dodo, 4 variables Vercel, tests, dépannage)
 FEATURE: CGV/confidentialité — identité réelle PolynetIA (EI, N° Tahiti F95709, Punaauia) via SiteConfig.legal, clause anti-review-gating + engagements Google du Client, rôle éditeur=sous-traitant / client=responsable (art. 28), base légale prospection SMS/e-mail (consentement + STOP) pour l'upsell CRM ; recherche juridique consolidée dans docs/recherche-juridique-avis-crm.md
 FEATURE: M5 vues owner — section « À suivre » sur /admin (churn du mois approxime via cancelledAt, inscriptions non finalisees ONBOARDING, commerces inactifs 0 scan/30j, essais qui expirent sous 3j avec contact) + filtre par statut cliquable sur /admin/commerces
@@ -21,6 +26,7 @@ FIX: m1 bouton Connexion — plus de ?callbackUrl= vide au SSR (parametre ajoute
 CHORE: d2 emojis hors-funnel remplaces par icones Lucide (CRM Sparkles, billing Check); d6 floating promise set-demo-step; titres FR squelettes admin (loading) + page users
 
 ## 2026-07-13
+
 FIX: audit M2-M4 — MRR admin = abonnes payants (ACTIVE) uniquement, essais comptes a part (tuile dediee), prix depuis SCANNSHINE_PLAN; MRR historique ACTIVE-only + note churn; texte lock PAST_DUE corrige (plus de fausse promesse 7j); validation signup (name min 2, confirmation mdp inline via refine, hint 8 caracteres); admin titre FR
 FIX: C2 tunnel — carte exigee a l onboarding: ecran 3 lance le checkout Dodo (essai 7j), onboardingStep=4 pose UNIQUEMENT par le webhook a l activation (plus d acces gratuit a vie), gating dashboard = TRIALING/ACTIVE seulement, ecran de confirmation paiement au retour, suppression de completeOnboardingAction
 FIX: C1 tunnel — signup/signin/root redirect to /dashboard (was /orgs boilerplate EN dashboard), disable org auto-creation (hook + autoCreateOrganizationOnSignUp) since ScanNShine is mono-establishment, /orgs now redirects to /dashboard, fix callbackUrl=null literal on signup link
@@ -43,7 +49,7 @@ FIX: Mobile-friendly landing pass — hero h1 text-4xl on mobile, PainSection he
 FEATURE: Add landing ProblemSection — 4 persona pain points as Lucide-icon cards (silent happy clients, better-rated competitor, surprise 1-star, no time/awkward to ask) between Hero and PainSection
 REFACTOR: Rework PainSection "Sans ScanNShine" bullets to consequences (avoid duplicating new ProblemSection) and replace emojis with Lucide ThumbsUp/ThumbsDown per ui-ux rule
 CHORE: Extend AI prompt library with 9 beauty-salon persona prompts (S1/S2/S3 + branding) in docs/prompts-visuels-ia.md
-CHORE: Add 3 beauty-salon persona ad creatives (docs/ads-creatives/salon-*) — angles A/B/C rewritten for salon owners, 1:1 + 9:16
+CHORE: Add 3 beauty-salon persona ad creatives (docs/ads-creatives/salon-\*) — angles A/B/C rewritten for salon owners, 1:1 + 9:16
 REFACTOR: Simplify landing footer — remove Product/Company/Legal link columns (dead links to boilerplate pages), keep brand + address + copyright in French
 CHORE: Add AI image-generation prompt library (docs/prompts-visuels-ia.md) — 13 optimized ChatGPT prompts for Meta Ads statics, mapped to the 4 ad angles
 CHORE: Add 8 Meta Ads static creatives (docs/ads-creatives/) — 4 angles x 2 formats (1:1, 9:16) with real QR code, generated from HTML/CSS
@@ -111,7 +117,7 @@ FIX: Free plan users now redirect to Stripe checkout instead of billing portal w
 
 ## 2026-01-19
 
-FEATURE: Add x-org-slug header support for /api/orgs/* routes in middleware
+FEATURE: Add x-org-slug header support for /api/orgs/\* routes in middleware
 
 ## 2026-01-18
 

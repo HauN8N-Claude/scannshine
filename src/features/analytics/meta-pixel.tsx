@@ -2,10 +2,10 @@
 
 import { env } from "@/lib/env";
 import Script from "next/script";
+import { useEffect } from "react";
 import { useCookieConsent } from "./cookie-consent-store";
 
 declare global {
-   
   interface Window {
     fbq?: (...args: unknown[]) => void;
   }
@@ -29,6 +29,14 @@ export const trackMetaEvent = (event: MetaPixelEvent) => {
 export const MetaPixel = () => {
   const pixelId = env.NEXT_PUBLIC_META_PIXEL_ID;
   const consent = useCookieConsent((state) => state.consent);
+
+  // RGPD : si le visiteur révoque son choix après avoir accepté (ex. via
+  // « Gérer les cookies »), on demande à Meta de suspendre le suivi tout de
+  // suite, sans attendre un rechargement de page. Regrant à la ré-acceptation.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.fbq) return;
+    window.fbq("consent", consent === "accepted" ? "grant" : "revoke");
+  }, [consent]);
 
   // RGPD : le pixel ne se charge qu'après consentement explicite du visiteur.
   if (!pixelId || consent !== "accepted") {
