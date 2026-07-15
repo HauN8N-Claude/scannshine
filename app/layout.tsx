@@ -1,3 +1,4 @@
+import { CookieBanner } from "@/features/analytics/cookie-banner";
 import { MetaPixel } from "@/features/analytics/meta-pixel";
 import { DebugPanel } from "@/features/debug";
 import { NextTopLoader } from "@/features/page/next-top-loader";
@@ -46,6 +47,7 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
         )}
       >
         <MetaPixel />
+        <CookieBanner />
         <NuqsAdapter>
           <Providers>
             <NextTopLoader delay={100} showSpinner={false} />

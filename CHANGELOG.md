@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-15
+FEATURE: Bandeau de consentement cookies (RGPD/CNIL) — store Zustand persisté (localStorage), bannière Refuser/Tout accepter à poids égal + lien politique de confidentialité ; le pixel Meta ne se charge QU'APRÈS acceptation (opt-in préalable), choix mémorisé et révocable
 FEATURE: C3 cron de securite — /api/cron/reconcile-subscriptions (Vercel Cron quotidien) reconcilie les etats a risque (essais expires, impayes) avec Dodo (source de verite) en cas de webhook manque ; auth par CRON_SECRET (fail-closed 503/401), ne touche jamais CANCELLED/ONBOARDING, ajout CRON_SECRET a l env + vercel.json
 FEATURE: m8 landing — nom du fondateur affiche (Haumoana) dans la signature et l alt de la photo
 FEATURE: m7 landing — section avis clients (3 temoignages, 1 benefice distinct chacun : visibilite/acquisition, simplicite, protection e-reputation) avec etoiles et avatars-initiales, montee avant le tarif ; ⚠️ avis PLACEHOLDER a remplacer par de vrais temoignages consentis

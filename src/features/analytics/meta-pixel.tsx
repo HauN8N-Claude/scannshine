@@ -2,6 +2,7 @@
 
 import { env } from "@/lib/env";
 import Script from "next/script";
+import { useCookieConsent } from "./cookie-consent-store";
 
 declare global {
    
@@ -27,8 +28,10 @@ export const trackMetaEvent = (event: MetaPixelEvent) => {
  */
 export const MetaPixel = () => {
   const pixelId = env.NEXT_PUBLIC_META_PIXEL_ID;
+  const consent = useCookieConsent((state) => state.consent);
 
-  if (!pixelId) {
+  // RGPD : le pixel ne se charge qu'après consentement explicite du visiteur.
+  if (!pixelId || consent !== "accepted") {
     return null;
   }
 
