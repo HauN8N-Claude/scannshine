@@ -19,7 +19,8 @@ import type { NextRequest } from "next/server";
  * d'abonnement Dodo). Déclenché par Vercel Cron (voir vercel.json).
  */
 
-export const dynamic = "force-dynamic";
+// La route lit `request.headers` (auth) → elle est intrinsèquement dynamique.
+// (Pas de `export const dynamic` : incompatible avec cacheComponents en Next 16.)
 export const maxDuration = 60;
 
 // On laisse d'abord ~24 h au webhook pour faire son travail avant de rattraper.
