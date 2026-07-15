@@ -12,7 +12,7 @@ export const FounderSection = () => {
       <div className="relative mx-auto aspect-[4/5] w-full max-w-xs shrink-0 overflow-hidden rounded-2xl border sm:max-w-sm lg:mx-0 lg:w-80">
         <Image
           src="/images/fondateur.jpg"
-          alt="Le fondateur de ScanNShine"
+          alt="Haumoana, fondateur de ScanNShine"
           fill
           sizes="(max-width: 1024px) 384px, 320px"
           className="object-cover object-top"
@@ -47,10 +47,10 @@ export const FounderSection = () => {
           après semaine — sans y passer une minute de plus.
         </Typography>
         <div className="flex flex-col gap-1">
-          <Typography variant="large">Le fondateur de ScanNShine</Typography>
+          <Typography variant="large">Haumoana</Typography>
           <Typography variant="muted">
-            Entreprise polynésienne · Support en français, par des gens du
-            fenua
+            Fondateur de ScanNShine · Entreprise polynésienne · Support en
+            français, par des gens du fenua
           </Typography>
         </div>
       </div>

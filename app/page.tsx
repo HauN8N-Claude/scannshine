@@ -5,6 +5,7 @@ import { HowItWorksSection } from "@/features/landing/how-it-works";
 import { LandingHeader } from "@/features/landing/landing-header";
 import { PainSection } from "@/features/landing/pain";
 import { ProblemSection } from "@/features/landing/problem-section";
+import { ReviewsSection } from "@/features/landing/reviews-section";
 import { ScannshinePricing } from "@/features/landing/scannshine-pricing";
 import { SectionDivider } from "@/features/landing/section-divider";
 import { Footer } from "@/features/layout/footer";
@@ -121,6 +122,8 @@ export default function HomePage() {
       <SectionDivider />
 
       <HowItWorksSection />
+
+      <ReviewsSection />
 
       <ScannshinePricing />
 
