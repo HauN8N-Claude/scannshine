@@ -20,12 +20,13 @@ import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import { startOfMonthPF } from "@/lib/date/pf-timezone";
 import { getBusinessByUserId } from "@/query/business/get-business";
-import { Download, Sparkles, UsersRound } from "lucide-react";
+import { Download, UsersRound } from "lucide-react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { CrmSearch } from "./crm-search";
 import { DeleteContactButton } from "./delete-contact-button";
+import { UpsellBanner } from "./upsell-banner";
 
 export const metadata: Metadata = {
   title: "Contacts",
@@ -114,13 +115,7 @@ async function CrmPage(props: PageProps<"/crm">) {
         </a>
       </LayoutActions>
       <LayoutContent className="flex flex-col gap-4">
-        <div className="bg-muted/50 text-muted-foreground flex items-center gap-2 rounded-lg border border-dashed p-3 text-sm">
-          <Sparkles className="size-4 shrink-0" aria-hidden />
-          <span>
-            Bientôt : envoyez vos promos par SMS à toute votre base, en deux
-            clics.
-          </span>
-        </div>
+        <UpsellBanner contactCount={total} />
 
         <CrmSearch />
 
@@ -138,9 +133,8 @@ async function CrmPage(props: PageProps<"/crm">) {
               </p>
               {!search ? (
                 <p className="text-muted-foreground max-w-sm text-sm">
-                  Vos clients laisseront leurs coordonnées en scannant votre
-                  QR — avec leur consentement, prêtes pour vos futures
-                  campagnes.
+                  Vos clients laisseront leurs coordonnées en scannant votre QR
+                  — avec leur consentement, prêtes pour vos futures campagnes.
                 </p>
               ) : null}
             </CardContent>

@@ -87,7 +87,15 @@ const INCLUDED = [
   "Support en français, par des gens du fenua",
 ] as const;
 
-export default function OffreCrmSmsPage() {
+export default async function OffreCrmSmsPage(
+  props: PageProps<"/offre-crm-sms">,
+) {
+  const searchParams = await props.searchParams;
+  // Arrivée via le déclencheur « juste après l'achat » : on doit toujours
+  // offrir une porte de sortie vers le dashboard (on ne piège pas un client
+  // qui vient de payer sur une page de vente).
+  const fromPurchase = searchParams.from === "achat";
+
   return (
     <SectionLayout size="sm" variant="transparent">
       <div className="mx-auto flex max-w-2xl flex-col gap-16">
@@ -269,6 +277,15 @@ export default function OffreCrmSmsPage() {
               </div>
             </CardContent>
           </Card>
+
+          {fromPurchase ? (
+            <Link
+              href="/dashboard"
+              className="text-muted-foreground hover:text-foreground mx-auto text-sm underline underline-offset-4"
+            >
+              Non merci, aller à mon tableau de bord
+            </Link>
+          ) : null}
         </div>
       </div>
     </SectionLayout>

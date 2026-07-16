@@ -40,6 +40,9 @@ async function OnboardingPage(props: PageProps<"/onboarding">) {
   const user = await getRequiredUser();
   const business = await getBusinessByUserId(user.id);
 
+  const searchParams = await props.searchParams;
+  const isCheckoutReturn = searchParams.paiement === "confirmation";
+
   // Abonnement actif/essai → onboarding terminé, direction le dashboard.
   if (
     business &&
@@ -47,16 +50,17 @@ async function OnboardingPage(props: PageProps<"/onboarding">) {
       business.subscriptionStatus === "ACTIVE" ||
       business.onboardingStep >= 4)
   ) {
+    // Déclencheur 1 — offre unique juste après l'achat : on intercale l'upsell
+    // avant le dashboard. Ne tombe qu'une fois car `paiement=confirmation`
+    // n'existe qu'au retour du checkout Dodo.
+    if (isCheckoutReturn) {
+      redirect("/offre-crm-sms?from=achat");
+    }
     redirect("/dashboard");
   }
 
-  const searchParams = await props.searchParams;
-
   // Retour du checkout Dodo : on attend que le webhook active l'abonnement.
-  if (
-    searchParams.paiement === "confirmation" &&
-    business?.subscriptionStatus === "ONBOARDING"
-  ) {
+  if (isCheckoutReturn && business?.subscriptionStatus === "ONBOARDING") {
     return (
       <main className="mx-auto flex min-h-svh w-full max-w-md flex-col justify-center gap-8 px-4 py-10">
         <PaymentConfirming />
@@ -69,9 +73,7 @@ async function OnboardingPage(props: PageProps<"/onboarding">) {
       ? Number.parseInt(searchParams.etape, 10)
       : null;
 
-  const currentStep = business
-    ? Math.min(business.onboardingStep, 3)
-    : 1;
+  const currentStep = business ? Math.min(business.onboardingStep, 3) : 1;
   // Le gérant peut revenir sur une étape déjà complétée, jamais sauter en avant
   const step =
     requestedStep && requestedStep >= 1 && requestedStep <= currentStep
