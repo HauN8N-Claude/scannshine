@@ -1,6 +1,9 @@
 # Changelog
 
 ## 2026-07-15
+FIX: Inscription impossible depuis www.scannshine.com (403 sur /api/auth/sign-up/email, confirmé en prod) — Better Auth ne faisait confiance qu'à l'origine de production (apex). Redirection 308 www -> apex dans next.config.ts (canonicalise aussi le SEO) + trustedOrigins explicites (apex, www, getServerUrl) dans auth.ts
+FIX: Build cassé sans clé Dodo — webhookKey utilisait `??` alors qu'une var d'env absente vaut "" (piège documenté dans REPRISE.md) ; `||` rétablit le fallback PLACEHOLDER_KEY
+CHORE: Test E2E paiement joué en prod (mode test) — signup → onboarding → checkout Dodo 16,90 €/essai 7j → carte 4242 → webhook → « Abonnement actif » : tunnel validé de bout en bout
 
 FIX: Formulaire /club cassé (révélé par la vérif runtime) — ContactCaptureSchema.omit() plantait sur un schéma refined (« .omit() cannot be used on object schemas containing refinements ») → page 400, aucun contact capté ; extraction d'un objet de base + ContactCaptureClientSchema dédié
 FIX: RGPD — révoquer le consentement (via « Gérer les cookies ») suspend le pixel Meta immédiatement (fbq consent grant/revoke), sans attendre un rechargement ; curseur pointer sur le bouton du footer

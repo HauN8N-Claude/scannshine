@@ -111,7 +111,9 @@ const applySubscriptionState = async (
           ? // Ne pas faire glisser la fenêtre de grâce sur un retry : on garde
             // la première date d'annulation connue.
             (business.cancelledAt ??
-            (payload.cancelled_at ? new Date(payload.cancelled_at) : new Date()))
+            (payload.cancelled_at
+              ? new Date(payload.cancelled_at)
+              : new Date()))
           : null,
     },
   });
@@ -129,7 +131,10 @@ const webhookKey = env.DODO_PAYMENTS_WEBHOOK_KEY;
 const PLACEHOLDER_KEY = "whsec_cGxhY2Vob2xkZXItamFtYWlzLXV0aWxpc2UtMDAwMDAw";
 
 const dodoWebhookHandler = Webhooks({
-  webhookKey: webhookKey ?? PLACEHOLDER_KEY,
+  // `||` et non `??` : une variable d'env absente vaut "" (chaîne vide), pas
+  // `undefined` — `??` laisserait passer "" et standardwebhooks lèverait
+  // « Secret can't be empty » au chargement du module (build cassé sans clé).
+  webhookKey: webhookKey || PLACEHOLDER_KEY,
   onSubscriptionActive: async (payload) => {
     await applySubscriptionState(payload.data, "ACTIVE");
   },

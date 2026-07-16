@@ -40,6 +40,19 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   baseURL: getServerUrl(),
+  /**
+   * Origines autorisées à appeler l'API d'auth. Sans le variant `www`, une
+   * inscription lancée depuis www.scannshine.com était rejetée en 403 (vérifié
+   * en prod). `getServerUrl()` couvre le localhost en dev et l'URL de
+   * déploiement ; les deux entrées suivantes couvrent le domaine public.
+   * Filet de sécurité : la redirection www -> apex (next.config.ts) fait déjà
+   * en sorte qu'on n'atterrisse jamais sur www.
+   */
+  trustedOrigins: [
+    getServerUrl(),
+    SiteConfig.prodUrl,
+    `https://www.${SiteConfig.domain}`,
+  ],
   session: {
     expiresIn: 60 * 60 * 24 * 20, // 20 days
     updateAge: 60 * 60 * 24 * 7, // Refresh session every 7 days
