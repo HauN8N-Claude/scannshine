@@ -26,14 +26,13 @@ export const CountdownBanner = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const minutes =
-    remaining === null ? 30 : Math.floor(remaining / 60000);
+  const minutes = remaining === null ? 30 : Math.floor(remaining / 60000);
   const seconds =
     remaining === null ? 0 : Math.floor((remaining % 60000) / 1000);
   const expired = remaining !== null && remaining <= 0;
 
   return (
-    <div className="bg-primary text-primary-foreground flex flex-col items-center justify-center gap-1 rounded-xl px-4 py-3 text-center sm:flex-row sm:gap-3">
+    <div className="bg-primary text-primary-foreground flex w-full flex-col items-center justify-center gap-1 px-4 py-3 text-center sm:flex-row sm:gap-3">
       <span className="flex items-center gap-2 text-sm font-medium">
         <Clock className="size-4" aria-hidden />
         {expired
@@ -41,10 +40,7 @@ export const CountdownBanner = () => {
           : "Offre de lancement réservée — elle expire dans"}
       </span>
       {expired ? null : (
-        <span
-          className="text-lg font-bold tabular-nums"
-          aria-live="polite"
-        >
+        <span className="text-lg font-bold tabular-nums" aria-live="polite">
           {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
         </span>
       )}
