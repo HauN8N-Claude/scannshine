@@ -29,7 +29,7 @@ export const Hero = () => {
               approche son téléphone, et son avis ⭐⭐⭐⭐⭐ part sur votre
               fiche Google en 30 secondes. Pensé pour les commerces de Tahiti.
             </Typography>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
               <Link
                 href="#tarif"
                 className={buttonVariants({ size: "lg", variant: "default" })}

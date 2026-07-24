@@ -5,15 +5,15 @@ import { SectionLayout } from "./section-layout";
 const PROBLEMS = [
   {
     icon: MessageSquareOff,
-    title: "« C'était super, à la prochaine ! »",
+    title: "Vos clients satisfaits ne laissent pas d'avis",
     description:
-      "Le client content vous le dit en face... puis repart sans rien écrire. Dix minutes après, c'est oublié — et votre fiche Google n'en garde aucune trace.",
+      "Un client content paie et s'en va. Sans rien au comptoir pour capter son avis à ce moment-là, il est perdu. Votre fiche Google stagne alors que les clients satisfaits défilent chez vous toute la journée.",
   },
   {
     icon: MapPin,
-    title: "Le touriste choisit sur Google Maps",
+    title: "Le mieux noté prend le client",
     description:
-      "Il compare deux adresses en 30 secondes et va chez celle qui a 200 avis. Même si la vôtre est meilleure. Ce n'est pas une question de qualité, c'est une question d'avis.",
+      "Sur Google Maps, le choix se fait à la note et au nombre d'avis. Moins d'avis que le concurrent d'à côté = moins de clients. Même si votre travail est meilleur.",
   },
   {
     icon: Frown,
