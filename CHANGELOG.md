@@ -1,7 +1,7 @@
 # Changelog
 
 ## 2026-07-24
-CHORE: Remplacement des placeholders par les visuels finaux de la plaque NFC (public/images/plaque-nfc.png et carte-nfc-3d.png, fond transparent) utilisés dans la section produit de la landing
+CHORE: Remplacement des placeholders par les visuels finaux de la plaque NFC (public/images/plaque-nfc.png et carte-nfc-3d.png, fond transparent) utilisés dans la section produit de la landing ; fond de plaque-nfc.png recomposé sur le bleu clair de la charte (--accent #E0F2FE) au lieu du beige d'origine, pour harmoniser avec la palette de la LP
 
 ## 2026-07-15
 FIX: Inscription impossible depuis www.scannshine.com (403 sur /api/auth/sign-up/email, confirmé en prod) — Better Auth ne faisait confiance qu'à l'origine de production (apex). Redirection 308 www -> apex dans next.config.ts (canonicalise aussi le SEO) + trustedOrigins explicites (apex, www, getServerUrl) dans auth.ts
