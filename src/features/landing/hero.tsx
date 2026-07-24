@@ -25,26 +25,27 @@ export const Hero = () => {
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              Un QR code en caisse, une page à vos couleurs, et chaque client
-              content devient un avis ⭐⭐⭐⭐⭐ sur votre fiche Google. Pensé
-              pour les commerces du fenua.
+              Une plaque NFC + QR code posée sur votre comptoir : le client
+              approche son téléphone, et son avis ⭐⭐⭐⭐⭐ part sur votre
+              fiche Google en 30 secondes. Pensé pour les commerces de Tahiti.
             </Typography>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
-                href="/auth/signup"
+                href="#tarif"
                 className={buttonVariants({ size: "lg", variant: "default" })}
               >
-                Essai gratuit 7 jours
+                Commander ma plaque
               </Link>
               <Link
-                href="#tarif"
+                href="#produit"
                 className={buttonVariants({ size: "lg", variant: "link" })}
               >
-                Voir le tarif <span aria-hidden="true">→</span>
+                Voir comment ça marche <span aria-hidden="true">→</span>
               </Link>
             </div>
             <Typography variant="muted" className="mt-6 text-xs">
-              Sans engagement · Prêt en 10 minutes · Support en français
+              Livrée programmée et testée · Posée en 2 minutes · Compatible
+              iPhone & Android
             </Typography>
           </div>
         </div>

@@ -5,16 +5,18 @@ import { HowItWorksSection } from "@/features/landing/how-it-works";
 import { LandingHeader } from "@/features/landing/landing-header";
 import { PainSection } from "@/features/landing/pain";
 import { ProblemSection } from "@/features/landing/problem-section";
+import { ProductSection } from "@/features/landing/product-section";
 import { ReviewsSection } from "@/features/landing/reviews-section";
 import { ScannshinePricing } from "@/features/landing/scannshine-pricing";
 import { SectionDivider } from "@/features/landing/section-divider";
+import { WhyReviewsSection } from "@/features/landing/why-reviews-section";
 import { Footer } from "@/features/layout/footer";
 import { SiteConfig } from "@/site-config";
 import type { Metadata } from "next";
 
 const PAGE_TITLE = "ScanNShine — Plus d'avis Google pour votre commerce au fenua";
 const PAGE_DESCRIPTION =
-  "Un QR code en caisse qui transforme vos clients satisfaits en avis Google. Pensé pour les commerces de Polynésie française. Essai gratuit 7 jours, 1 990 XPF/mois.";
+  "La plaque NFC + QR code qui transforme vos clients satisfaits en avis Google. Posée sur votre comptoir, livrée prête à l'emploi. Pour les commerces de Tahiti et de Polynésie française.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -120,6 +122,10 @@ export default function HomePage() {
       <PainSection />
 
       <SectionDivider />
+
+      <WhyReviewsSection />
+
+      <ProductSection />
 
       <HowItWorksSection />
 
