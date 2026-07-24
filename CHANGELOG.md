@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-07-24
+CHORE: Remplacement des placeholders par les visuels finaux de la plaque NFC (public/images/plaque-nfc.png et carte-nfc-3d.png, fond transparent) utilisés dans la section produit de la landing
+
 ## 2026-07-15
 FIX: Inscription impossible depuis www.scannshine.com (403 sur /api/auth/sign-up/email, confirmé en prod) — Better Auth ne faisait confiance qu'à l'origine de production (apex). Redirection 308 www -> apex dans next.config.ts (canonicalise aussi le SEO) + trustedOrigins explicites (apex, www, getServerUrl) dans auth.ts
 FIX: Build cassé sans clé Dodo — webhookKey utilisait `??` alors qu'une var d'env absente vaut "" (piège documenté dans REPRISE.md) ; `||` rétablit le fallback PLACEHOLDER_KEY
