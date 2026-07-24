@@ -59,7 +59,7 @@ export const ScannshinePricing = () => {
             ))}
           </ul>
           <Link
-            href="/contact"
+            href="/commander"
             className={buttonVariants({ size: "lg", className: "w-full" })}
           >
             Commander ma plaque
