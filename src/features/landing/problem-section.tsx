@@ -17,15 +17,15 @@ const PROBLEMS = [
   },
   {
     icon: Frown,
-    title: "Le mécontent, lui, trouve le temps",
+    title: "Votre note ne dit pas la vérité",
     description:
-      "Il ne dit rien en partant. Il l'écrit directement sur votre fiche Google, devant tout le monde. Un seul avis 1 étoile pèse plus lourd que dix clients ravis restés silencieux.",
+      "Les mécontents écrivent, les satisfaits non. Résultat mécanique : votre fiche publique est pire que votre commerce réel.",
   },
   {
     icon: Clock,
-    title: "Demander un avis, ça passe toujours après",
+    title: "Un avis se joue dans la minute",
     description:
-      "Entre la caisse, les fournisseurs et le service, courir après les avis n'arrive jamais en haut de la pile. Et le demander de vive voix, c'est gênant — alors on ne le fait pas.",
+      "C'est au moment de payer, sur place, que le client est prêt à noter. Passé la porte, c'est terminé. Sans outil à cet instant précis, l'avis est perdu.",
   },
 ] as const;
 

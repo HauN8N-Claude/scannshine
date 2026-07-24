@@ -45,5 +45,52 @@ export const orderPlaqueAction = action
       ...(email ? { replyTo: email } : {}),
     });
 
+    // Mini-CRM : une ligne par lead dans Airtable. Ne doit jamais faire
+    // échouer la commande — l'email ci-dessus reste la source de secours.
+    if (env.AIRTABLE_API_KEY && env.AIRTABLE_BASE_ID) {
+      const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME ?? "Leads");
+      try {
+        const response = await fetch(
+          `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${table}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              records: [
+                {
+                  fields: {
+                    Commerce: businessName,
+                    Contact: contactName,
+                    "Téléphone": phone,
+                    Email: email ?? "",
+                    "Commune / île": commune,
+                    "Adresse livraison": deliveryAddress,
+                    "Créneau d'appel": callTime ?? "",
+                    "Contact secours": backupName,
+                    "Téléphone secours": backupPhone,
+                    Notes: notes ?? "",
+                    Statut: "Nouveau",
+                  },
+                },
+              ],
+              typecast: true,
+            }),
+          },
+        );
+        if (!response.ok) {
+          console.error(
+            "Airtable lead sync failed",
+            response.status,
+            await response.text(),
+          );
+        }
+      } catch (error) {
+        console.error("Airtable lead sync failed", error);
+      }
+    }
+
     return { message: "Votre demande a bien été envoyée." };
   });

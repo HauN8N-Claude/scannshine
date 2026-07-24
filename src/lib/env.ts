@@ -26,6 +26,10 @@ export const env = createEnv({
     // route de cron renvoie 503 (fail-closed).
     CRON_SECRET: z.string().optional(),
     CI: z.coerce.boolean().optional(),
+    // Mini-CRM Airtable pour les leads /commander — si absent, seul l'email part
+    AIRTABLE_API_KEY: z.string().optional(),
+    AIRTABLE_BASE_ID: z.string().optional(),
+    AIRTABLE_TABLE_NAME: z.string().optional(),
   },
   /**
    * If you add `client` environment variables, you need to add them to
