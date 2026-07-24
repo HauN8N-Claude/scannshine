@@ -92,5 +92,22 @@ export const orderPlaqueAction = action
       }
     }
 
+    // Mini-CRM Google Sheets : POST vers un webhook Apps Script qui ajoute la
+    // ligne au Sheet. Même règle : ne bloque jamais la commande.
+    if (env.GSHEET_WEBHOOK_URL) {
+      try {
+        const response = await fetch(env.GSHEET_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsedInput),
+        });
+        if (!response.ok) {
+          console.error("GSheet lead sync failed", response.status);
+        }
+      } catch (error) {
+        console.error("GSheet lead sync failed", error);
+      }
+    }
+
     return { message: "Votre demande a bien été envoyée." };
   });

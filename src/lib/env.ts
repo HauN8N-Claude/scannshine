@@ -30,6 +30,8 @@ export const env = createEnv({
     AIRTABLE_API_KEY: z.string().optional(),
     AIRTABLE_BASE_ID: z.string().optional(),
     AIRTABLE_TABLE_NAME: z.string().optional(),
+    // Mini-CRM Google Sheets (webhook Apps Script) — alternative ou complément
+    GSHEET_WEBHOOK_URL: z.string().url().optional(),
   },
   /**
    * If you add `client` environment variables, you need to add them to
