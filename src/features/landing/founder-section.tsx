@@ -40,11 +40,10 @@ export const FounderSection = () => {
           commerce.
         </Typography>
         <Typography variant="p" className="text-muted-foreground !mt-0">
-          J'ai créé ScanNShine pour régler ça, simplement : un QR code en
-          caisse qui demande l'avis à votre place, au bon moment. Vos clients
-          contents deviennent enfin visibles, les mécontents vous parlent en
-          privé avant d'écrire publiquement, et votre note remonte semaine
-          après semaine — sans y passer une minute de plus.
+          J'ai créé ScanNShine pour régler ça, simplement : une plaquette
+          posée en caisse qui demande l'avis à votre place, au bon moment.
+          Vos clients contents deviennent enfin visibles, et votre note
+          remonte semaine après semaine — sans y passer une minute de plus.
         </Typography>
         <div className="flex flex-col gap-1">
           <Typography variant="large">Haumoana</Typography>

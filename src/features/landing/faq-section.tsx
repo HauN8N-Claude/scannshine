@@ -51,18 +51,18 @@ export const FAQSection = (props: FeaturesPreviewProps) => {
 
         <div className="bg-card flex flex-col gap-3 rounded-2xl border p-6">
           <Typography variant="h3" className="text-lg">
-            Convaincu ? Testez-le sur votre commerce, gratuitement.
+            Convaincu ? Commandez votre plaquette.
           </Typography>
           <Typography variant="muted">
-            7 jours offerts, sans engagement. En 3 minutes, votre QR est prêt à
-            transformer vos clients satisfaits en avis Google.
+            4 990 XPF, paiement unique. Livrée en main propre, testée devant
+            vous dans votre commerce — vous ne réglez qu'à ce moment-là.
           </Typography>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <Link
-              href="/auth/signup"
+              href="/commander"
               className={buttonVariants({ size: "lg" })}
             >
-              Commencer — 7 jours gratuits
+              Commander ma plaquette
             </Link>
             <a
               href={`mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
