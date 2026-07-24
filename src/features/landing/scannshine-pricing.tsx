@@ -7,17 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SCANNSHINE_PLAN } from "@/lib/dodo";
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { SectionLayout } from "./section-layout";
 
 const FEATURES = [
-  "QR code + affiches à imprimer (et QR de poche sur votre téléphone)",
-  "Page de collecte aux couleurs de votre commerce",
-  "Retours négatifs captés en privé, par email",
-  "Statistiques : scans, clics vers Google, chaque semaine",
-  "Base contacts clients avec consentement + export",
+  "Plaque NFC prête à l'emploi, programmée et testée avant livraison",
+  "Reliée à votre fiche Google, vérifiée avec vous",
+  "Adhésif solide : posée en 2 minutes sur comptoir, caisse ou table",
+  "Compatible iPhone & Android, sans application à installer",
+  "Lien modifiable à distance si votre fiche change un jour",
   "Support en français, par des gens du fenua",
 ] as const;
 
@@ -34,20 +33,18 @@ export const ScannshinePricing = () => {
           Un tarif simple
         </Typography>
         <Typography variant="large" className="text-muted-foreground">
-          Moins qu'un plat du jour par semaine.
+          Un paiement unique. La plaque travaille pour vous tous les jours.
         </Typography>
       </div>
 
       <Card className="border-primary mx-auto w-full max-w-md border-2 shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">ScanNShine</CardTitle>
+          <CardTitle className="text-xl">La plaque ScanNShine</CardTitle>
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-5xl font-bold">1 990</span>
-            <span className="text-muted-foreground text-lg">XPF/mois</span>
+            <span className="text-5xl font-bold">4 990</span>
+            <span className="text-muted-foreground text-lg">XPF</span>
           </div>
-          <CardDescription>
-            {SCANNSHINE_PLAN.displayPriceDetail} · Sans engagement
-          </CardDescription>
+          <CardDescription>Paiement unique · Sans abonnement</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <ul className="flex flex-col gap-2.5">
@@ -62,14 +59,14 @@ export const ScannshinePricing = () => {
             ))}
           </ul>
           <Link
-            href="/auth/signup"
+            href="/contact"
             className={buttonVariants({ size: "lg", className: "w-full" })}
           >
-            Commencer — 7 jours gratuits
+            Commander ma plaque
           </Link>
           <p className="text-muted-foreground text-center text-xs">
-            Paiement sécurisé. Aucun débit avant la fin de l'essai. Annulable
-            en deux clics.
+            Une question avant de commander ? Écrivez-nous — on vous répond en
+            français, rapidement.
           </p>
         </CardContent>
       </Card>
