@@ -30,10 +30,13 @@ export const PainSection = () => {
               Sans ScanNShine
             </Typography>
             <ul className="text-foreground/80 mt-4 ml-4 flex list-disc flex-col gap-2 text-base lg:text-lg">
-              <li>Votre note stagne pendant que le concurrent engrange</li>
-              <li>Les seuls avis qui tombent sont les mauvais</li>
+              <li>
+                Votre note Google stagne et les futurs clients vont chez la
+                concurrence…
+              </li>
+              <li>Seuls les clients qui ne sont pas contents vous laissent des avis…</li>
               <li>Vous découvrez les problèmes une fois publiés sur Google</li>
-              <li>Votre fiche fait fuir au lieu d'attirer</li>
+              <li>Votre fiche Google fait fuir les clients au lieu de les attirer à vous</li>
             </ul>
           </div>
           <div className="flex-1 rounded-lg bg-green-500/20 p-4 lg:p-6">
