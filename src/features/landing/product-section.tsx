@@ -73,7 +73,7 @@ export const ProductSection = () => {
             alt="Plaquette ScanNShine posée sur un comptoir, prête à recevoir les avis Google"
             width={640}
             height={640}
-            className="w-full rounded-2xl border object-cover shadow-lg"
+            className="w-full drop-shadow-xl"
           />
         </div>
         <div className="flex flex-col gap-6">
@@ -102,10 +102,13 @@ export const ProductSection = () => {
           </span>
         ))}
       </div>
-      <Typography variant="muted" className="max-w-2xl text-center text-balance">
-        Votre plaquette est livrée prête à l'emploi, reliée à votre fiche
-        Google et testée. Si votre fiche change un jour, on la met à jour à
-        distance — sans changer la plaquette.
+      <Typography
+        variant="muted"
+        className="max-w-2xl text-center text-balance"
+      >
+        Votre plaquette est livrée prête à l'emploi, reliée à votre fiche Google
+        et testée. Si votre fiche change un jour, on la met à jour à distance —
+        sans changer la plaquette.
       </Typography>
     </SectionLayout>
   );

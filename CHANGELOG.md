@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+FIX: Image plaquette (section produit) — fond figé qui jurait en mode sombre (la LP suit le thème système) ; plaque-nfc.png rendue transparente et cadre retiré (drop-shadow seul) pour qu'elle flotte sur le vrai fond de la LP et s'harmonise en clair comme en sombre
 FIX: Build/déploiement Vercel cassé (TS4104) — le tableau FAQ `as const` (readonly) était passé à la prop `faq: Faq[]` mutable de FAQSection ; prop élargie en `readonly Faq[]`, le build repasse au vert
 CHORE: Remplacement des placeholders par les visuels finaux de la plaque NFC (public/images/plaque-nfc.png et carte-nfc-3d.png, fond transparent) utilisés dans la section produit de la landing ; fond de plaque-nfc.png recomposé sur le bleu clair de la charte (--accent #E0F2FE) au lieu du beige d'origine, pour harmoniser avec la palette de la LP
 
