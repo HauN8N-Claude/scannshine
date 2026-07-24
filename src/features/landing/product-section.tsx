@@ -69,7 +69,7 @@ export const ProductSection = () => {
       <div className="grid w-full items-center gap-10 lg:grid-cols-2">
         <div className="relative mx-auto w-full max-w-md">
           <Image
-            src="/images/plaque-nfc.jpg"
+            src="/images/plaque-nfc.png"
             alt="Plaque NFC et QR code ScanNShine posée sur un comptoir, prête à recevoir les avis Google"
             width={640}
             height={640}

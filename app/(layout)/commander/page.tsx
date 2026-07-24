@@ -251,7 +251,8 @@ export default function CommanderPage() {
                     En cas d'absence le jour de la livraison
                   </span>{" "}
                   — indiquez une personne de confiance (employé, associé,
-                  famille) qu'on peut contacter pour remettre la plaque.
+                  famille) qu'on peut contacter pour remettre la plaque et
+                  encaisser le paiement.
                 </Typography>
               </div>
               <div>
