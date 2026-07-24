@@ -1,5 +1,5 @@
 import { Typography } from "@/components/nowts/typography";
-import { MessageCircleHeart, QrCode, Smile, Sparkles, Star } from "lucide-react";
+import { MessageCircleHeart, Nfc, Smile, Sparkles, Star } from "lucide-react";
 import { SectionLayout } from "./section-layout";
 
 const STEPS = [
@@ -13,13 +13,13 @@ const STEPS = [
     icon: Star,
     title: "2. C'est le moment de demander",
     description:
-      "Un avis se demande à chaud, dans la minute qui suit. Plus besoin de trouver les mots : le QR code fait la demande à votre place.",
+      "Un avis se demande à chaud, dans la minute qui suit. Plus besoin de trouver les mots : la plaquette fait la demande à votre place.",
   },
   {
-    icon: QrCode,
-    title: "3. Il scanne votre QR code",
+    icon: Nfc,
+    title: "3. Il approche son téléphone",
     description:
-      "Tendez le chevalet ou votre téléphone. Le client scanne, note en 30 secondes — rien à télécharger, rien à taper.",
+      "Sur la plaquette posée en caisse, comme pour payer sans contact. Il note en 30 secondes — rien à télécharger, rien à taper.",
   },
   {
     icon: Sparkles,

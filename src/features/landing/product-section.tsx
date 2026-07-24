@@ -1,32 +1,32 @@
 import { Typography } from "@/components/nowts/typography";
-import { Nfc, QrCode, Star, Sticker } from "lucide-react";
+import { Nfc, Star, Sticker, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import { SectionLayout } from "./section-layout";
 
 const PRODUCT_STEPS = [
   {
     icon: Sticker,
-    title: "Collez la plaque là où ça compte",
+    title: "Collez la plaquette là où ça compte",
     description:
-      "Sur le comptoir, à la caisse, sur la table : la plaque adhésive se pose en deux minutes et reste en place. Pas de câble, pas de batterie, rien à recharger.",
+      "Sur le comptoir, à la caisse, sur la table : elle se colle en deux minutes et reste en place. Pas de câble, pas de batterie, rien à recharger.",
   },
   {
     icon: Nfc,
-    title: "Le client approche son téléphone…",
+    title: "Le client approche son téléphone",
     description:
-      "La puce NFC intégrée ouvre directement votre page d'avis Google, comme un paiement sans contact. Aucune application à installer.",
-  },
-  {
-    icon: QrCode,
-    title: "…ou scanne le QR code",
-    description:
-      "Les deux chemins sont sur la même plaque : NFC pour les téléphones récents, QR code pour tous les autres. Personne n'est laissé de côté.",
+      "Comme pour un paiement sans contact : il pose son téléphone sur la plaquette et votre page d'avis Google s'ouvre toute seule. Rien à installer, rien à taper.",
   },
   {
     icon: Star,
-    title: "L'avis arrive sur votre fiche Google",
+    title: "Il laisse son avis en 30 secondes",
     description:
-      "Le client note et écrit son avis en 30 secondes, à chaud, pendant que l'envie est là. Votre fiche s'enrichit d'un avis authentique.",
+      "Sur place, à chaud, pendant que l'envie est là. Quelques étoiles, deux phrases, c'est envoyé — avant même qu'il ait rangé son téléphone.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Votre fiche Google grimpe",
+    description:
+      "Un avis authentique de plus à chaque client content. Votre note monte, votre fiche ressort sur Google Maps, et les prochains clients vous choisissent vous.",
   },
 ] as const;
 
@@ -63,14 +63,14 @@ export const ProductSection = () => {
           Comment fonctionne le produit
         </Typography>
         <Typography variant="large" className="text-muted-foreground">
-          Une plaque NFC + QR code, posée sur votre comptoir. C'est tout.
+          Une plaquette posée sur votre comptoir. C'est tout.
         </Typography>
       </div>
       <div className="grid w-full items-center gap-10 lg:grid-cols-2">
         <div className="relative mx-auto w-full max-w-md">
           <Image
             src="/images/plaque-nfc.png"
-            alt="Plaque NFC et QR code ScanNShine posée sur un comptoir, prête à recevoir les avis Google"
+            alt="Plaquette ScanNShine posée sur un comptoir, prête à recevoir les avis Google"
             width={640}
             height={640}
             className="w-full rounded-2xl border object-cover shadow-lg"
@@ -103,9 +103,9 @@ export const ProductSection = () => {
         ))}
       </div>
       <Typography variant="muted" className="max-w-2xl text-center text-balance">
-        Votre plaque est livrée programmée et testée, reliée à votre fiche
-        Google. Si votre fiche change un jour, le lien est mis à jour à
-        distance — sans changer la plaque.
+        Votre plaquette est livrée prête à l'emploi, reliée à votre fiche
+        Google et testée. Si votre fiche change un jour, on la met à jour à
+        distance — sans changer la plaquette.
       </Typography>
     </SectionLayout>
   );

@@ -25,16 +25,17 @@ export const Hero = () => {
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              Une plaque NFC + QR code posée sur votre comptoir : le client
-              approche son téléphone, et son avis ⭐⭐⭐⭐⭐ part sur votre
-              fiche Google en 30 secondes. Pensé pour les commerces de Tahiti.
+              Une plaquette posée à côté de votre caisse : le client approche
+              son téléphone, comme pour payer sans contact, et son avis
+              ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé
+              pour les commerces de Tahiti.
             </Typography>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
               <Link
                 href="#tarif"
                 className={buttonVariants({ size: "lg", variant: "default" })}
               >
-                Commander ma plaque
+                Commander ma plaquette
               </Link>
               <Link
                 href="#produit"
@@ -44,8 +45,7 @@ export const Hero = () => {
               </Link>
             </div>
             <Typography variant="muted" className="mt-6 text-xs">
-              Livrée programmée et testée · Posée en 2 minutes · Compatible
-              iPhone & Android
+              Livrée prête à poser · Aucune installation · iPhone & Android
             </Typography>
           </div>
         </div>

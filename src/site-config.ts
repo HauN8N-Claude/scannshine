@@ -1,7 +1,7 @@
 export const SiteConfig = {
   title: "ScanNShine",
   description:
-    "Transformez vos clients satisfaits en avis Google — la plaque NFC + QR code pensée pour les commerces de Polynésie française.",
+    "Transformez vos clients satisfaits en avis Google — la plaquette sans contact pensée pour les commerces de Polynésie française.",
   prodUrl: "https://scannshine.com",
   appId: "scannshine",
   domain: "scannshine.com",

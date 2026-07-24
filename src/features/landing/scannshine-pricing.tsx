@@ -12,7 +12,7 @@ import Link from "next/link";
 import { SectionLayout } from "./section-layout";
 
 const FEATURES = [
-  "Plaque NFC prête à l'emploi, programmée et testée avant livraison",
+  "Plaquette prête à l'emploi, programmée et testée avant livraison",
   "Reliée à votre fiche Google, vérifiée avec vous",
   "Adhésif solide : posée en 2 minutes sur comptoir, caisse ou table",
   "Compatible iPhone & Android, sans application à installer",
@@ -33,13 +33,13 @@ export const ScannshinePricing = () => {
           Un tarif simple
         </Typography>
         <Typography variant="large" className="text-muted-foreground">
-          Un paiement unique. La plaque travaille pour vous tous les jours.
+          Un paiement unique. La plaquette travaille pour vous tous les jours.
         </Typography>
       </div>
 
       <Card className="border-primary mx-auto w-full max-w-md border-2 shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">La plaque ScanNShine</CardTitle>
+          <CardTitle className="text-xl">La plaquette ScanNShine</CardTitle>
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-5xl font-bold">4 990</span>
             <span className="text-muted-foreground text-lg">XPF</span>
@@ -62,7 +62,7 @@ export const ScannshinePricing = () => {
             href="/commander"
             className={buttonVariants({ size: "lg", className: "w-full" })}
           >
-            Commander ma plaque
+            Commander ma plaquette
           </Link>
           <p className="text-muted-foreground text-center text-xs">
             Une question avant de commander ? Écrivez-nous — on vous répond en

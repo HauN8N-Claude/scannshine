@@ -16,7 +16,7 @@ import type { Metadata } from "next";
 
 const PAGE_TITLE = "ScanNShine — Plus d'avis Google pour votre commerce au fenua";
 const PAGE_DESCRIPTION =
-  "La plaque NFC + QR code qui transforme vos clients satisfaits en avis Google. Posée sur votre comptoir, livrée prête à l'emploi. Pour les commerces de Tahiti et de Polynésie française.";
+  "La plaquette sans contact qui transforme vos clients satisfaits en avis Google. Posée sur votre comptoir, livrée prête à l'emploi. Pour les commerces de Tahiti et de Polynésie française.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: `${SiteConfig.prodUrl}/images/og.jpg`,
         width: 1200,
         height: 630,
-        alt: "ScanNShine — la plaque NFC + QR code qui transforme vos clients satisfaits en avis Google",
+        alt: "ScanNShine — la plaquette sans contact qui transforme vos clients satisfaits en avis Google",
       },
     ],
   },
@@ -50,44 +50,29 @@ export const metadata: Metadata = {
 
 const FAQ = [
   {
-    question: "Est-ce que ça marche vraiment pour un commerce comme le mien ?",
+    question: "Je ne suis pas doué avec la technologie. Je vais y arriver ?",
     answer:
-      "Oui — snack, salon, boutique, loueur, pension : si vos clients passent en caisse, la plaque travaille. Vos clients satisfaits **veulent** vous aider, ils oublient juste une fois partis. La plaque capte l'avis **au bon moment** : sur place, pendant qu'ils sont contents. Plus d'avis récents, c'est une meilleure place sur Google Maps — et plus de clients qui poussent **votre** porte.",
+      "Oui, parce qu'il n'y a rien à faire. La plaquette arrive **prête à l'emploi, déjà reliée à votre fiche Google et testée**. Vous la collez à côté de la caisse, c'est terminé. Pas d'application, pas de mot de passe, pas de réglages — et si besoin, le support est **en français, par des gens du fenua**.",
   },
   {
-    question: "Je ne suis pas très à l'aise avec la technique. C'est compliqué ?",
+    question: "4 990 XPF, ce n'est pas un peu cher ?",
     answer:
-      "C'est l'inverse : il n'y a **rien à installer**. La plaque arrive **programmée, testée et reliée à votre fiche Google**. Vous la collez sur le comptoir, c'est terminé. Pas d'application, pas de compte, pas d'abonnement — et le support est **en français, par des gens du fenua**.",
+      "C'est un **paiement unique** : pas d'abonnement, pas de frais cachés. Comparez avec la publicité : une pub s'arrête quand vous arrêtez de payer, un avis Google reste **pour toujours**. Un seul client supplémentaire suffit en général à rembourser la plaquette — et elle travaille tous les jours, pendant des années.",
   },
   {
-    question: "Ça marche avec quels téléphones ?",
+    question: "Mes clients vont vraiment prendre le temps de laisser un avis ?",
     answer:
-      "Tous. Les téléphones récents (iPhone comme Android) utilisent le **NFC** : votre client approche son téléphone, la page d'avis s'ouvre. Les autres scannent le **QR code** imprimé sur la même plaque. Dans les deux cas, **rien à installer** côté client.",
+      "Oui, parce que vous leur demandez **au bon moment** : sur place, au moment de payer, pendant qu'ils sont contents. Le geste est le même qu'un **paiement sans contact** — ils approchent leur téléphone (iPhone comme Android), la page d'avis s'ouvre, ils mettent leurs étoiles. **30 secondes**, rien à installer, rien à taper. C'est une fois rentrés chez eux qu'ils n'écrivent jamais — pas quand c'est devant eux.",
   },
   {
-    question: "Est-ce autorisé par Google ?",
+    question: "Je risque des ennuis avec Google ?",
     answer:
-      "Oui, sans réserve. **Demander des avis est encouragé par Google.** Ce qui est interdit, c'est d'acheter de faux avis ou de filtrer qui peut en laisser — la plaque ne fait rien de tout ça : elle ouvre votre page d'avis, et vos clients écrivent ce qu'ils veulent. Des avis **100 % authentiques**.",
+      "Aucun. **Google encourage les commerçants à demander des avis.** Ce qui est interdit, c'est d'acheter de faux avis ou d'empêcher les clients mécontents d'écrire. La plaquette ne fait rien de tout ça : elle ouvre simplement votre page d'avis, et chacun écrit ce qu'il veut. Des avis **100 % vrais**, écrits par de vrais clients.",
   },
   {
-    question: "4 990 XPF, c'est rentable pour un petit commerce ?",
+    question: "Et si ça ne fonctionne pas chez moi ?",
     answer:
-      "C'est un **paiement unique** — pas d'abonnement, pas de frais cachés. Un seul client supplémentaire suffit souvent à rembourser la plaque. Et contrairement à une publicité, un avis Google **reste pour toujours** : la plaque continue de travailler mois après mois, sans rien coûter de plus.",
-  },
-  {
-    question: "Et si ma fiche Google change un jour ?",
-    answer:
-      "C'est prévu. La plaque pointe vers un **lien que nous pouvons modifier à distance** : déménagement, changement de nom, nouvelle fiche — on met à jour le lien, **sans changer la plaque**.",
-  },
-  {
-    question: "Comment se passent la livraison et le paiement ?",
-    answer:
-      "Vous remplissez le formulaire, **on vous rappelle** pour confirmer et vérifier votre fiche Google ensemble. Puis on vous livre **en main propre**, la plaque est testée devant vous — et c'est là que vous réglez. **Aucun paiement en ligne.**",
-  },
-  {
-    question: "Je n'ai pas encore de fiche Google, ou très peu d'avis ?",
-    answer:
-      "Ce n'est pas bloquant. S'il vous manque la fiche, elle est **gratuite** à créer et on vous guide. Et peu d'avis, c'est justement la meilleure raison de poser la plaque : chaque nouvel avis compte double quand on part de peu.",
+      "Vous ne prenez aucun risque : on vous livre **en main propre**, on teste la plaquette **devant vous, dans votre commerce** — et vous ne payez **qu'à ce moment-là**. Aucun paiement en ligne. Et si un jour votre fiche Google change (nom, adresse, nouvelle fiche), on met votre plaquette à jour **à distance**, sans la changer.",
   },
 ] as const;
 

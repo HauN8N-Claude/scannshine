@@ -13,9 +13,9 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Commander ma plaque — ScanNShine",
+  title: "Commander ma plaquette — ScanNShine",
   description:
-    "Commandez votre plaque NFC + QR code ScanNShine. Laissez vos coordonnées, on vous rappelle pour vérifier votre fiche Google et organiser la livraison à Tahiti.",
+    "Commandez votre plaquette ScanNShine. Laissez vos coordonnées, on vous rappelle pour vérifier votre fiche Google et organiser la livraison à Tahiti.",
   alternates: {
     canonical: `${SiteConfig.prodUrl}/commander`,
   },
@@ -32,13 +32,13 @@ const NEXT_STEPS = [
     icon: ShieldCheck,
     title: "On vérifie votre fiche Google ensemble",
     description:
-      "Bonne fiche, bon nom, bonne adresse — la plaque est programmée et testée avant de partir.",
+      "Bonne fiche, bon nom, bonne adresse — la plaquette est préparée et testée avant de partir.",
   },
   {
     icon: Truck,
     title: "On vous livre en main propre",
     description:
-      "La plaque arrive prête à coller. Si vous êtes absent, on s'arrange avec la personne de secours que vous nous indiquez.",
+      "La plaquette arrive prête à coller. Si vous êtes absent, on s'arrange avec la personne de secours que vous nous indiquez.",
   },
 ] as const;
 
@@ -56,13 +56,13 @@ export default function CommanderPage() {
               variant="h1"
               className="text-foreground text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
             >
-              Commander ma plaque
+              Commander ma plaquette
             </Typography>
             <Typography
               variant="p"
               className="text-muted-foreground mt-6 text-lg/8"
             >
-              La plaque NFC + QR code ScanNShine — 4 990 XPF, paiement unique.
+              La plaquette ScanNShine — 4 990 XPF, paiement unique.
               Remplissez le formulaire, la suite se passe au téléphone, en
               français.
             </Typography>
@@ -251,7 +251,7 @@ export default function CommanderPage() {
                     En cas d'absence le jour de la livraison
                   </span>{" "}
                   — indiquez une personne de confiance (employé, associé,
-                  famille) qu'on peut contacter pour remettre la plaque et
+                  famille) qu'on peut contacter pour remettre la plaquette et
                   encaisser le paiement.
                 </Typography>
               </div>
@@ -312,7 +312,7 @@ export default function CommanderPage() {
               </Button>
               <p className="text-muted-foreground text-center text-xs">
                 Aucun paiement en ligne : vous réglez à la livraison, une fois
-                la plaque testée devant vous. Vos coordonnées servent
+                la plaquette testée devant vous. Vos coordonnées servent
                 uniquement à traiter votre commande.
               </p>
             </div>
