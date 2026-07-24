@@ -25,7 +25,7 @@ export const Hero = () => {
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              Une plaquette posée à côté de votre caisse : le client approche
+              La plaquette ScanNShine, posée à côté de votre caisse : le client approche
               son téléphone, comme pour payer sans contact, et son avis
               ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé
               pour les commerces de Tahiti.

@@ -39,7 +39,7 @@ export const orderPlaqueAction = action
 
     await sendEmail({
       to: env.NEXT_PUBLIC_EMAIL_CONTACT,
-      subject: `🛒 Commande plaque NFC — ${businessName} (${commune})`,
+      subject: `🛒 Commande plaquette ScanNShine — ${businessName} (${commune})`,
       text: lines.join("\n"),
       html: `<pre style="font-family:inherit">${lines.join("<br/>")}</pre>`,
       ...(email ? { replyTo: email } : {}),

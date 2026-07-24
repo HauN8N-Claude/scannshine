@@ -45,7 +45,7 @@ export const ProductSection = () => {
       containerClassName="relative isolate scroll-mt-20 overflow-hidden"
       id="produit"
     >
-      {/* Carte NFC en filigrane — décorative, le copy reste le point focal */}
+      {/* Plaquette en filigrane — décorative, le copy reste le point focal */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 hidden select-none md:block"
@@ -63,7 +63,7 @@ export const ProductSection = () => {
           Comment fonctionne le produit
         </Typography>
         <Typography variant="large" className="text-muted-foreground">
-          Une plaquette posée sur votre comptoir. C'est tout.
+          La plaquette ScanNShine, posée sur votre comptoir. C'est tout.
         </Typography>
       </div>
       <div className="grid w-full items-center gap-10 lg:grid-cols-2">
