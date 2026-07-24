@@ -17,8 +17,8 @@ export const PainSection = () => {
           12 avis quand votre concurrent en a 200&nbsp;?
         </Typography>
         <Typography variant="large" className="text-center text-balance">
-          Ce déséquilibre n'est pas une fatalité. Voici ce qui change avec un
-          simple QR code en caisse.
+          Ce déséquilibre n'est pas une fatalité. Voici ce qui change avec une
+          plaque posée sur votre comptoir.
         </Typography>
         <div className="flex items-start gap-4 max-lg:flex-col">
           <div className="flex-1 rounded-lg bg-red-500/20 p-4 lg:p-6">
@@ -45,10 +45,10 @@ export const PainSection = () => {
               Avec ScanNShine
             </Typography>
             <ul className="text-foreground/80 mt-4 ml-4 flex list-disc flex-col gap-2 text-base lg:text-lg">
-              <li>Le QR est en caisse, il travaille tout seul</li>
-              <li>Le client scanne et note en 30 secondes</li>
-              <li>Les mécontents vous écrivent en privé, pas sur Google</li>
-              <li>Vous suivez vos scans et vos avis chaque semaine</li>
+              <li>La plaque est en caisse, elle travaille toute seule</li>
+              <li>Le client approche son téléphone et note en 30 secondes</li>
+              <li>Chaque client satisfait devient un avis de plus</li>
+              <li>Votre fiche grimpe, les nouveaux clients vous trouvent</li>
             </ul>
           </div>
         </div>
