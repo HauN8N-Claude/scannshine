@@ -41,10 +41,23 @@ export const ProductSection = () => {
   return (
     <SectionLayout
       size="lg"
-      className="flex flex-col items-center gap-10"
-      containerClassName="scroll-mt-20"
+      className="relative flex flex-col items-center gap-10"
+      containerClassName="relative isolate scroll-mt-20 overflow-hidden"
       id="produit"
     >
+      {/* Carte NFC en filigrane — décorative, le copy reste le point focal */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 hidden select-none md:block"
+      >
+        <Image
+          src="/images/carte-nfc-3d.png"
+          alt=""
+          width={720}
+          height={720}
+          className="absolute top-1/2 right-[-8%] w-[46rem] max-w-none -translate-y-1/2 rotate-12 opacity-[0.06]"
+        />
+      </div>
       <div className="flex flex-col items-center gap-3 text-center">
         <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
           Comment fonctionne le produit

@@ -1,4 +1,5 @@
 import { FAQSection } from "@/features/landing/faq-section";
+import { ForWhoSection } from "@/features/landing/for-who-section";
 import { FounderSection } from "@/features/landing/founder-section";
 import { Hero } from "@/features/landing/hero";
 import { HowItWorksSection } from "@/features/landing/how-it-works";
@@ -128,6 +129,8 @@ export default function HomePage() {
       <ProductSection />
 
       <HowItWorksSection />
+
+      <ForWhoSection />
 
       <ReviewsSection />
 
