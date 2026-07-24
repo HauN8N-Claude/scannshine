@@ -19,7 +19,7 @@ type Faq = {
 };
 
 type FeaturesPreviewProps = {
-  faq: Faq[];
+  faq: readonly Faq[];
 };
 
 export const FAQSection = (props: FeaturesPreviewProps) => {
@@ -58,10 +58,7 @@ export const FAQSection = (props: FeaturesPreviewProps) => {
             vous dans votre commerce — vous ne réglez qu'à ce moment-là.
           </Typography>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <Link
-              href="/commander"
-              className={buttonVariants({ size: "lg" })}
-            >
+            <Link href="/commander" className={buttonVariants({ size: "lg" })}>
               Commander ma plaquette
             </Link>
             <a
