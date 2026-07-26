@@ -6,7 +6,6 @@ import { motion, useMotionValue, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { AuthButtonClient } from "../auth/auth-button-client";
 
 function useBoundedScroll(threshold: number) {
   const { scrollY } = useScroll();
@@ -82,8 +81,9 @@ export function LandingHeader() {
           </motion.p>
         </div>
         <nav className="text-muted-foreground flex items-center gap-4 text-sm font-medium">
-          {/* Seuls les liens d'ancre s'estompent au scroll — le CTA d'auth
-              reste toujours visible (sinon on perd l'inscription en scrollant). */}
+          {/* Liens d'ancre uniquement — la LP est un tunnel de commande de
+              plaque (/commander) ; aucun accès au tunnel onboarding/abonnement
+              n'est exposé au lead. Les liens s'estompent au scroll. */}
           <motion.div
             style={{
               opacity: useTransform(
@@ -97,7 +97,6 @@ export function LandingHeader() {
             <Link href="#comment-ca-marche">Comment ça marche</Link>
             <Link href="#tarif">Tarif</Link>
           </motion.div>
-          <AuthButtonClient />
         </nav>
       </div>
     </motion.header>
