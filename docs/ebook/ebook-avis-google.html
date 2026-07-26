@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>La fiche Google qui remplit votre commerce — ScanNShine</title>
+<style>
+  :root{
+    --navy:#0b1f3f; --blue:#1a73e8; --gold:#f2a815; --ink:#1c2430;
+    --muted:#5b6675; --bg:#ffffff; --soft:#f2f6fd; --line:#dfe6f0;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--bg); }
+  body{ font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif; color:var(--ink);
+        font-size:10.1pt; line-height:1.52; }
+  .page{ page-break-after:always; padding:0; }
+  .content{ padding:13mm 16mm; }
+
+  /* ---------- Couverture ---------- */
+  .cover{ background:var(--navy); color:#fff; height:296mm; display:flex; flex-direction:column;
+          justify-content:space-between; padding:24mm 20mm; }
+  .cover .kicker{ color:var(--gold); font-weight:700; letter-spacing:.18em; font-size:10pt; text-transform:uppercase; }
+  .cover h1{ font-size:31pt; line-height:1.14; margin-top:8mm; font-weight:800; }
+  .cover h1 em{ color:var(--gold); font-style:normal; }
+  .cover .sub{ margin-top:8mm; font-size:12.5pt; color:#cdd9ec; max-width:150mm; }
+  .cover .stars{ font-size:20pt; color:var(--gold); letter-spacing:.15em; margin-top:10mm; }
+  .cover .brand{ display:flex; justify-content:space-between; align-items:flex-end; color:#9fb2cf; font-size:9.5pt; }
+  .cover .brand b{ color:#fff; font-size:12pt; }
+  .badge{ display:inline-block; background:rgba(242,168,21,.15); border:1px solid var(--gold);
+          color:var(--gold); border-radius:999px; padding:1.5mm 5mm; font-size:9pt; font-weight:700; }
+
+  /* ---------- Typo générale ---------- */
+  h2.chap{ font-size:17.5pt; color:var(--navy); font-weight:800; line-height:1.2; margin-bottom:2mm; }
+  .chapnum{ color:var(--gold); font-weight:800; letter-spacing:.14em; text-transform:uppercase; font-size:9.5pt; }
+  h3{ font-size:12pt; color:var(--blue); margin:4.5mm 0 1.6mm; }
+  p{ margin:2.4mm 0; }
+  ul,ol{ margin:2.4mm 0 2.4mm 5.5mm; }
+  li{ margin:1.2mm 0; }
+  strong{ color:var(--navy); }
+  .lead{ font-size:11.6pt; color:var(--muted); }
+  .rule{ height:1.2mm; width:26mm; background:var(--gold); border-radius:2mm; margin:4mm 0 6mm; }
+
+  /* ---------- Blocs ---------- */
+  .stat-row{ display:flex; gap:4mm; margin:3.8mm 0; }
+  .stat{ flex:1; background:var(--soft); border:1px solid var(--line); border-radius:3mm; padding:4mm; text-align:center; }
+  .stat .n{ font-size:16.5pt; font-weight:800; color:var(--blue); line-height:1.1; }
+  .stat .l{ font-size:8.6pt; color:var(--muted); margin-top:1mm; }
+  .valbox{ background:var(--soft); border-left:1.6mm solid var(--blue); border-radius:0 3mm 3mm 0;
+           padding:3.6mm 4.5mm; margin:3.8mm 0; }
+  .valbox.gold{ border-left-color:var(--gold); }
+  .valbox h4{ color:var(--navy); font-size:10.8pt; margin-bottom:2mm; }
+  .valbox ul,.valbox ol{ margin-left:5mm; }
+  .quote{ background:var(--navy); color:#fff; border-radius:3mm; padding:4mm 5mm; margin:3.8mm 0; font-size:10.8pt; }
+  .quote b{ color:var(--gold); }
+  .foot{ color:var(--muted); font-size:8.4pt; }
+  sup{ color:var(--blue); font-weight:700; }
+
+  /* ---------- Sommaire ---------- */
+  .toc a{ text-decoration:none; color:var(--ink); display:flex; align-items:baseline; gap:3mm;
+          padding:3.2mm 0; border-bottom:1px dashed var(--line); }
+  .toc a .num{ color:#fff; background:var(--blue); min-width:7mm; height:7mm; border-radius:50%;
+               display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:9.5pt; }
+  .toc a .t{ font-weight:700; color:var(--navy); font-size:11.5pt; }
+  .toc a .d{ color:var(--muted); font-size:9.2pt; margin-left:auto; text-align:right; max-width:62mm; }
+  .toc a.intro .num, .toc a.conclu .num{ background:var(--gold); }
+
+  /* ---------- Faux résultat Google ---------- */
+  .serp{ background:#fff; border:1px solid var(--line); border-radius:3mm; padding:4mm; margin:5mm 0; }
+  .serp .search{ background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:2mm 4mm;
+                 color:var(--muted); font-size:9.5pt; margin-bottom:3mm; }
+  .serp .r{ display:flex; gap:3mm; align-items:center; padding:2mm 3mm; border-radius:2.5mm; margin:1.6mm 0; border:1px solid var(--line); }
+  .serp .r.win{ background:#eaf2fe; border-color:var(--blue); }
+  .serp .r .rank{ background:var(--blue); color:#fff; min-width:6mm; height:6mm; border-radius:50%;
+                  display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:9pt; }
+  .serp .r.dim .rank{ background:#c3ccd8; }
+  .serp .r .name{ font-weight:700; color:var(--navy); }
+  .serp .r .meta{ margin-left:auto; color:var(--muted); font-size:9pt; }
+  .serp .r .meta b{ color:var(--ink); }
+  .serp .low{ text-align:center; color:var(--muted); font-size:8.8pt; border-top:1px dashed var(--line); padding-top:2.5mm; margin-top:2.5mm; }
+  .star{ color:var(--gold); }
+
+  .pagefoot{ display:none; }
+  a{ color:var(--blue); }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 : COUVERTURE ============ -->
+<div class="page cover">
+  <div>
+    <span class="badge">GUIDE OFFERT PAR SCANNSHINE</span>
+    <div class="kicker" style="margin-top:12mm;">Commerces de Polynésie française</div>
+    <h1>La fiche Google qui <em>remplit</em> votre commerce</h1>
+    <p class="sub">Pourquoi vos futurs clients — voisins comme touristes — vous choisissent (ou vous ignorent) sur Google avant même de pousser votre porte. Et comment inverser la tendance, sans compétence technique.</p>
+    <div class="stars">★★★★★</div>
+  </div>
+  <div class="brand">
+    <div><b>ScanNShine</b><br>scannshine.com</div>
+    <div>Édition 2026 · Tahiti, Polynésie française</div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2 : SOMMAIRE ============ -->
+<div class="page">
+  <div class="content toc">
+    <div class="chapnum">Sommaire</div>
+    <h2 class="chap">Cliquez, vous y êtes.</h2>
+    <div class="rule"></div>
+    <a class="intro" href="#intro"><span class="num">→</span><span class="t">Introduction</span><span class="d">Ce que ce guide va changer pour votre commerce</span></a>
+    <a href="#ch1"><span class="num">1</span><span class="t">Votre vraie vitrine n'est plus dans la rue</span><span class="d">Le bouche-à-oreille a changé de support</span></a>
+    <a href="#ch2"><span class="num">2</span><span class="t">Comment Google choisit qui montrer en premier</span><span class="d">Le classement expliqué simplement</span></a>
+    <a href="#ch3"><span class="num">3</span><span class="t">263 766 touristes qui choisissent à la note</span><span class="d">Le marché que votre fiche capte (ou laisse filer)</span></a>
+    <a href="#ch4"><span class="num">4</span><span class="t">Votre fiche impeccable en 30 minutes</span><span class="d">Le quick win — checklist complète</span></a>
+    <a href="#ch5"><span class="num">5</span><span class="t">Les avis : pourquoi les clients contents n'écrivent pas</span><span class="d">Et le seul moment où ils le font</span></a>
+    <a href="#ch6"><span class="num">6</span><span class="t">Répondre aux avis comme un pro</span><span class="d">3 modèles à copier-coller</span></a>
+    <a href="#ch7"><span class="num">7</span><span class="t">Les 5 erreurs qui coûtent des clients</span><span class="d">Dont une interdite par Google</span></a>
+    <a class="conclu" href="#conclusion"><span class="num">✓</span><span class="t">Votre plan d'action 7 jours</span><span class="d">Par quoi commencer, concrètement</span></a>
+    <p class="foot" style="margin-top:8mm;">Les chiffres cités dans ce guide proviennent d'études publiques récentes (ISPF, BrightLocal, TripAdvisor/Ipsos, DataReportal) — sources détaillées en dernière page.</p>
+  </div>
+</div>
+
+<!-- ============ PAGE 3 : INTRO ============ -->
+<div class="page">
+  <div class="content" id="intro">
+    <div class="chapnum">Introduction</div>
+    <h2 class="chap">Votre commerce mérite d'être trouvé</h2>
+    <div class="rule"></div>
+    <p class="lead">Vous faites du bon travail. Vos clients repartent contents, ils le disent, ils reviennent. Et pourtant, quand quelqu'un qui ne vous connaît pas cherche un commerce comme le vôtre, c'est souvent chez le concurrent qu'il atterrit.</p>
+    <p>Ce n'est pas une question de qualité. C'est une question de <strong>visibilité au moment du choix</strong> — et aujourd'hui, ce moment se passe sur Google, pas dans la rue.</p>
+    <p>Ce guide vous montre, en langage simple et sans jargon :</p>
+    <ul>
+      <li><strong>pourquoi</strong> votre fiche Google est devenue votre vitrine principale — pour les gens d'ici comme pour les touristes ;</li>
+      <li><strong>comment</strong> Google décide qui apparaît en premier (et pourquoi les avis y jouent le rôle central) ;</li>
+      <li><strong>quoi faire</strong>, étape par étape, pour que votre fiche travaille pour vous : la créer, la remplir, récolter des avis au bon moment et y répondre.</li>
+    </ul>
+    <div class="quote">À la dernière page, vous saurez exactement quoi faire — et dans quel ordre — pour que <b>les clients qui ne vous connaissent pas encore vous trouvent avant vos concurrents.</b></div>
+    <p><strong>Comment lire ce guide :</strong> dans l'ordre, un chapitre à la fois. Chaque chapitre se termine par un élément concret à appliquer (checklist, modèle, plan). Le chapitre 4 vous donne un premier résultat en 30 minutes.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Introduction</span></div>
+</div>
+
+<!-- ============ PAGE 4-5 : CH1 ============ -->
+<div class="page">
+  <div class="content" id="ch1">
+    <div class="chapnum">Chapitre 1</div>
+    <h2 class="chap">Votre vraie vitrine n'est plus dans la rue</h2>
+    <div class="rule"></div>
+    <p>Il y a quinze ans, un nouveau client arrivait chez vous de deux façons : il passait devant, ou quelqu'un lui avait parlé de vous. Le bouche-à-oreille faisait le travail — lentement, mais sûrement.</p>
+    <p>Le bouche-à-oreille n'est pas mort. <strong>Il a changé de support.</strong> Aujourd'hui, il s'écrit noir sur blanc sur votre fiche Google, et il est consulté par quasiment tout le monde :</p>
+    <div class="stat-row">
+      <div class="stat"><div class="n">98 %</div><div class="l">des consommateurs lisent les avis en ligne avant de choisir un commerce local<sup>1</sup></div></div>
+      <div class="stat"><div class="n">83 %</div><div class="l">lisent ces avis d'abord sur Google — loin devant toutes les autres plateformes<sup>1</sup></div></div>
+      <div class="stat"><div class="n">87 %</div><div class="l">vérifient sur Google même quand un ami leur a déjà recommandé l'adresse<sup>1</sup></div></div>
+    </div>
+    <p>Relisez ce dernier chiffre. Même quand quelqu'un vous recommande de vive voix — le bouche-à-oreille classique, le vrai — <strong>presque 9 personnes sur 10 sortent leur téléphone pour vérifier votre fiche Google avant de venir</strong>. Si la fiche est vide, absente ou mal notée, la recommandation de l'ami est annulée par l'écran.</p>
+    <h3>Et en Polynésie ?</h3>
+    <p>Le réflexe est déjà installé chez nous : <strong>près de 3 Polynésiens sur 4 utilisent internet</strong> (72,7 % de la population début 2025), et près de deux tiers sont sur les réseaux sociaux<sup>4</sup>. Votre future clientèle locale a le téléphone en main — et quand elle cherche « snack », « coiffeur » ou « location de voiture » près de chez elle, c'est Google qui répond.</p>
+    <div class="valbox gold">
+      <h4>🔎 Faites le test maintenant (2 minutes)</h4>
+      <ol>
+        <li>Prenez votre téléphone, ouvrez Google Maps.</li>
+        <li>Tapez votre activité + votre commune (ex. « snack Punaauia »).</li>
+        <li>Regardez : où apparaissez-vous ? Avec combien d'avis ? Et vos concurrents ?</li>
+      </ol>
+      <p style="margin-top:2mm;">Ce que vous voyez à l'écran, c'est <strong>exactement</strong> ce que voit chaque futur client. C'est votre vitrine réelle.</p>
+    </div>
+    <p class="foot">Récap : le choix se fait sur Google avant de se faire dans la rue. La suite logique : comprendre comment Google décide de l'ordre d'affichage. C'est le chapitre 2.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 1</span></div>
+</div>
+
+<!-- ============ PAGE 6 : CH2 ============ -->
+<div class="page">
+  <div class="content" id="ch2">
+    <div class="chapnum">Chapitre 2</div>
+    <h2 class="chap">Comment Google choisit qui montrer en premier</h2>
+    <div class="rule"></div>
+    <p>Quand un client tape « restaurant près de moi », Google affiche une liste. Ce classement n'est pas un tirage au sort : Google met en avant les commerces qui donnent <strong>le plus de signes de confiance</strong>. Et le signe de confiance numéro un, visible par tous, c'est <strong>le nombre d'avis, leur note et leur fraîcheur</strong>.</p>
+    <div class="serp">
+      <div class="search">🔍 &nbsp;snack près de moi</div>
+      <div class="r win"><span class="rank">1</span><span class="name">Votre commerce</span><span class="meta"><span class="star">★</span> 4,8 · <b>214 avis</b></span></div>
+      <div class="r dim"><span class="rank">2</span><span class="name">Le concurrent d'en face</span><span class="meta"><span class="star">★</span> 4,6 · <b>87 avis</b></span></div>
+      <div class="r dim" style="opacity:.65;"><span class="rank">3</span><span class="name">L'autre, un peu plus loin</span><span class="meta"><span class="star">★</span> 4,9 · <b>12 avis</b></span></div>
+      <div class="low">↓ plus bas — presque personne ne descend jusqu'ici</div>
+    </div>
+    <p>Trois choses à retenir de ce schéma :</p>
+    <ul>
+      <li><strong>Le client regarde les premiers résultats, puis choisit.</strong> Il ne fait pas défiler la liste jusqu'en bas. Être premier ou cinquième, ce n'est pas un détail : c'est la différence entre être vu et être invisible.</li>
+      <li><strong>Le nombre d'avis pèse autant que la note.</strong> Regardez le n°3 du schéma : meilleure note (4,9), mais 12 avis seulement — il reste derrière. Une excellente note sur très peu d'avis ne rassure pas : elle passe inaperçue.</li>
+      <li><strong>La fraîcheur compte.</strong> Des avis qui datent de 2023 racontent un commerce à l'abandon. Un flux régulier d'avis récents dit à Google — et aux clients — que ça vit, en ce moment.</li>
+    </ul>
+    <div class="valbox">
+      <h4>💡 La règle simple à retenir</h4>
+      <p><strong>Plus d'avis récents → meilleure place dans la liste → plus de clients qui vous voient en premier → plus de clients qui poussent votre porte.</strong> Et chaque nouveau client satisfait peut devenir un avis de plus : une fois lancée, la machine s'alimente toute seule.</p>
+    </div>
+    <p class="foot">Récap : le classement se gagne avec des avis nombreux, bons et récents. Voyons maintenant qui lit ce classement avec le plus d'attention : les touristes. Chapitre 3.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 2</span></div>
+</div>
+
+<!-- ============ PAGE 7-8 : CH3 ============ -->
+<div class="page">
+  <div class="content" id="ch3">
+    <div class="chapnum">Chapitre 3</div>
+    <h2 class="chap">263 766 touristes qui choisissent à la note</h2>
+    <div class="rule"></div>
+    <p>2024 a été une année record pour le tourisme polynésien : <strong>263 766 visiteurs</strong>, du jamais-vu, pour plus de <strong>4,3 millions de nuitées</strong> et un séjour moyen de <strong>16,3 jours</strong><sup>2</sup>.</p>
+    <p>Seize jours sur place. Seize jours de repas, de coiffeur avant une soirée, de scooter à louer, de sorties à réserver, de pension à choisir pour l'île suivante. Chacune de ces décisions est prise par quelqu'un qui a un point commun avec tous les autres touristes :</p>
+    <div class="quote"><b>Il ne connaît personne ici.</b> Pas de cousin pour lui souffler la bonne adresse, pas d'habitude, pas de fidélité. Son seul conseiller, c'est son téléphone.</div>
+    <div class="stat-row">
+      <div class="stat"><div class="n">263 766</div><div class="l">touristes en Polynésie en 2024 — record historique<sup>2</sup></div></div>
+      <div class="stat"><div class="n">16,3 jours</div><div class="l">de séjour moyen — des dizaines de décisions d'achat chacun<sup>2</sup></div></div>
+      <div class="stat"><div class="n">81 %</div><div class="l">des voyageurs lisent les avis avant de réserver<sup>3</sup></div></div>
+    </div>
+    <p>Le touriste compare deux adresses en trente secondes, depuis sa chambre d'hôtel ou le bord de la route. Il ne visite pas vos locaux, il ne goûte pas votre cuisine, il ne serre pas votre main : <strong>il lit votre note, compte vos avis, regarde vos photos — et tranche.</strong></p>
+    <h3>L'injustice — et l'opportunité</h3>
+    <p>C'est parfois injuste : le meilleur poisson cru de la côte peut perdre face à un concurrent moyen mais bien noté. Mais c'est aussi une opportunité énorme pour les commerces qui s'y mettent : <strong>en Polynésie, très peu de TPE travaillent sérieusement leur fiche Google</strong>. Quelques dizaines d'avis récents suffisent souvent à passer devant des concurrents installés depuis vingt ans.</p>
+    <div class="valbox gold">
+      <h4>🧭 Là où le touriste vous cherche</h4>
+      <ul>
+        <li><strong>Avant le voyage</strong> : il repère les incontournables — pensions, activités, restaurants « à faire ».</li>
+        <li><strong>Sur place, le jour même</strong> : « où manger », « location scooter », « coiffeur » + le nom de votre commune. C'est ici que le classement local (chapitre 2) décide.</li>
+        <li><strong>Devant votre porte</strong> : il hésite, il vérifie la note une dernière fois. Une fiche soignée conclut la vente.</li>
+      </ul>
+    </div>
+    <p class="foot">Récap : les touristes sont une clientèle massive, sans a priori, qui se décide uniquement sur votre fiche. Encore faut-il que cette fiche existe et soit impeccable — c'est l'objet du chapitre 4.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 3</span></div>
+</div>
+
+<!-- ============ PAGE 9-10 : CH4 ============ -->
+<div class="page">
+  <div class="content" id="ch4">
+    <div class="chapnum">Chapitre 4 — Quick win</div>
+    <h2 class="chap">Votre fiche impeccable en 30 minutes</h2>
+    <div class="rule"></div>
+    <p>Bonne nouvelle : la fiche Google est <strong>gratuite</strong>, et la mettre à niveau se fait en une demi-heure, depuis votre téléphone. C'est le meilleur rapport temps/résultat de tout ce guide.</p>
+    <h3>Si vous n'avez pas encore de fiche</h3>
+    <ol>
+      <li>Ouvrez <strong>google.com/business</strong> et connectez-vous avec un compte Google (le vôtre, pas celui d'un prestataire — vous devez rester propriétaire).</li>
+      <li>Renseignez le nom exact de votre commerce, la catégorie principale (soyez précis : « Snack » plutôt que « Restaurant » si c'en est un), l'adresse ou la zone desservie, les horaires, le téléphone.</li>
+      <li>Validez la fiche (code de vérification par téléphone, e-mail ou courrier selon les cas).</li>
+    </ol>
+    <h3>La checklist de la fiche qui rassure</h3>
+    <div class="valbox">
+      <h4>✅ À vérifier point par point (cochez !)</h4>
+      <ul>
+        <li>☐ <strong>Nom exact</strong> — celui de l'enseigne, sans mots-clés ajoutés artificiellement.</li>
+        <li>☐ <strong>Catégorie principale précise</strong> + catégories secondaires utiles.</li>
+        <li>☐ <strong>Horaires à jour</strong> — y compris jours fériés et fermetures exceptionnelles. Une fiche qui dit « ouvert » quand c'est fermé fabrique des avis 1 étoile.</li>
+        <li>☐ <strong>Téléphone qui répond</strong> (votre vini, c'est très bien).</li>
+        <li>☐ <strong>Position exacte sur la carte</strong> — vérifiez l'épingle, surtout hors de Papeete : une épingle mal placée = des clients perdus au PK d'à côté.</li>
+        <li>☐ <strong>10 photos minimum, récentes et vraies</strong> : la devanture (pour qu'on vous reconnaisse de la route), l'intérieur, vos produits, l'équipe. Pas besoin d'un photographe — un téléphone récent en pleine lumière suffit.</li>
+        <li>☐ <strong>Description simple</strong> : qui vous êtes, ce que vous faites, pour qui — 3 phrases, sans jargon.</li>
+        <li>☐ <strong>En bonus pour les touristes</strong> : quelques mots d'anglais dans la description, et vos moyens de paiement précisés.</li>
+      </ul>
+    </div>
+    <p>Faites ce travail une fois, sérieusement, puis un contrôle rapide chaque mois (horaires, photos, infos). C'est tout ce que la fiche exige en entretien.</p>
+    <p class="foot">Récap : en 30 minutes, votre vitrine Google est propre et rassurante. Mais une fiche parfaite avec 6 avis reste une fiche invisible. Le vrai moteur, ce sont les avis — chapitre 5.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 4</span></div>
+</div>
+
+<!-- ============ PAGE 11-12 : CH5 ============ -->
+<div class="page">
+  <div class="content" id="ch5">
+    <div class="chapnum">Chapitre 5</div>
+    <h2 class="chap">Pourquoi vos clients contents n'écrivent pas (et le seul moment où ils le font)</h2>
+    <div class="rule"></div>
+    <p>Voici le paradoxe que tous les gérants connaissent : les clients ravis vous le disent en face… et n'écrivent jamais rien. Pendant ce temps, le client mécontent, lui, trouve toujours dix minutes pour poster son 1 étoile.</p>
+    <p>Ce n'est pas de la mauvaise volonté. C'est mécanique :</p>
+    <ul>
+      <li><strong>Le client content n'a aucune raison d'y penser.</strong> Il est content, il passe à autre chose. Écrire un avis chez lui, le soir, c'est un effort sans bénéfice pour lui.</li>
+      <li><strong>Le client fâché a une motivation</strong> : se faire entendre. Sa colère est son carburant.</li>
+    </ul>
+    <p>Résultat : livrée à elle-même, votre fiche raconte l'inverse de votre réalité — elle sur-représente les mécontents et fait taire la majorité satisfaite.</p>
+    <h3>La fenêtre de tir : à la caisse, pas après</h3>
+    <div class="quote">Le seul moment où un client content laisse un avis, c'est <b>tout de suite</b> : au moment de payer ou juste après la prestation. Le sourire est là, le téléphone est déjà dans sa main, et vous êtes en face. Une heure plus tard, l'élan est retombé. Le soir chez lui, c'est perdu.</div>
+    <h3>Comment demander sans quémander</h3>
+    <p>« Tu me mettras un petit avis, hein ? » — tout le monde dit oui, presque personne ne le fait, et c'est gênant à demander. Trois façons de faire qui marchent mieux :</p>
+    <div class="valbox">
+      <h4>🗣️ Trois demandes naturelles, à dire au moment de l'addition</h4>
+      <ol>
+        <li><strong>La version service</strong> : « Si ça vous a plu, votre avis Google nous aide énormément — ça prend 30 secondes, c'est juste là. » <em>(en montrant le support posé en caisse)</em></li>
+        <li><strong>La version touriste (EN)</strong> : « If you enjoyed it, a Google review helps us a lot — it takes 30 seconds, right here. »</li>
+        <li><strong>La version zéro parole</strong> : un support visible posé à côté de la caisse fait la demande à votre place, à chaque client, sans que vous ayez à y penser. C'est la méthode la plus régulière — et la régularité est exactement ce que Google récompense.</li>
+      </ol>
+    </div>
+    <p><strong>L'objectif n'est pas un pic, c'est un rythme</strong> : quelques avis par semaine, chaque semaine, valent mieux que 30 avis d'un coup puis plus rien pendant six mois.</p>
+    <p class="foot">Récap : capter l'avis à chaud, avec un système en caisse qui demande à votre place. Prochaine étape : que faire des avis qui arrivent — y compris les mauvais. Chapitre 6.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 5</span></div>
+</div>
+
+<!-- ============ PAGE 13 : CH6 ============ -->
+<div class="page">
+  <div class="content" id="ch6">
+    <div class="chapnum">Chapitre 6</div>
+    <h2 class="chap">Répondre aux avis comme un pro</h2>
+    <div class="rule"></div>
+    <p>Chaque réponse que vous écrivez est lue par des dizaines de futurs clients. Vous ne répondez pas à l'auteur de l'avis : <strong>vous parlez à tous ceux qui liront après lui.</strong> Répondez à tout, dans les 48 h si possible — en 1 à 3 phrases, ça suffit.</p>
+    <div class="valbox">
+      <h4>📋 Modèle 1 — Avis positif (local)</h4>
+      <p>« Māuruuru [prénom] ! Ça fait vraiment plaisir. Au plaisir de vous revoir bientôt — [votre prénom], [nom du commerce]. »</p>
+    </div>
+    <div class="valbox">
+      <h4>📋 Modèle 2 — Avis positif (touriste, en anglais)</h4>
+      <p>« Thank you so much, [name]! It was a pleasure welcoming you. Safe travels, and see you next time in [île/commune] — [your name]. »</p>
+    </div>
+    <div class="valbox gold">
+      <h4>📋 Modèle 3 — Avis négatif (le plus important)</h4>
+      <p>« Bonjour [prénom], merci d'avoir pris le temps. Ce que vous décrivez ne correspond pas à ce qu'on veut offrir, et je suis désolé pour ça. J'aimerais comprendre et arranger les choses : appelez-moi au [numéro]. — [votre prénom], gérant. »</p>
+      <p style="margin-top:2mm;"><strong>Les 4 règles :</strong> répondre à froid (jamais dans l'heure qui suit la colère) · ne jamais se justifier point par point en public · proposer de continuer en privé · rester digne — les lecteurs jugent votre réponse, pas l'avis.</p>
+    </div>
+    <p>Un avis négatif avec une réponse calme et professionnelle fait souvent <strong>meilleure</strong> impression qu'une fiche sans aucun avis négatif : il prouve qu'il y a quelqu'un aux commandes.</p>
+    <p class="foot">Récap : répondez à tout, court et digne — c'est votre service client en public. Dernier chapitre : les pièges à éviter absolument.</p>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 6</span></div>
+</div>
+
+<!-- ============ PAGE 14 : CH7 ============ -->
+<div class="page">
+  <div class="content" id="ch7">
+    <div class="chapnum">Chapitre 7</div>
+    <h2 class="chap">Les 5 erreurs qui coûtent des clients</h2>
+    <div class="rule"></div>
+    <ol>
+      <li><strong>Acheter de faux avis — ou filtrer les vrais.</strong> C'est interdit par Google (et trompeur pour vos clients). Les fiches prises la main dans le sac voient leurs avis supprimés, avec un risque de sanction sur la visibilité. En revanche, <strong>demander un avis à un vrai client est parfaitement autorisé et même encouragé</strong> — tant que tout le monde peut s'exprimer, satisfait ou non, et sans récompense en échange.</li>
+      <li><strong>Laisser la fiche à l'abandon.</strong> Horaires faux, photos de 2019, dernier avis il y a un an : pour un client, c'est le signe d'un commerce qui a peut-être fermé. Il passe au suivant.</li>
+      <li><strong>Compter sur la bonne volonté.</strong> « Ils laisseront un avis s'ils sont contents » — non, ils ne le feront pas (chapitre 5). Sans système qui demande au bon moment, il ne se passe rien.</li>
+      <li><strong>Ignorer les avis négatifs.</strong> Un 1 étoile sans réponse travaille contre vous jour et nuit. Une réponse calme le neutralise en 3 phrases (chapitre 6).</li>
+      <li><strong>Tout miser sur les réseaux sociaux.</strong> Vos abonnés Facebook et Instagram vous connaissent déjà. Ceux qui ne vous connaissent pas — le touriste, le nouvel arrivant, le voisin qui cherche — passent par Google. Les deux se complètent ; mais si la fiche est vide, la plus belle page Instagram n'y changera rien : <strong>87 % vérifieront quand même votre fiche</strong><sup>1</sup>.</li>
+    </ol>
+    <div class="valbox gold">
+      <h4>⚖️ La ligne rouge Google, en une phrase</h4>
+      <p>Des <strong>vrais avis</strong>, de <strong>vrais clients</strong>, laissés <strong>librement</strong> — jamais achetés, jamais triés, jamais récompensés. Tout ce qui respecte cette phrase est non seulement autorisé, mais souhaité par Google.</p>
+    </div>
+  </div>
+  <div class="pagefoot"><span>ScanNShine · La fiche Google qui remplit votre commerce</span><span>Chapitre 7</span></div>
+</div>
+
+<!-- ============ PAGE 15 : CONCLUSION + PLAN + SOURCES ============ -->
+<div class="page">
+  <div class="content" id="conclusion">
+    <div class="chapnum">Conclusion</div>
+    <h2 class="chap">Votre plan d'action 7 jours</h2>
+    <div class="rule"></div>
+    <p>Vous savez maintenant ce que 98 % de vos futurs clients regardent avant de choisir. Voici le chemin, dans l'ordre :</p>
+    <div class="valbox">
+      <h4>🗓️ Le plan, jour par jour</h4>
+      <ul>
+        <li><strong>Jour 1</strong> — Faites le test du chapitre 1 : cherchez-vous sur Google Maps, notez où vous en êtes (position, nombre d'avis, note).</li>
+        <li><strong>Jour 2</strong> — Créez ou reprenez la main sur votre fiche, passez la checklist du chapitre 4 (30 minutes).</li>
+        <li><strong>Jour 3</strong> — Ajoutez 10 photos récentes prises au téléphone.</li>
+        <li><strong>Jour 4</strong> — Répondez à tous les avis existants avec les modèles du chapitre 6, même les vieux.</li>
+        <li><strong>Jour 5</strong> — Mettez en place votre système de récolte à la caisse (chapitre 5) : c'est lui qui transformera chaque client content en avis, semaine après semaine.</li>
+        <li><strong>Jours 6-7</strong> — Testez le parcours complet comme si vous étiez un client, et briefez votre équipe en 5 minutes : « on capte l'avis au moment de l'addition, jamais après ».</li>
+      </ul>
+    </div>
+    <h3>Pour aller plus vite</h3>
+    <p>Le point 5 est celui qui change tout — et c'est exactement ce que fait la <strong>plaquette ScanNShine</strong> : posée à côté de votre caisse, elle capte l'avis au seul moment qui compte. Votre client approche son téléphone, comme pour payer sans contact, et son avis part sur votre fiche Google en 30 secondes. Livrée prête à l'emploi, testée devant vous, payée une seule fois à la livraison.</p>
+    <div class="quote">👉 <b>scannshine.com</b> — ou écrivez-nous sur WhatsApp au <b>+689 89 26 03 72</b>. On vous répond en français, rapidement.</div>
+    <h3 style="margin-top:6mm;">Sources</h3>
+    <p class="foot">
+      1. BrightLocal, <em>Local Consumer Review Survey 2025</em> — comportements de lecture d'avis des consommateurs.<br>
+      2. ISPF (Institut de la statistique de la Polynésie française), <em>Bilan du tourisme 2024</em> — fréquentation touristique record.<br>
+      3. TripAdvisor × Ipsos MORI, étude sur l'utilisation des avis en ligne par les voyageurs.<br>
+      4. DataReportal, <em>Digital 2025: French Polynesia</em> — usages d'internet et des réseaux sociaux en Polynésie.<br>
+      Guide édité par ScanNShine · Tahiti, Polynésie française · © 2026 — Reproduction libre avec mention de la source.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
