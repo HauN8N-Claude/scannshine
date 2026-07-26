@@ -5,11 +5,7 @@ import { AuthButton } from "../auth/auth-button";
 import { ContentNav } from "./content-nav";
 import { MobileNav } from "./mobile-nav";
 
-const navItems = [
-  { href: "/docs", label: "Docs" },
-  { href: "/posts", label: "Blog" },
-  { href: "/changelog", label: "Changelog" },
-];
+const navItems: { href: string; label: string }[] = [];
 
 export function ContentHeader() {
   return (
