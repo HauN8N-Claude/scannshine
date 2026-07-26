@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+REFACTOR: Section « 12 avis / 200 » (pain) refondue — couleurs harmonisées avec la palette bleue de la LP (fin du rouge/vert brut) : profil « sans avis » en neutre/muted, profil « avis récents en nombre » en bleu primary, étoiles dorées + compteur d'avis pour visualiser le contraste quantité/fraîcheur
 CHORE: Retrait des liens de navigation template (Docs, Blog, Changelog) de l'en-tête des pages (content-header) — sans rapport avec ScanNShine
 FIX: Image plaquette (section produit) — fond figé qui jurait en mode sombre (la LP suit le thème système) ; plaque-nfc.png rendue transparente et cadre retiré (drop-shadow seul) pour qu'elle flotte sur le vrai fond de la LP et s'harmonise en clair comme en sombre
 FIX: Build/déploiement Vercel cassé (TS4104) — le tableau FAQ `as const` (readonly) était passé à la prop `faq: Faq[]` mutable de FAQSection ; prop élargie en `readonly Faq[]`, le build repasse au vert
