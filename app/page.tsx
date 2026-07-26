@@ -74,6 +74,11 @@ const FAQ = [
     answer:
       "Vous ne prenez aucun risque : on vous livre **en main propre**, on teste la plaquette **devant vous, dans votre commerce** — et vous ne payez **qu'à ce moment-là**. Aucun paiement en ligne. Et si un jour votre fiche Google change (nom, adresse, nouvelle fiche), on met votre plaquette à jour **à distance**, sans la changer.",
   },
+  {
+    question: "Je paie une seule fois. Et si la plaquette tombe en panne ?",
+    answer:
+      "Vous payez **une seule fois, à la livraison** — et c'est réglé pour de bon. Si un jour votre plaquette ne marche plus (panne, décollement, défaut quelconque), **on vous la remplace, gratuitement**. Vous n'avez rien de plus à débourser : une plaquette qui vous fait défaut, on la change, point.",
+  },
 ] as const;
 
 const FAQ_JSON_LD = {
