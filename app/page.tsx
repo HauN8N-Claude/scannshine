@@ -8,6 +8,7 @@ import { PainSection } from "@/features/landing/pain";
 import { ProblemSection } from "@/features/landing/problem-section";
 import { ProductSection } from "@/features/landing/product-section";
 import { ScannshinePricing } from "@/features/landing/scannshine-pricing";
+import { SearchRankingSection } from "@/features/landing/search-ranking-section";
 import { SectionDivider } from "@/features/landing/section-divider";
 import { WhyReviewsSection } from "@/features/landing/why-reviews-section";
 import { Footer } from "@/features/layout/footer";
@@ -114,6 +115,8 @@ export default function HomePage() {
       <SectionDivider />
 
       <WhyReviewsSection />
+
+      <SearchRankingSection />
 
       <ProductSection />
 
