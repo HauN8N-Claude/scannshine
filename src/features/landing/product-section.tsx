@@ -26,7 +26,7 @@ const PRODUCT_STEPS = [
     icon: TrendingUp,
     title: "Votre fiche Google grimpe",
     description:
-      "Un avis authentique de plus à chaque client content. Votre note monte, votre fiche ressort sur Google Maps, et les prochains clients vous choisissent vous.",
+      "Un avis authentique de plus à chaque client content. Votre note monte, votre commerce apparaît en tête des recherches sur Google Maps, et les prochains clients vous choisissent vous.",
   },
 ] as const;
 
