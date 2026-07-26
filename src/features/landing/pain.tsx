@@ -122,8 +122,8 @@ export const PainSection = () => {
           variant="small"
           className="text-muted-foreground mt-2 text-center text-balance"
         >
-          La plaque ScanNShine, posée sur votre comptoir, est ce qui fait passer
-          votre fiche de l'un à l'autre.
+          La plaquette ScanNShine, posée sur votre comptoir, est ce qui fait
+          passer votre fiche de l'un à l'autre.
         </Typography>
       </div>
     </SectionLayout>
