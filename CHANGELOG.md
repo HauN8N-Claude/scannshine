@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+CHORE: Hero LP — accroche de qualification reformulée : « Vous voulez que les touristes et vos futurs clients vous trouvent avant vos concurrents ? »
 FEATURE: Hero LP — accroche de qualification (eyebrow) au-dessus du H1 : « Vous voulez que les touristes vous trouvent avant les autres ? » (bleu primary), pour qualifier le lead dès le premier coup d'œil
 CHORE: LP — retrait du bouton « Connexion » de l'en-tête : plus aucun accès au tunnel onboarding/abonnement (SaaS) exposé au lead ; la LP ne pousse que vers la commande de plaque (/commander). Le code du tunnel (auth, onboarding, dashboard) reste en place, simplement non lié depuis la landing
 FIX: Formulaire /commander — protection anti-double-envoi : le bouton « Envoyer ma demande » utilise SubmitButton (useFormStatus), désactivé + spinner pendant la soumission, pour empêcher un 2e clic de créer un lead en double

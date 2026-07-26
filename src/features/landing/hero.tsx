@@ -15,8 +15,8 @@ export const Hero = () => {
               variant="small"
               className="text-primary mb-4 font-semibold text-balance sm:text-base"
             >
-              Vous voulez que les touristes vous trouvent avant les
-              autres&nbsp;?
+              Vous voulez que les touristes et vos futurs clients vous trouvent
+              avant vos concurrents&nbsp;?
             </Typography>
             <Typography
               variant="h1"
