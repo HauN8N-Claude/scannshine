@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+FIX: Formulaire /commander — protection anti-double-envoi : le bouton « Envoyer ma demande » utilise SubmitButton (useFormStatus), désactivé + spinner pendant la soumission, pour empêcher un 2e clic de créer un lead en double
 FIX: Sync Google Sheets /commander — ne plus logger une fausse erreur « GSheet lead sync failed (redirected) » à chaque succès : Apps Script renvoie toujours un 302 vers son URL echo (le corps est déjà consommé par doPost, la ligne est écrite), donc l'échec ne se juge que sur response.ok
 REFACTOR: Section « 12 avis / 200 » (pain) refondue — couleurs harmonisées avec la palette bleue de la LP (fin du rouge/vert brut) : profil « sans avis » en neutre/muted, profil « avis récents en nombre » en bleu primary, étoiles dorées + compteur d'avis pour visualiser le contraste quantité/fraîcheur
 CHORE: Retrait des liens de navigation template (Docs, Blog, Changelog) de l'en-tête des pages (content-header) — sans rapport avec ScanNShine

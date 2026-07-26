@@ -1,9 +1,9 @@
 import GridBackground from "@/components/nowts/grid-background";
 import { Typography } from "@/components/nowts/typography";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { SubmitButton } from "@/features/form/submit-button";
 import { orderPlaqueAction } from "@/features/order/order-plaque.action";
 import { OrderPlaqueSchema } from "@/features/order/order-plaque.schema";
 import { serverToast } from "@/lib/server-toast";
@@ -62,9 +62,8 @@ export default function CommanderPage() {
               variant="p"
               className="text-muted-foreground mt-6 text-lg/8"
             >
-              La plaquette ScanNShine — 4 990 XPF, paiement unique.
-              Remplissez le formulaire, la suite se passe au téléphone, en
-              français.
+              La plaquette ScanNShine — 4 990 XPF, paiement unique. Remplissez
+              le formulaire, la suite se passe au téléphone, en français.
             </Typography>
             <dl className="text-muted-foreground mt-10 flex flex-col gap-6 text-base/7">
               {NEXT_STEPS.map((step) => (
@@ -307,9 +306,9 @@ export default function CommanderPage() {
               </div>
             </div>
             <div className="mt-8 flex flex-col gap-3">
-              <Button type="submit" size="lg" className="w-full">
+              <SubmitButton type="submit" size="lg" className="w-full">
                 Envoyer ma demande
-              </Button>
+              </SubmitButton>
               <p className="text-muted-foreground text-center text-xs">
                 Aucun paiement en ligne : vous réglez à la livraison, une fois
                 la plaquette testée devant vous. Vos coordonnées servent
