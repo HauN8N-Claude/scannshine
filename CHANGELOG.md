@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+FEATURE: Nouvelle LP /guidepremium (page de vente du guide low-ticket 1990 XPF) — charte ScanNShine, centrée sur les désirs du marché (être trouvé en 1er sur Google par locaux + touristes, plus d'avis, plus de clients sans pub) ; CTA d'achat isolé dans une constante GUIDE_CHECKOUT_URL à brancher (Gumroad ou Dodo) ; page en noindex tant que le produit n'est pas branché
 CHORE: Hero LP — sous-titre : « Pensé pour les commerces de Tahiti » → « Pensé spécialement pour les commerces de Tahiti »
 CHORE: Hero LP — accroche de qualification reformulée : « Vous voulez que les touristes et vos futurs clients vous trouvent avant vos concurrents ? »
 FEATURE: Hero LP — accroche de qualification (eyebrow) au-dessus du H1 : « Vous voulez que les touristes vous trouvent avant les autres ? » (bleu primary), pour qualifier le lead dès le premier coup d'œil
