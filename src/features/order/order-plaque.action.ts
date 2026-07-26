@@ -96,13 +96,24 @@ export const orderPlaqueAction = action
     // ligne au Sheet. Même règle : ne bloque jamais la commande.
     if (env.GSHEET_WEBHOOK_URL) {
       try {
+        // Content-Type text/plain : évite le preflight CORS et le rejet des
+        // POST par Apps Script (qui lit de toute façon e.postData.contents).
         const response = await fetch(env.GSHEET_WEBHOOK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(parsedInput),
         });
-        if (!response.ok) {
-          console.error("GSheet lead sync failed", response.status);
+        // Un webhook Apps Script d'un compte Google Workspace redirige l'URL
+        // générique (/macros/s/) vers l'URL de domaine (/a/macros/<domaine>/) ;
+        // fetch suit la redirection en GET et perd le corps → aucune ligne
+        // écrite. Utiliser directement l'URL /a/macros/<domaine>/ dans l'env.
+        if (!response.ok || response.redirected) {
+          console.error(
+            "GSheet lead sync failed",
+            response.status,
+            response.redirected ? "(redirected — use the /a/macros URL)" : "",
+            (await response.text()).slice(0, 200),
+          );
         }
       } catch (error) {
         console.error("GSheet lead sync failed", error);
