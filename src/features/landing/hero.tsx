@@ -34,8 +34,8 @@ export const Hero = () => {
             >
               La plaquette ScanNShine, posée à côté de votre caisse : le client
               approche son téléphone, comme pour payer sans contact, et son avis
-              ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé pour
-              les commerces de Tahiti.
+              ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé
+              spécialement pour les commerces de Tahiti.
             </Typography>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
               <Link
