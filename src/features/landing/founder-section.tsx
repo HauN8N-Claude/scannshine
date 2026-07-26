@@ -47,10 +47,7 @@ export const FounderSection = () => {
         </Typography>
         <div className="flex flex-col gap-1">
           <Typography variant="large">Haumoana</Typography>
-          <Typography variant="muted">
-            Fondateur de ScanNShine · Entreprise polynésienne · Support en
-            français, par des gens du fenua
-          </Typography>
+          <Typography variant="muted">Fondateur de ScanNShine</Typography>
         </div>
       </div>
     </SectionLayout>
