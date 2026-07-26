@@ -64,7 +64,7 @@ export const orderPlaqueAction = action
                   fields: {
                     Commerce: businessName,
                     Contact: contactName,
-                    "Téléphone": phone,
+                    Téléphone: phone,
                     Email: email ?? "",
                     "Commune / île": commune,
                     "Adresse livraison": deliveryAddress,
@@ -103,15 +103,15 @@ export const orderPlaqueAction = action
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(parsedInput),
         });
-        // Un webhook Apps Script d'un compte Google Workspace redirige l'URL
-        // générique (/macros/s/) vers l'URL de domaine (/a/macros/<domaine>/) ;
-        // fetch suit la redirection en GET et perd le corps → aucune ligne
-        // écrite. Utiliser directement l'URL /a/macros/<domaine>/ dans l'env.
-        if (!response.ok || response.redirected) {
+        // Apps Script renvoie toujours un 302 vers son URL « echo »
+        // (script.googleusercontent.com), même quand doPost réussit : le corps
+        // est consommé par doPost pendant le POST et la ligne est écrite avant
+        // la redirection. response.redirected vaut donc true même en cas de
+        // succès — on ne juge l'échec que sur response.ok.
+        if (!response.ok) {
           console.error(
             "GSheet lead sync failed",
             response.status,
-            response.redirected ? "(redirected — use the /a/macros URL)" : "",
             (await response.text()).slice(0, 200),
           );
         }
