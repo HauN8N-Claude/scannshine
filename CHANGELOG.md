@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+FEATURE: Hero LP — accroche de qualification (eyebrow) au-dessus du H1 : « Vous voulez que les touristes vous trouvent avant les autres ? » (bleu primary), pour qualifier le lead dès le premier coup d'œil
 CHORE: LP — retrait du bouton « Connexion » de l'en-tête : plus aucun accès au tunnel onboarding/abonnement (SaaS) exposé au lead ; la LP ne pousse que vers la commande de plaque (/commander). Le code du tunnel (auth, onboarding, dashboard) reste en place, simplement non lié depuis la landing
 FIX: Formulaire /commander — protection anti-double-envoi : le bouton « Envoyer ma demande » utilise SubmitButton (useFormStatus), désactivé + spinner pendant la soumission, pour empêcher un 2e clic de créer un lead en double
 FIX: Sync Google Sheets /commander — ne plus logger une fausse erreur « GSheet lead sync failed (redirected) » à chaque succès : Apps Script renvoie toujours un 302 vers son URL echo (le corps est déjà consommé par doPost, la ligne est écrite), donc l'échec ne se juge que sur response.ok

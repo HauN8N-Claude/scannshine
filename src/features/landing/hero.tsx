@@ -12,6 +12,13 @@ export const Hero = () => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <Typography
+              variant="small"
+              className="text-primary mb-4 font-semibold text-balance sm:text-base"
+            >
+              Vous voulez que les touristes vous trouvent avant les
+              autres&nbsp;?
+            </Typography>
+            <Typography
               variant="h1"
               className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
             >
@@ -25,10 +32,10 @@ export const Hero = () => {
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              La plaquette ScanNShine, posée à côté de votre caisse : le client approche
-              son téléphone, comme pour payer sans contact, et son avis
-              ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé
-              pour les commerces de Tahiti.
+              La plaquette ScanNShine, posée à côté de votre caisse : le client
+              approche son téléphone, comme pour payer sans contact, et son avis
+              ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé pour
+              les commerces de Tahiti.
             </Typography>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
               <Link
