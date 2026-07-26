@@ -34,7 +34,6 @@ const PRODUCT_BADGES = [
   "Compatible iPhone & Android",
   "Sans application",
   "Sans batterie",
-  "Lien modifiable à distance",
 ] as const;
 
 export const ProductSection = () => {
