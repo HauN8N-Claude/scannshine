@@ -21,6 +21,8 @@ export const env = createEnv({
     DODO_PAYMENTS_WEBHOOK_KEY: z.string().optional(),
     DODO_PAYMENTS_ENVIRONMENT: z.enum(["test_mode", "live_mode"]).optional(),
     DODO_PRODUCT_ID: z.string().optional(),
+    // Produit Dodo one-time du guide (/guidepremium) — paiement unique 1990 XPF
+    DODO_GUIDE_PRODUCT_ID: z.string().optional(),
     // Secret partagé avec Vercel Cron : Vercel l'envoie en `Authorization:
     // Bearer <CRON_SECRET>` sur les appels planifiés. Tant qu'il est absent, la
     // route de cron renvoie 503 (fail-closed).
@@ -32,6 +34,9 @@ export const env = createEnv({
     AIRTABLE_TABLE_NAME: z.string().optional(),
     // Mini-CRM Google Sheets (webhook Apps Script) — alternative ou complément
     GSHEET_WEBHOOK_URL: z.string().url().optional(),
+    // CRM Google Sheets dédié aux acheteurs du guide (webhook Apps Script,
+    // onglet séparé) — alimenté par le webhook Dodo onPaymentSucceeded
+    GSHEET_GUIDE_WEBHOOK_URL: z.string().url().optional(),
   },
   /**
    * If you add `client` environment variables, you need to add them to

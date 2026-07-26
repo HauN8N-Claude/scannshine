@@ -3,6 +3,7 @@ import { Typography } from "@/components/nowts/typography";
 import { CircleSvg } from "@/components/svg/circle-svg";
 import { LogoSvg } from "@/components/svg/logo-svg";
 import { buttonVariants } from "@/components/ui/button";
+import { GuideCheckoutButton } from "@/features/guide/guide-checkout-button";
 import { SectionLayout } from "@/features/landing/section-layout";
 import { Footer } from "@/features/layout/footer";
 import { SiteConfig } from "@/site-config";
@@ -10,7 +11,6 @@ import {
   BadgeCheck,
   Check,
   Clock,
-  Download,
   MapPin,
   MessageCircle,
   Search,
@@ -32,15 +32,18 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-/**
- * 🔗 À BRANCHER : URL de paiement + livraison du guide.
- * Deux options (voir analyse) : lien produit Gumroad, OU checkout Dodo Payments.
- * Tant que le produit n'est pas prêt, ce placeholder est le seul point à changer :
- * tous les boutons « Obtenir le guide » l'utilisent.
- */
-const GUIDE_CHECKOUT_URL = "#"; // TODO: remplacer par l'URL Gumroad / Dodo
-
 const PRICE_XPF = "1 990 XPF";
+
+// Section « Ce guide est fait pour vous si… » — miroir des douleurs ET des
+// désirs du persona (commerçant du fenua). L'objectif : identification immédiate.
+const FOR_YOU_IF = [
+  "Vous servez bien vos clients, mais votre fiche Google ne le montre pas",
+  "Vous voyez des concurrents moins bons, mais mieux notés, capter votre clientèle",
+  "Vous ne savez pas comment demander un avis sans être gênant",
+  "Vous voulez capter les touristes qui vous cherchent sur Google Maps",
+  "Vous n'avez ni le temps ni l'envie de vous battre avec la technique",
+  "Vous voulez plus de clients sans payer de la publicité chaque mois",
+];
 
 // Ce que le lead VEUT (désirs du marché) — formulé en résultats, pas en chapitres.
 // À affiner quand le contenu de l'ebook sera figé.
@@ -277,8 +280,45 @@ export default function GuidePremiumPage() {
         </div>
       </SectionLayout>
 
-      {/* POUR QUI */}
+      {/* CE GUIDE EST FAIT POUR VOUS SI… (persona : douleurs + désirs) */}
       <SectionLayout variant="card" size="base" className="flex flex-col gap-8">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <Typography
+            variant="h2"
+            className="text-3xl text-balance sm:text-4xl"
+          >
+            Ce guide est fait pour vous si…
+          </Typography>
+          <Typography
+            variant="large"
+            className="text-muted-foreground max-w-2xl text-balance"
+          >
+            Si vous vous reconnaissez dans une seule de ces phrases, vous êtes
+            au bon endroit.
+          </Typography>
+        </div>
+        <div className="mx-auto grid w-full max-w-4xl gap-4 sm:grid-cols-2">
+          {FOR_YOU_IF.map((item) => (
+            <div
+              key={item}
+              className="bg-background/60 flex items-start gap-3 rounded-xl border p-5"
+            >
+              <div className="bg-primary/10 text-primary flex size-8 shrink-0 items-center justify-center rounded-full">
+                <Check className="size-4" aria-hidden />
+              </div>
+              <Typography
+                variant="small"
+                className="leading-relaxed font-medium"
+              >
+                {item}
+              </Typography>
+            </div>
+          ))}
+        </div>
+      </SectionLayout>
+
+      {/* POUR QUI */}
+      <SectionLayout size="base" className="flex flex-col gap-8">
         <div className="flex flex-col items-center gap-3 text-center">
           <Typography
             variant="h2"
@@ -357,16 +397,11 @@ export default function GuidePremiumPage() {
             ))}
           </ul>
 
-          <Link
-            href={GUIDE_CHECKOUT_URL}
-            className={buttonVariants({
-              size: "lg",
-              className: "mt-8 w-full",
-            })}
-          >
-            <Download className="size-4" aria-hidden />
-            Obtenir le guide
-          </Link>
+          <GuideCheckoutButton
+            label="Obtenir le guide"
+            withIcon
+            className="mt-8 w-full"
+          />
           <Typography
             variant="muted"
             className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs"
@@ -403,12 +438,7 @@ export default function GuidePremiumPage() {
             Une autre question avant de commander&nbsp;?
           </Typography>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href={GUIDE_CHECKOUT_URL}
-              className={buttonVariants({ size: "lg" })}
-            >
-              Obtenir le guide — {PRICE_XPF}
-            </Link>
+            <GuideCheckoutButton label={`Obtenir le guide — ${PRICE_XPF}`} />
             <Link
               href={SiteConfig.whatsapp.href}
               target="_blank"

@@ -124,6 +124,59 @@ const applySubscriptionState = async (
   });
 };
 
+type PaymentPayload = {
+  payment_id?: string;
+  total_amount?: number | null;
+  currency?: string | null;
+  customer?: { email?: string; name?: string } | null;
+  metadata?: Record<string, unknown> | null;
+};
+
+/**
+ * Paiement UNIQUE réussi. On ne traite QUE les achats du guide
+ * (metadata.source === "guide") — les paiements d'abonnement sont gérés par les
+ * handlers onSubscription*. Chaque acheteur est poussé dans le CRM Google Sheet
+ * dédié (même mécanisme que les leads /commander). Ne bloque jamais le webhook.
+ */
+const handleGuidePayment = async (payload: PaymentPayload) => {
+  if (payload.metadata?.source !== "guide") return;
+
+  const url = env.GSHEET_GUIDE_WEBHOOK_URL;
+  if (!url) {
+    logger.info(
+      "[dodo webhook] achat guide reçu mais GSHEET_GUIDE_WEBHOOK_URL absent",
+      { paymentId: payload.payment_id },
+    );
+    return;
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        date: new Date().toISOString(),
+        name: payload.customer?.name ?? "",
+        email: payload.customer?.email ?? "",
+        amount: payload.total_amount ?? "",
+        currency: payload.currency ?? "",
+        paymentId: payload.payment_id ?? "",
+        source: "Guide Premium",
+        statut: "Nouveau",
+      }),
+    });
+    // Apps Script renvoie toujours un 302 vers son URL echo même en cas de
+    // succès (le corps est déjà écrit) : on ne juge l'échec que sur response.ok.
+    if (!response.ok) {
+      logger.error("[dodo webhook] GSheet guide sync failed", {
+        status: response.status,
+      });
+    }
+  } catch (error) {
+    logger.error("[dodo webhook] GSheet guide sync error", { error });
+  }
+};
+
 const webhookKey = env.DODO_PAYMENTS_WEBHOOK_KEY;
 
 // Placeholder base64 valide exigé par standardwebhooks au chargement du module.
@@ -155,6 +208,9 @@ const dodoWebhookHandler = Webhooks({
   },
   onSubscriptionExpired: async (payload) => {
     await applySubscriptionState(payload.data, "CANCELLED");
+  },
+  onPaymentSucceeded: async (payload) => {
+    await handleGuidePayment(payload.data as PaymentPayload);
   },
   onPayload: async (payload) => {
     logger.debug("[dodo webhook] event reçu", { type: payload.type });
