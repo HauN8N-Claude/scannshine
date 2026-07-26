@@ -1,6 +1,6 @@
 import { Typography } from "@/components/nowts/typography";
 import { cn } from "@/lib/utils";
-import { Star, TrendingDown, TrendingUp } from "lucide-react";
+import { ArrowRight, Star, TrendingDown, TrendingUp } from "lucide-react";
 import { SectionLayout } from "./section-layout";
 
 const Stars = ({
@@ -49,7 +49,15 @@ export const PainSection = () => {
           fraîcheur. Voici les deux profils que voient vos futurs clients.
         </Typography>
 
-        <div className="mt-2 grid w-full items-stretch gap-4 md:grid-cols-2">
+        <div className="relative mt-2 grid w-full items-stretch gap-6 md:grid-cols-2 md:gap-10">
+          {/* Flèche de transformation : sans avis → avec avis (gauche → droite) */}
+          <div
+            aria-hidden
+            className="ring-card bg-primary text-primary-foreground absolute top-1/2 left-1/2 z-10 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-lg ring-8"
+          >
+            <ArrowRight className="size-5 rotate-90 md:rotate-0" />
+          </div>
+
           {/* Commerce sans système d'avis — dé-emphase (neutre) */}
           <div className="border-border/60 bg-muted/40 flex flex-col gap-4 rounded-xl border p-5 lg:p-6">
             <div className="flex flex-col gap-2">
