@@ -20,6 +20,11 @@ export const SiteConfig = {
   },
   // Adresse de contact / support / feedback (leads et clients abonnés)
   supportEmail: "haumoana@polynetia.com",
+  // Canal de contact public (LP) : WhatsApp uniquement — pas d'email affiché
+  whatsapp: {
+    number: "+689 89 26 03 72",
+    href: "https://wa.me/68989260372",
+  },
   brand: {
     primary: "#0ea5e9",
   },

@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { SiteConfig } from "@/site-config";
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { SectionLayout } from "./section-layout";
@@ -65,8 +66,16 @@ export const ScannshinePricing = () => {
             Commander ma plaquette
           </Link>
           <p className="text-muted-foreground text-center text-xs">
-            Une question avant de commander ? Écrivez-nous — on vous répond en
-            français, rapidement.
+            Une question avant de commander ?{" "}
+            <a
+              href={SiteConfig.whatsapp.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary font-medium hover:underline"
+            >
+              Écrivez-nous sur WhatsApp
+            </a>{" "}
+            — on répond vite, en français.
           </p>
         </CardContent>
       </Card>

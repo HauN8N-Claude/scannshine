@@ -62,9 +62,9 @@ export const FAQSection = (props: FeaturesPreviewProps) => {
               Commander ma plaquette
             </Link>
             <a
-              href={`mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
-                "Une question sur ScanNShine",
-              )}`}
+              href={SiteConfig.whatsapp.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className={buttonVariants({ variant: "ghost", size: "lg" })}
             >
               J&rsquo;ai encore une question

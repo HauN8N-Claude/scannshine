@@ -9,11 +9,7 @@ import Link from "next/link";
 export function Footer() {
   const reopenCookieBanner = useCookieConsent((state) => state.reopen);
 
-  const feedbackHref = `mailto:${SiteConfig.supportEmail}?subject=${encodeURIComponent(
-    "Mon avis sur ScanNShine",
-  )}&body=${encodeURIComponent(
-    "Bonjour,\n\nVoici mon retour sur ScanNShine :\n\n",
-  )}`;
+  const feedbackHref = SiteConfig.whatsapp.href;
 
   return (
     <footer className="bg-background border-t pb-8">
@@ -32,10 +28,12 @@ export function Footer() {
             <div className="flex flex-col gap-3 md:items-end md:text-right">
               <a
                 href={feedbackHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-primary inline-flex items-center gap-2 text-sm font-medium hover:underline"
               >
                 <MessageSquareText className="size-4" />
-                Une question, une idée ? Donnez-nous votre avis
+                Une question ? Écrivez-nous sur WhatsApp
               </a>
               <div className="text-muted-foreground flex items-center gap-3 text-sm">
                 <Link
