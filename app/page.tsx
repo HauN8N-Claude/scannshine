@@ -10,12 +10,14 @@ import { ProductSection } from "@/features/landing/product-section";
 import { ScannshinePricing } from "@/features/landing/scannshine-pricing";
 import { SearchRankingSection } from "@/features/landing/search-ranking-section";
 import { SectionDivider } from "@/features/landing/section-divider";
+import { StickyMobileCta } from "@/features/landing/sticky-mobile-cta";
 import { WhyReviewsSection } from "@/features/landing/why-reviews-section";
 import { Footer } from "@/features/layout/footer";
 import { SiteConfig } from "@/site-config";
 import type { Metadata } from "next";
 
-const PAGE_TITLE = "ScanNShine — Plus d'avis Google pour votre commerce au fenua";
+const PAGE_TITLE =
+  "ScanNShine — Plus d'avis Google pour votre commerce au fenua";
 const PAGE_DESCRIPTION =
   "La plaquette sans contact qui transforme vos clients satisfaits en avis Google. Posée sur votre comptoir, livrée prête à l'emploi. Pour les commerces de Tahiti et de Polynésie française.";
 
@@ -124,7 +126,6 @@ export default function HomePage() {
 
       <ForWhoSection />
 
-
       <ScannshinePricing />
 
       <SectionDivider />
@@ -134,6 +135,8 @@ export default function HomePage() {
       <FAQSection faq={FAQ} />
 
       <Footer />
+
+      <StickyMobileCta />
     </div>
   );
 }

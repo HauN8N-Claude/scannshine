@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-27
+
+FEATURE: LP mobile — barre CTA collante (StickyMobileCta, mobile uniquement) qui garde « Commander · 4 990 XPF » sous le pouce dès que le hero est franchi, et s'efface près du bas de page pour ne pas masquer le CTA final (tarif + footer)
+FIX: Hero LP — retrait de l'emoji ⭐⭐⭐⭐⭐ (règle ui-ux : jamais d'emoji) remplacé par des étoiles Lucide dorées inline
+CHORE: Hero LP mobile — CTA principal « Commander ma plaquette » en pleine largeur (cible tactile) + boutons empilés verticalement sur mobile, et hook (padding haut) resserré pour remonter l'accroche au-dessus de la ligne de flottaison
+
 ## 2026-07-24
 FEATURE: Guide /guidepremium — téléphone obligatoire au checkout Dodo (require_phone_number) + captation Nom & Téléphone du lead dans le CRM Google Sheet (webhook onPaymentSucceeded → colonne Téléphone) pour la relance WhatsApp
 FEATURE: Tunnel guide /guidepremium sur Dodo — checkout invité paiement unique (startGuideCheckoutAction, one-time, return_url /guidepremium/merci), webhook onPaymentSucceeded qui écrit l'acheteur dans un CRM Google Sheet dédié (metadata.source=guide → GSHEET_GUIDE_WEBHOOK_URL), page d'upsell /guidepremium/merci vers /commander, + section « Ce guide est fait pour vous si… » (persona). Requiert : produit one-time Dodo (DODO_GUIDE_PRODUCT_ID) + webhook Apps Script guide (GSHEET_GUIDE_WEBHOOK_URL)

@@ -1,14 +1,27 @@
 import { CircleSvg } from "@/components/svg/circle-svg";
 import { buttonVariants } from "@/components/ui/button";
+import { Star } from "lucide-react";
 import Link from "next/link";
 import { Typography } from "../../components/nowts/typography";
+
+const HeroStars = () => (
+  <span className="mx-0.5 inline-flex translate-y-0.5 gap-0.5 align-middle whitespace-nowrap">
+    {Array.from({ length: 5 }).map((_, index) => (
+      <Star
+        key={index}
+        className="size-4 fill-amber-400 text-amber-400"
+        aria-hidden
+      />
+    ))}
+  </span>
+);
 
 export const Hero = () => {
   return (
     <div className="relative isolate flex flex-col">
       <GridBackground />
       <GradientBackground />
-      <main className="relative py-24 sm:py-32 lg:pb-40">
+      <main className="relative py-16 sm:py-32 lg:pb-40">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <Typography
@@ -33,14 +46,18 @@ export const Hero = () => {
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
               La plaquette ScanNShine, posée à côté de votre caisse : le client
-              approche son téléphone, comme pour payer sans contact, et son avis
-              ⭐⭐⭐⭐⭐ part sur votre fiche Google en 30 secondes. Pensé
+              approche son téléphone, comme pour payer sans contact, et son avis{" "}
+              <HeroStars /> part sur votre fiche Google en 30 secondes. Pensé
               spécialement pour les commerces de Tahiti.
             </Typography>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+            <div className="mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-4">
               <Link
                 href="#tarif"
-                className={buttonVariants({ size: "lg", variant: "default" })}
+                className={buttonVariants({
+                  size: "lg",
+                  variant: "default",
+                  className: "w-full sm:w-auto",
+                })}
               >
                 Commander ma plaquette
               </Link>
