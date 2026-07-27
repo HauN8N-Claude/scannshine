@@ -134,16 +134,25 @@ type PaymentPayload = {
     phone_number?: string | null;
   } | null;
   metadata?: Record<string, unknown> | null;
+  product_cart?: { product_id?: string }[] | null;
 };
 
 /**
- * Paiement UNIQUE réussi. On ne traite QUE les achats du guide
- * (metadata.source === "guide") — les paiements d'abonnement sont gérés par les
- * handlers onSubscription*. Chaque acheteur est poussé dans le CRM Google Sheet
- * dédié (même mécanisme que les leads /commander). Ne bloque jamais le webhook.
+ * Paiement UNIQUE réussi. On ne traite QUE les achats du guide — les paiements
+ * d'abonnement sont gérés par les handlers onSubscription*. Chaque acheteur est
+ * poussé dans le CRM Google Sheet dédié (même mécanisme que /commander). Ne
+ * bloque jamais le webhook.
  */
 const handleGuidePayment = async (payload: PaymentPayload) => {
-  if (payload.metadata?.source !== "guide") return;
+  // Double garde-fou : metadata (posée au checkout) OU présence du produit guide
+  // dans le panier — au cas où Dodo ne propagerait pas la metadata au paiement.
+  const isGuide =
+    payload.metadata?.source === "guide" ||
+    (payload.product_cart ?? []).some(
+      (item) =>
+        item.product_id && item.product_id === env.DODO_GUIDE_PRODUCT_ID,
+    );
+  if (!isGuide) return;
 
   const url = env.GSHEET_GUIDE_WEBHOOK_URL;
   if (!url) {
