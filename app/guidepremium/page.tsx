@@ -3,6 +3,7 @@ import { Typography } from "@/components/nowts/typography";
 import { CircleSvg } from "@/components/svg/circle-svg";
 import { LogoSvg } from "@/components/svg/logo-svg";
 import { buttonVariants } from "@/components/ui/button";
+import { GuideAiSection } from "@/features/guide/guide-ai-section";
 import { GuideCheckoutButton } from "@/features/guide/guide-checkout-button";
 import { SectionLayout } from "@/features/landing/section-layout";
 import { Footer } from "@/features/layout/footer";
@@ -355,6 +356,9 @@ export default function GuidePremiumPage() {
           ))}
         </div>
       </SectionLayout>
+
+      {/* POSITIONNEMENT IA — le futur de la recherche locale */}
+      <GuideAiSection />
 
       {/* CE QUE VOUS ALLEZ OBTENIR */}
       <SectionLayout size="lg" className="flex flex-col gap-10">
