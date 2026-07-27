@@ -1,7 +1,9 @@
 # Changelog
 
 ## 2026-07-27
-FEATURE: Kit créatif Meta Ads de l'abonnement ScanNShine (docs/meta-ads-scannshine-nfc.md) — 5 annonces consolidées au format kit (injustice silencieuse, concurrent mieux noté, ça travaille tout seul, essai 7 jours, retour privé) avec copy complète (primary text long + 3 headlines + description) et prompts GPT Image ; s'appuie sur meta-ads.md + prompts-visuels-ia.md, correspondance UTM/test et prérequis pixel CompleteRegistration/StartTrial
+FIX: Page upsell guide /guidepremium/merci — prix de la plaquette affiché (4 990 XPF · Paiement unique · Livrée et testée devant vous), aligné sur l'offre réelle vendue via /commander
+FIX: Kit créatif Meta Ads plaque (docs/meta-ads-scannshine-nfc.md) — corrigé pour l'offre RÉELLE : plaquette 4 990 XPF paiement unique (au lieu de l'abonnement 3 990 XPF/mois + essai 7 j, obsolète depuis le pivot) ; couche offre/CTA/objectif réécrite (livrée et réglée à la livraison, CTA « En savoir plus », objectif Prospects/lead-gen), Ad 4 « essai 7 jours » remplacée par « livrée & testée sur place », cibles de mesure one-shot (CPL, closing, coût/vente)
+FEATURE: Kit créatif Meta Ads de la plaque ScanNShine (docs/meta-ads-scannshine-nfc.md) — 5 annonces au format kit (injustice silencieuse, concurrent mieux noté, ça travaille tout seul, offre zéro risque, retour privé) avec copy complète (primary text long + 3 headlines + description) et prompts GPT Image
 FEATURE: Kit créatif Meta Ads du guide /guidepremium (docs/meta-ads-guide-visibilite.md) — 5 annonces classées (touriste compare, bon travail invisible, l'IA recommande, plan 30 jours, offre directe) avec copy complète (primary text long + 3 headlines + description par angle) et prompts GPT Image prêts à coller pour les visuels ; correspondance UTM/test et prérequis pixel Purchase
 
 ## 2026-07-24

@@ -108,7 +108,7 @@ export default function GuideMerciPage() {
                 La plaquette ScanNShine
               </Typography>
               <Typography variant="muted" className="text-sm">
-                Paiement unique · Livrée et testée devant vous
+                4 990 XPF · Paiement unique · Livrée et testée devant vous
               </Typography>
             </div>
           </div>
