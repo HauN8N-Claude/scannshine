@@ -27,6 +27,18 @@ Deux mécanismes d'upsell demandés par le client :
 - **Prix affiché** : **1 990 XPF uniquement** (pas d'euro sur la page).
 - Domaine rattaché à scannshine.com (même projet Next.js / même déploiement).
 
+## 🟢 ÉTAT AU 2026-07-27 — TUNNEL VALIDÉ EN PROD (test_mode)
+
+- ✅ Produit Dodo `pdt_0Nk4NJWZKB8gm67uxkWrM` + `DODO_GUIDE_PRODUCT_ID` posé sur Vercel.
+- ✅ `GSHEET_GUIDE_WEBHOOK_URL` posé sur Vercel (Apps Script du Sheet `1fCQ2PhE-…`).
+- ✅ Bouton `/guidepremium` → checkout Dodo (téléphone rendu obligatoire).
+- ✅ **Achat test réel → ligne CRM avec Nom + Téléphone + Email** (validé : « Revault Teuhinui / +68989260372 »).
+- ✅ Téléphone stocké en TEXTE via préfixe apostrophe côté webhook (évite `#ERROR!` Sheets) — pas besoin de retoucher l'Apps Script.
+- ✅ Page d'upsell `/guidepremium/merci` → `/commander`.
+- ⏳ **En-tête du Sheet** : à corriger manuellement ligne 1 → `Date · Nom · Téléphone · Email · Montant · Devise · Payment ID · Source · Statut` (données déjà bien alignées).
+- ⏳ **Livraison PDF** : Option A retenue (Dodo natif) — téléverser le PDF sur le produit Dodo (dashboard). PDF prêt côté client.
+- ⏳ **Passage live** : produit + clé Dodo live, `DODO_PAYMENTS_ENVIRONMENT=live_mode`, retirer `noindex` de `/guidepremium`.
+
 ## ✅ Ce qui est FAIT (code, déployé)
 
 | Élément | Fichier |
