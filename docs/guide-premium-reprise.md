@@ -43,9 +43,16 @@ La page est en **`noindex`** (hors Google) tant que le produit n'est pas branch�
 
 ## ⏳ Ce qui RESTE à faire (manuel + à finaliser)
 
-1. **Créer le produit one-time dans Dodo** (dashboard Dodo) :
-   - Type : paiement unique (pas subscription), montant **≈ 16,68 €** (= 1 990 XPF, parité 119,33).
-   - Récupérer son `product_id` → poser la var Vercel **`DODO_GUIDE_PRODUCT_ID`** (Production).
+1. **Produit one-time Dodo** : ✅ **CRÉÉ** en test_mode →
+   `DODO_GUIDE_PRODUCT_ID = pdt_0Nk4NJWZKB8gm67uxkWrM` (nom « Le Guide Premium »,
+   16,90 € = 1 990 XPF, digital_products, taxe incluse).
+   - ⏳ **Reste à poser cette valeur sur Vercel** (Production) + redéployer.
+   - Vérifié : la session de checkout se crée et la page Dodo affiche bien
+     « Le Guide Premium · €16.90 · Mode de test ».
+   - Webhook Dodo déjà configuré → `https://scannshine.com/api/webhooks/dodo`
+     (actif, reçoit tous les events dont `payment.succeeded`).
+   - ⚠️ Compte Dodo actuellement en **test_mode** (clé test). Pour vendre en
+     réel : produit + clé + `DODO_PAYMENTS_ENVIRONMENT=live_mode`.
 2. **CRM Google Sheet du guide** :
    - Créer un **onglet séparé** « Guide — Acheteurs » dans le Sheet, avec un
      `doPost` Apps Script qui mappe : `date, name, email, amount, currency, paymentId, source, statut`.
