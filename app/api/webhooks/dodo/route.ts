@@ -170,7 +170,11 @@ const handleGuidePayment = async (payload: PaymentPayload) => {
       body: JSON.stringify({
         date: new Date().toISOString(),
         name: payload.customer?.name ?? "",
-        phone: payload.customer?.phone_number ?? "",
+        // Apostrophe en tête : force Google Sheets à traiter le téléphone comme
+        // du TEXTE (sinon « +689… » est interprété comme une formule → #ERROR!).
+        phone: payload.customer?.phone_number
+          ? `'${payload.customer.phone_number}`
+          : "",
         email: payload.customer?.email ?? "",
         amount: payload.total_amount ?? "",
         currency: payload.currency ?? "",
