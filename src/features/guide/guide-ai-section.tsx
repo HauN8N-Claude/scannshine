@@ -179,34 +179,15 @@ export const GuideAiSection = () => {
         ))}
       </div>
 
-      {/* ENJEU + TEST IA */}
-      <div className="grid w-full items-stretch gap-4 lg:grid-cols-2">
-        <div className="border-primary/40 bg-primary text-primary-foreground flex flex-col justify-center gap-2 rounded-2xl p-6 lg:p-8">
-          <Typography variant="h3" className="text-xl text-balance">
-            Pas d'avis = invisible. Pour Google comme pour l'IA.
-          </Typography>
-          <Typography className="text-primary-foreground/80 text-balance">
-            Une analyse de 800 000 réponses d'IA l'a montré : les commerces avec
-            peu d'avis n'apparaissent presque jamais dans les recommandations.
-          </Typography>
-        </div>
-        <div className="border-primary/30 bg-background/60 flex flex-col justify-center gap-2 rounded-2xl border p-6 lg:p-8">
-          <Typography
-            variant="small"
-            className="text-primary font-semibold tracking-wide uppercase"
-          >
-            Faites le test, maintenant
-          </Typography>
-          <Typography variant="large" className="text-base font-medium text-balance">
-            Ouvrez ChatGPT et demandez : « Quel est le meilleur [votre métier] à
-            [votre commune] ? »
-          </Typography>
-          <Typography variant="muted" className="text-balance">
-            Vous y êtes ? Ou c'est votre concurrent ? En Polynésie, presque
-            personne ne prépare encore sa fiche pour l'IA : celui qui s'y met
-            maintenant prend une avance difficile à rattraper.
-          </Typography>
-        </div>
+      {/* ENJEU */}
+      <div className="border-primary/40 bg-primary text-primary-foreground mx-auto flex max-w-3xl flex-col items-center gap-2 rounded-2xl p-6 text-center lg:p-8">
+        <Typography variant="h3" className="text-xl text-balance">
+          Pas d'avis = invisible. Pour Google comme pour l'IA.
+        </Typography>
+        <Typography className="text-primary-foreground/80 max-w-2xl text-balance">
+          Une analyse de 800 000 réponses d'IA l'a montré : les commerces avec
+          peu d'avis n'apparaissent presque jamais dans les recommandations.
+        </Typography>
       </div>
 
       {/* CE QUE LE DOSSIER IA DONNE + CTA */}
