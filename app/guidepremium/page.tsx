@@ -355,46 +355,6 @@ export default function GuidePremiumPage() {
         </div>
       </SectionLayout>
 
-      {/* APERÇU — pages réelles */}
-      <SectionLayout variant="card" size="lg" className="flex flex-col gap-8">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
-            Regardez à l'intérieur
-          </Typography>
-          <Typography
-            variant="large"
-            className="text-muted-foreground max-w-2xl text-balance"
-          >
-            Du concret à chaque page. Voici deux extraits parmi les plus utiles.
-          </Typography>
-        </div>
-        <div className="mx-auto grid w-full max-w-3xl gap-6 sm:grid-cols-2">
-          {[
-            {
-              src: "/images/ebook/audit.png",
-              label: "L'audit Google sur 100 points",
-            },
-            {
-              src: "/images/ebook/plan30j.png",
-              label: "Le plan d'action sur 30 jours",
-            },
-          ].map((p) => (
-            <figure key={p.src} className="flex flex-col gap-3">
-              <Image
-                src={p.src}
-                alt={p.label}
-                width={734}
-                height={950}
-                className="w-full rounded-lg border shadow-lg"
-              />
-              <figcaption className="text-muted-foreground text-center text-sm font-medium">
-                {p.label}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </SectionLayout>
-
       {/* CE QUE VOUS ALLEZ OBTENIR */}
       <SectionLayout size="lg" className="flex flex-col gap-10">
         <div className="flex flex-col items-center gap-3 text-center">
