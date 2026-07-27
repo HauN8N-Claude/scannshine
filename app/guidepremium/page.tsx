@@ -160,9 +160,9 @@ const FAQ = [
       "Une prestation de visibilité Google se facture des dizaines de milliers de francs. Ici, vous avez la méthode complète pour le prix d'un plein d'essence — et vous gardez la main sur votre fiche.",
   },
   {
-    question: "Et si le guide ne me convient pas ?",
+    question: "Et si le guide ne me convient pas ? Puis-je me rétracter ?",
     answer:
-      "Vous êtes couvert : si le guide ne vous apporte rien, écrivez-nous sous 14 jours et vous êtes remboursé. Vous ne prenez aucun risque.",
+      "Le guide est un contenu numérique à accès immédiat : en l'achetant, vous en demandez la livraison immédiate et renoncez au droit légal de rétractation de 14 jours prévu pour les achats à distance. Vous ne prenez aucun risque pour autant : nous maintenons notre propre garantie « satisfait ou remboursé ». Si le guide ne vous apporte rien, écrivez-nous sous 14 jours et vous êtes remboursé.",
   },
   {
     question: "Je dois avoir un site internet ?",
@@ -534,6 +534,16 @@ export default function GuidePremiumPage() {
             <ShieldCheck className="size-3.5" aria-hidden />
             Garantie satisfait ou remboursé sous 14 jours
           </div>
+          <Typography
+            variant="muted"
+            className="text-muted-foreground/80 mt-3 text-center text-[11px] leading-relaxed text-balance"
+          >
+            Contenu numérique à accès immédiat : en validant votre achat, vous
+            en demandez la mise à disposition immédiate et reconnaissez renoncer
+            à votre droit légal de rétractation de 14 jours. Notre garantie
+            commerciale « satisfait ou remboursé » de 14 jours reste, elle,
+            pleinement applicable.
+          </Typography>
         </div>
       </SectionLayout>
 
