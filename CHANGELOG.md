@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-07-27
+FEATURE: Kit créatif Meta Ads du guide /guidepremium (docs/meta-ads-guide-visibilite.md) — 5 annonces classées (touriste compare, bon travail invisible, l'IA recommande, plan 30 jours, offre directe) avec copy complète (primary text long + 3 headlines + description par angle) et prompts GPT Image prêts à coller pour les visuels ; correspondance UTM/test et prérequis pixel Purchase
+
 ## 2026-07-24
 FEATURE: Guide /guidepremium — téléphone obligatoire au checkout Dodo (require_phone_number) + captation Nom & Téléphone du lead dans le CRM Google Sheet (webhook onPaymentSucceeded → colonne Téléphone) pour la relance WhatsApp
 FEATURE: Tunnel guide /guidepremium sur Dodo — checkout invité paiement unique (startGuideCheckoutAction, one-time, return_url /guidepremium/merci), webhook onPaymentSucceeded qui écrit l'acheteur dans un CRM Google Sheet dédié (metadata.source=guide → GSHEET_GUIDE_WEBHOOK_URL), page d'upsell /guidepremium/merci vers /commander, + section « Ce guide est fait pour vous si… » (persona). Requiert : produit one-time Dodo (DODO_GUIDE_PRODUCT_ID) + webhook Apps Script guide (GSHEET_GUIDE_WEBHOOK_URL)
