@@ -276,7 +276,17 @@ export default function GuidePremiumPage() {
       </section>
 
       {/* PROBLÈME / CONSTAT */}
-      <SectionLayout variant="card" size="base" className="flex flex-col gap-6">
+      <SectionLayout
+        variant="card"
+        size="base"
+        className="relative flex flex-col gap-6"
+        containerClassName="relative isolate overflow-hidden"
+      >
+        {/* Décor : poignée de main (chaleur humaine) — fondu, transparent */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-[url('/images/decor/handshake.png')] bg-contain bg-center bg-no-repeat opacity-[0.10] [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_75%)]"
+        />
         <div className="flex flex-col items-center gap-3 text-center">
           <Typography
             variant="h2"
