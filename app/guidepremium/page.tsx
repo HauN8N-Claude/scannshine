@@ -9,33 +9,81 @@ import { Footer } from "@/features/layout/footer";
 import { SiteConfig } from "@/site-config";
 import {
   BadgeCheck,
+  Bot,
+  Calendar,
   Check,
+  ClipboardCheck,
   Clock,
+  Image as ImageIcon,
+  LayoutDashboard,
   MapPin,
   MessageCircle,
   Search,
-  Sparkles,
+  ShieldCheck,
   Star,
+  Store,
   TrendingUp,
   Users,
 } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
+const PRICE_XPF = "2 990 XPF";
+const PRICE_DETAIL = "≈ 25 €, paiement unique";
+
 export const metadata: Metadata = {
-  title: "Le Guide Premium — Plus de clients grâce à Google | ScanNShine",
+  title: "La Méthode Visibilité Locale — le guide Google des commerces du fenua",
   description:
-    "Le guide pour les commerces de Polynésie : soyez trouvé en premier sur Google par les clients locaux et les touristes, sans payer de publicité.",
+    "Le guide premium pour les commerces de Polynésie : audit Google sur 100 points, plan 30 jours, système d'avis et dossier spécial IA. Soyez trouvé en premier par les clients locaux et les touristes.",
   alternates: { canonical: `${SiteConfig.prodUrl}/guidepremium` },
-  // La page vit tant que le produit n'est pas branché : on la garde hors index
-  // le temps de finaliser le guide et le checkout. Passer à index:true au lancement.
+  // noindex tant que le produit Dodo n'est pas branché en prod. Passer à
+  // index:true au lancement (une fois le produit Dodo one-time configuré).
   robots: { index: false, follow: true },
 };
 
-const PRICE_XPF = "1 990 XPF";
+// Livrables concrets — ce qui distingue ce guide d'un article de blog.
+const DELIVERABLES = [
+  {
+    icon: ClipboardCheck,
+    title: "L'audit Google sur 100 points",
+    description:
+      "Une grille prête à remplir pour noter votre fiche et repérer, chiffres en main, les 3 corrections qui rapportent le plus.",
+  },
+  {
+    icon: Calendar,
+    title: "Le plan d'action sur 30 jours",
+    description:
+      "Une action simple par jour. Pas de « il faudrait » : vous savez exactement quoi faire, ce matin, et le matin suivant.",
+  },
+  {
+    icon: Bot,
+    title: "Le dossier spécial IA",
+    description:
+      "Vos clients commencent à demander à ChatGPT où manger ou dormir. Comment être la réponse — le sujet que personne ne traite encore ici.",
+  },
+  {
+    icon: Store,
+    title: "Les fiches par métier",
+    description:
+      "Restauration, beauté, location, tourisme : les priorités propres à votre activité, pas des conseils passe-partout.",
+  },
+  {
+    icon: ImageIcon,
+    title: "Le plan photo qui rassure",
+    description:
+      "Quelles photos prendre, dans quel ordre, avec un simple téléphone — pour donner envie d'entrer plutôt que de passer.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Le tableau de bord mensuel",
+    description:
+      "Une page à remplir chaque mois pour suivre vos avis, votre note et vos progrès — sans y passer des heures.",
+  },
+];
 
 // Section « Ce guide est fait pour vous si… » — miroir des douleurs ET des
-// désirs du persona (commerçant du fenua). L'objectif : identification immédiate.
+// désirs du persona (commerçant du fenua).
 const FOR_YOU_IF = [
   "Vous servez bien vos clients, mais votre fiche Google ne le montre pas",
   "Vous voyez des concurrents moins bons, mais mieux notés, capter votre clientèle",
@@ -45,8 +93,6 @@ const FOR_YOU_IF = [
   "Vous voulez plus de clients sans payer de la publicité chaque mois",
 ];
 
-// Ce que le lead VEUT (désirs du marché) — formulé en résultats, pas en chapitres.
-// À affiner quand le contenu de l'ebook sera figé.
 const OUTCOMES = [
   {
     icon: Search,
@@ -58,7 +104,7 @@ const OUTCOMES = [
     icon: Star,
     title: "Récolter des avis récents, en continu",
     description:
-      "Le vrai levier de classement, ce n'est pas la chance : c'est un flux d'avis frais. On vous montre comment l'obtenir, simplement.",
+      "Le vrai levier de classement, ce n'est pas la chance : c'est un flux d'avis frais. On vous montre comment l'installer, sans quémander.",
   },
   {
     icon: MapPin,
@@ -96,10 +142,10 @@ const FOR_WHO = [
 ];
 
 const OFFER_INCLUDES = [
-  "Le guide complet, au format PDF, à lire sur téléphone ou ordinateur",
-  "Des étapes concrètes, pensées pour un commerce de Polynésie — pas de théorie",
-  "Accès immédiat après paiement, à garder à vie",
-  "Écrit en français, par des gens du fenua",
+  "Le guide complet — 34 pages, format PDF, à lire sur téléphone ou ordinateur",
+  "L'audit 100 points, le plan 30 jours et le tableau de bord, prêts à l'emploi",
+  "Le dossier spécial IA : la longueur d'avance sur vos concurrents",
+  "Accès immédiat, à garder à vie — pensé pour un commerce du fenua",
 ];
 
 const FAQ = [
@@ -111,12 +157,17 @@ const FAQ = [
   {
     question: `${PRICE_XPF}, qu'est-ce que je reçois exactement ?`,
     answer:
-      "Un guide PDF complet, accessible immédiatement après le paiement, à garder à vie. Paiement unique, sans abonnement.",
+      "Un guide PDF complet de 34 pages, avec l'audit 100 points, le plan 30 jours, le tableau de bord et le dossier IA. Accessible immédiatement après le paiement, à garder à vie. Paiement unique, aucun abonnement.",
   },
   {
-    question: "Ça marche pour mon type de commerce ?",
+    question: "Combien ça coûterait de faire faire ça par une agence ?",
     answer:
-      "Si des clients passent votre porte — snack, salon, boutique, pension, garage… — alors votre fiche Google peut vous amener plus de monde. Le guide s'applique à tous les commerces de proximité du fenua.",
+      "Une prestation de visibilité Google se facture des dizaines de milliers de francs. Ici, vous avez la méthode complète pour le prix d'un plein d'essence — et vous gardez la main sur votre fiche.",
+  },
+  {
+    question: "Et si le guide ne me convient pas ?",
+    answer:
+      "Vous êtes couvert : si le guide ne vous apporte rien, écrivez-nous sous 14 jours et vous êtes remboursé. Vous ne prenez aucun risque.",
   },
   {
     question: "Je dois avoir un site internet ?",
@@ -157,43 +208,74 @@ export default function GuidePremiumPage() {
           size={20}
           color="color-mix(in srgb, var(--border) 35%, transparent)"
         />
-        <div className="mx-auto max-w-3xl px-6 pt-32 pb-20 text-center sm:pt-40 sm:pb-28">
-          <Typography
-            variant="small"
-            className="text-primary mb-4 font-semibold text-balance sm:text-base"
-          >
-            Commerçant en Polynésie&nbsp;? Vos futurs clients vous cherchent
-            déjà sur Google.
-          </Typography>
-          <Typography
-            variant="h1"
-            className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl"
-          >
-            Soyez le commerce que les clients{" "}
-            <span className="relative inline-block">
-              <span>et les touristes</span>
-              <CircleSvg className="fill-primary absolute inset-0" />
-            </span>{" "}
-            trouvent en premier
-          </Typography>
-          <Typography
-            variant="large"
-            className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
-          >
-            Le guide qui vous apprend à faire de votre fiche Google votre
-            meilleur commercial : plus de visibilité, plus d'avis, plus de
-            clients — locaux comme touristes — sans payer de publicité.
-          </Typography>
-          <div className="mt-10 flex flex-col items-center gap-3">
-            <Link
-              href="#offre"
-              className={buttonVariants({ size: "lg", className: "px-8" })}
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-32 pb-16 sm:pt-40 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
+          <div className="text-center lg:text-left">
+            <Typography
+              variant="small"
+              className="text-primary mb-4 font-semibold text-balance sm:text-base"
             >
-              Je veux le guide — {PRICE_XPF}
-            </Link>
-            <Typography variant="muted" className="text-xs">
-              Accès immédiat · Format PDF · Paiement unique
+              Commerçant en Polynésie&nbsp;? Vos futurs clients vous jugent sur
+              Google avant de vous connaître.
             </Typography>
+            <Typography
+              variant="h1"
+              className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+            >
+              Soyez le commerce trouvé{" "}
+              <span className="relative inline-block">
+                <span>en premier</span>
+                <CircleSvg className="fill-primary absolute inset-0" />
+              </span>{" "}
+              — par les locaux, les touristes… et l'IA
+            </Typography>
+            <Typography
+              variant="large"
+              className="text-muted-foreground mt-6 text-lg font-medium text-pretty sm:text-xl/8"
+            >
+              La méthode complète pour faire de votre fiche Google votre meilleur
+              commercial : plus de visibilité, plus d'avis, plus de clients —
+              sans payer de publicité, sans compétence technique.
+            </Typography>
+            <div className="mt-8 flex flex-col items-center gap-3 lg:items-start">
+              <Link
+                href="#offre"
+                className={buttonVariants({ size: "lg", className: "px-8" })}
+              >
+                Je veux le guide — {PRICE_XPF}
+              </Link>
+              <Typography variant="muted" className="text-xs">
+                Paiement unique · Accès immédiat · Garanti 14 jours
+              </Typography>
+            </div>
+            <div className="text-muted-foreground mt-8 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs font-medium lg:justify-start">
+              <span className="flex items-center gap-1.5">
+                <ClipboardCheck className="text-primary size-4" aria-hidden />
+                Audit 100 points
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Calendar className="text-primary size-4" aria-hidden />
+                Plan 30 jours
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Bot className="text-primary size-4" aria-hidden />
+                Dossier IA
+              </span>
+              <span className="flex items-center gap-1.5">
+                <LayoutDashboard className="text-primary size-4" aria-hidden />
+                34 pages
+              </span>
+            </div>
+          </div>
+          {/* Visuel produit — mockup de la couverture réelle */}
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
+            <Image
+              src="/images/ebook/cover-mockup.png"
+              alt="Le guide La Méthode Visibilité Locale — ScanNShine"
+              width={1360}
+              height={1182}
+              priority
+              className="w-full"
+            />
           </div>
         </div>
       </section>
@@ -201,10 +283,7 @@ export default function GuidePremiumPage() {
       {/* PROBLÈME / CONSTAT */}
       <SectionLayout variant="card" size="base" className="flex flex-col gap-6">
         <div className="flex flex-col items-center gap-3 text-center">
-          <Typography
-            variant="h2"
-            className="text-3xl text-balance sm:text-4xl"
-          >
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
             Vous faites du bon travail. Google ne le montre pas.
           </Typography>
           <Typography
@@ -213,8 +292,7 @@ export default function GuidePremiumPage() {
           >
             Aujourd'hui, un client — ou un touriste — vous juge sur Google avant
             même de vous connaître. S'il ne vous trouve pas, ou s'il tombe sur
-            une fiche vide, il va chez le voisin. Chaque jour, l'écart se
-            creuse.
+            une fiche vide, il va chez le voisin. Chaque jour, l'écart se creuse.
           </Typography>
         </div>
         <div className="mx-auto grid w-full max-w-3xl gap-4 sm:grid-cols-3">
@@ -245,21 +323,83 @@ export default function GuidePremiumPage() {
         </div>
       </SectionLayout>
 
-      {/* CE QUE VOUS ALLEZ OBTENIR */}
+      {/* CE QU'IL Y A DANS LA MÉTHODE (livrables concrets) */}
       <SectionLayout size="lg" className="flex flex-col gap-10">
         <div className="flex flex-col items-center gap-3 text-center">
-          <Typography
-            variant="h2"
-            className="text-3xl text-balance sm:text-4xl"
-          >
-            Ce que ce guide va changer pour vous
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
+            Une méthode concrète, pas un cours théorique
           </Typography>
           <Typography
             variant="large"
             className="text-muted-foreground max-w-2xl text-balance"
           >
-            Pas de théorie. Des résultats concrets, applicables dès cette
-            semaine sur votre fiche Google.
+            Des outils prêts à l'emploi, que vous remplissez et appliquez —
+            pensés pour un commerce de Polynésie.
+          </Typography>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {DELIVERABLES.map((item) => (
+            <div
+              key={item.title}
+              className="bg-card flex flex-col gap-3 rounded-xl border p-6"
+            >
+              <div className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-full">
+                <item.icon className="size-5" aria-hidden />
+              </div>
+              <Typography variant="h3" className="text-lg">
+                {item.title}
+              </Typography>
+              <Typography variant="muted">{item.description}</Typography>
+            </div>
+          ))}
+        </div>
+      </SectionLayout>
+
+      {/* APERÇU — pages réelles */}
+      <SectionLayout variant="card" size="lg" className="flex flex-col gap-8">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
+            Regardez à l'intérieur
+          </Typography>
+          <Typography
+            variant="large"
+            className="text-muted-foreground max-w-2xl text-balance"
+          >
+            Du concret à chaque page. Voici deux extraits parmi les plus utiles.
+          </Typography>
+        </div>
+        <div className="mx-auto grid w-full max-w-3xl gap-6 sm:grid-cols-2">
+          {[
+            {
+              src: "/images/ebook/audit.png",
+              label: "L'audit Google sur 100 points",
+            },
+            {
+              src: "/images/ebook/plan30j.png",
+              label: "Le plan d'action sur 30 jours",
+            },
+          ].map((p) => (
+            <figure key={p.src} className="flex flex-col gap-3">
+              <Image
+                src={p.src}
+                alt={p.label}
+                width={734}
+                height={950}
+                className="w-full rounded-lg border shadow-lg"
+              />
+              <figcaption className="text-muted-foreground text-center text-sm font-medium">
+                {p.label}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </SectionLayout>
+
+      {/* CE QUE VOUS ALLEZ OBTENIR */}
+      <SectionLayout size="lg" className="flex flex-col gap-10">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
+            Ce que ce guide va changer pour vous
           </Typography>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -280,21 +420,18 @@ export default function GuidePremiumPage() {
         </div>
       </SectionLayout>
 
-      {/* CE GUIDE EST FAIT POUR VOUS SI… (persona : douleurs + désirs) */}
+      {/* CE GUIDE EST FAIT POUR VOUS SI… */}
       <SectionLayout variant="card" size="base" className="flex flex-col gap-8">
         <div className="flex flex-col items-center gap-3 text-center">
-          <Typography
-            variant="h2"
-            className="text-3xl text-balance sm:text-4xl"
-          >
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
             Ce guide est fait pour vous si…
           </Typography>
           <Typography
             variant="large"
             className="text-muted-foreground max-w-2xl text-balance"
           >
-            Si vous vous reconnaissez dans une seule de ces phrases, vous êtes
-            au bon endroit.
+            Si vous vous reconnaissez dans une seule de ces phrases, vous êtes au
+            bon endroit.
           </Typography>
         </div>
         <div className="mx-auto grid w-full max-w-4xl gap-4 sm:grid-cols-2">
@@ -306,10 +443,7 @@ export default function GuidePremiumPage() {
               <div className="bg-primary/10 text-primary flex size-8 shrink-0 items-center justify-center rounded-full">
                 <Check className="size-4" aria-hidden />
               </div>
-              <Typography
-                variant="small"
-                className="leading-relaxed font-medium"
-              >
+              <Typography variant="small" className="leading-relaxed font-medium">
                 {item}
               </Typography>
             </div>
@@ -320,10 +454,7 @@ export default function GuidePremiumPage() {
       {/* POUR QUI */}
       <SectionLayout size="base" className="flex flex-col gap-8">
         <div className="flex flex-col items-center gap-3 text-center">
-          <Typography
-            variant="h2"
-            className="text-3xl text-balance sm:text-4xl"
-          >
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
             Pensé pour les commerces du fenua
           </Typography>
           <Typography
@@ -356,31 +487,27 @@ export default function GuidePremiumPage() {
         id="offre"
       >
         <div className="flex flex-col items-center gap-3 text-center">
-          <Typography
-            variant="h2"
-            className="text-3xl text-balance sm:text-4xl"
-          >
+          <Typography variant="h2" className="text-3xl text-balance sm:text-4xl">
             Un guide, un prix, accès à vie
           </Typography>
           <Typography variant="large" className="text-muted-foreground">
-            Paiement unique. Aucun abonnement.
+            Le prix d'un plein d'essence. Une méthode qui travaille pour vous des
+            années.
           </Typography>
         </div>
 
         <div className="border-primary/40 bg-card w-full max-w-md rounded-2xl border-2 p-8 shadow-lg">
-          <div className="flex items-center gap-2">
-            <Sparkles className="text-primary size-5" aria-hidden />
-            <Typography variant="large" className="font-semibold">
-              Le Guide Premium
-            </Typography>
-          </div>
-          <div className="mt-4 flex items-end gap-2">
-            <span className="text-5xl font-bold tracking-tight">
-              {PRICE_XPF}
+          <Typography variant="large" className="font-semibold">
+            La Méthode Visibilité Locale
+          </Typography>
+          <div className="mt-4 flex items-end gap-3">
+            <span className="text-5xl font-bold tracking-tight">{PRICE_XPF}</span>
+            <span className="text-muted-foreground mb-1 text-sm">
+              {PRICE_DETAIL}
             </span>
           </div>
           <Typography variant="muted" className="mt-1">
-            Paiement unique · Accès immédiat
+            Paiement unique · Accès immédiat · Sans abonnement
           </Typography>
 
           <ul className="mt-6 flex flex-col gap-3">
@@ -402,13 +529,10 @@ export default function GuidePremiumPage() {
             withIcon
             className="mt-8 w-full"
           />
-          <Typography
-            variant="muted"
-            className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs"
-          >
-            <Clock className="size-3.5" aria-hidden />
-            Disponible immédiatement après le paiement
-          </Typography>
+          <div className="text-muted-foreground mt-4 flex items-center justify-center gap-1.5 text-center text-xs">
+            <ShieldCheck className="size-3.5" aria-hidden />
+            Garantie satisfait ou remboursé sous 14 jours
+          </div>
         </div>
       </SectionLayout>
 
@@ -445,6 +569,7 @@ export default function GuidePremiumPage() {
               rel="noopener noreferrer"
               className={buttonVariants({ size: "lg", variant: "outline" })}
             >
+              <MessageCircle className="size-4" aria-hidden />
               Écrivez-nous sur WhatsApp
             </Link>
           </div>
