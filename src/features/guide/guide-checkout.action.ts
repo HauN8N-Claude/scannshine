@@ -32,6 +32,8 @@ export const startGuideCheckoutAction = action
       // USD flottante pour les clients polynésiens.
       billing_currency: "EUR",
       metadata: { source: "guide" },
+      // Téléphone OBLIGATOIRE : indispensable pour la relance WhatsApp du lead.
+      feature_flags: { require_phone_number: true },
       return_url: `${getServerUrl()}/guidepremium/merci`,
     });
 

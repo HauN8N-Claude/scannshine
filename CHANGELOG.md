@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-24
+FEATURE: Guide /guidepremium — téléphone obligatoire au checkout Dodo (require_phone_number) + captation Nom & Téléphone du lead dans le CRM Google Sheet (webhook onPaymentSucceeded → colonne Téléphone) pour la relance WhatsApp
 FEATURE: Tunnel guide /guidepremium sur Dodo — checkout invité paiement unique (startGuideCheckoutAction, one-time, return_url /guidepremium/merci), webhook onPaymentSucceeded qui écrit l'acheteur dans un CRM Google Sheet dédié (metadata.source=guide → GSHEET_GUIDE_WEBHOOK_URL), page d'upsell /guidepremium/merci vers /commander, + section « Ce guide est fait pour vous si… » (persona). Requiert : produit one-time Dodo (DODO_GUIDE_PRODUCT_ID) + webhook Apps Script guide (GSHEET_GUIDE_WEBHOOK_URL)
 FEATURE: Nouvelle LP /guidepremium (page de vente du guide low-ticket 1990 XPF) — charte ScanNShine, centrée sur les désirs du marché (être trouvé en 1er sur Google par locaux + touristes, plus d'avis, plus de clients sans pub) ; CTA d'achat isolé dans une constante GUIDE_CHECKOUT_URL à brancher (Gumroad ou Dodo) ; page en noindex tant que le produit n'est pas branché
 CHORE: Hero LP — sous-titre : « Pensé pour les commerces de Tahiti » → « Pensé spécialement pour les commerces de Tahiti »

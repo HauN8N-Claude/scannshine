@@ -128,7 +128,11 @@ type PaymentPayload = {
   payment_id?: string;
   total_amount?: number | null;
   currency?: string | null;
-  customer?: { email?: string; name?: string } | null;
+  customer?: {
+    email?: string;
+    name?: string;
+    phone_number?: string | null;
+  } | null;
   metadata?: Record<string, unknown> | null;
 };
 
@@ -157,6 +161,7 @@ const handleGuidePayment = async (payload: PaymentPayload) => {
       body: JSON.stringify({
         date: new Date().toISOString(),
         name: payload.customer?.name ?? "",
+        phone: payload.customer?.phone_number ?? "",
         email: payload.customer?.email ?? "",
         amount: payload.total_amount ?? "",
         currency: payload.currency ?? "",
