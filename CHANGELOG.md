@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-07-27
+FEATURE: Kit créatif Meta Ads de l'abonnement ScanNShine (docs/meta-ads-scannshine-nfc.md) — 5 annonces consolidées au format kit (injustice silencieuse, concurrent mieux noté, ça travaille tout seul, essai 7 jours, retour privé) avec copy complète (primary text long + 3 headlines + description) et prompts GPT Image ; s'appuie sur meta-ads.md + prompts-visuels-ia.md, correspondance UTM/test et prérequis pixel CompleteRegistration/StartTrial
 FEATURE: Kit créatif Meta Ads du guide /guidepremium (docs/meta-ads-guide-visibilite.md) — 5 annonces classées (touriste compare, bon travail invisible, l'IA recommande, plan 30 jours, offre directe) avec copy complète (primary text long + 3 headlines + description par angle) et prompts GPT Image prêts à coller pour les visuels ; correspondance UTM/test et prérequis pixel Purchase
 
 ## 2026-07-24
