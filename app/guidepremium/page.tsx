@@ -370,11 +370,11 @@ export default function GuidePremiumPage() {
             Ce que ce guide va changer pour vous
           </Typography>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-wrap justify-center gap-6">
           {OUTCOMES.map((item) => (
             <div
               key={item.title}
-              className="bg-card flex flex-col gap-3 rounded-xl border p-6"
+              className="bg-card flex w-full flex-col gap-3 rounded-xl border p-6 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
               <div className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-full">
                 <item.icon className="size-5" aria-hidden />
