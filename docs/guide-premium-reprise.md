@@ -112,3 +112,24 @@ La page est en **`noindex`** (hors Google) tant que le produit n'est pas branch�
          → webhook onPaymentSucceeded → CRM Google Sheet « Guide — Acheteurs »
          → (À FAIRE) email de livraison du PDF
 ```
+
+---
+
+## 🔄 MàJ session 2026-07-27 (build avancé jusqu'au test)
+
+**Fait (vérifié) :**
+- Produit Dodo créé (test_mode) : `pdt_0Nk4NJWZKB8gm67uxkWrM` (16,90 €, one-time).
+- Vercel Production : `DODO_GUIDE_PRODUCT_ID` **posé** + `GSHEET_GUIDE_WEBHOOK_URL` **posé** (webhook Apps Script du Sheet 1fCQ2PhE…) + redéployé.
+- Bouton `/guidepremium` en prod → redirige bien vers le checkout Dodo (testé).
+- Webhook Dodo → `https://scannshine.com/api/webhooks/dodo` (actif, tous events).
+- Webhook CRM testé en direct (ligne écrite dans le Sheet).
+- **Téléphone obligatoire** au checkout (`require_phone_number`) + capté (`customer.phone_number`) → écrit dans le CRM.
+- Garde-fou webhook : achat guide détecté via `metadata.source=guide` OU produit guide dans le panier.
+
+**Reste :**
+- Mettre à jour le script Apps Script du Sheet guide pour ajouter la colonne **Téléphone** (ordre : Date, Nom, Téléphone, Email, Montant, Devise, Payment ID, Source, Statut).
+- Faire 1 **achat test réel** (carte 4242) — l'automatisation du formulaire carte Dodo est impossible en headless (skeleton figé).
+- Livraison du PDF (email + lien) — toujours à implémenter.
+- Passer `robots.index` à true au lancement + passer Dodo en **live_mode** (produit + clé live) pour vendre en réel.
+- Nettoyer les lignes de test dans le Sheet guide.
+
